@@ -16,7 +16,7 @@ from .reward import NONE, attitude_reinforcement, progress_reinforcement
 class MissionSettings:
     input: str = "panel"  # panel | black
     reward: str = "attitude"  # attitude | progress | off
-    error_scale_deg: float = 10.0  # pitch error that draws the needle at full width
+    error_scale_deg: float = 5.0  # pitch error that draws the needle at full width
     goal_altitude: float = 70_000.0  # Kerbin's atmosphere ends here
     attitude_deadband_deg: float = 0.3
     progress_deadband_m: float = 20.0

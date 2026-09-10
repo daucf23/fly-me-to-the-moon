@@ -1,6 +1,6 @@
 # Fly Me to the Moon
 
-**Fly by wire.** A fruit-fly connectome at the stick of a rocket.
+**Literally Fly by Wire.** A fruit-fly connectome at the stick of a rocket.
 
 The full retained **MaleCNS v1.0** wiring diagram (166,700 neurons, 25.6 million
 connections) runs as a spiking network. It looks at a cockpit instrument panel through
@@ -16,39 +16,42 @@ No living fly is involved. Jebediah is not at risk. The fly, however, is.
 ## Status
 
 - **Ground truth**: done. Connectome downloaded and verified, kernel benchmarked
-  ([docs/ground-truth.md](docs/ground-truth.md)).
+([docs/ground-truth.md](docs/ground-truth.md)).
 - **Calibration**: done. Of 474 descending neuron types, two respond to the panel; the
-  needle and decoder were redesigned around them ([docs/calibration.md](docs/calibration.md)).
-- **2D simulator**: done. The fly reaches burnout on every seed, 781 km apoapsis vs 6.6 km
-  hands-off; frozen weights fly identically; blind, it tumbles
-  ([docs/results.md](docs/results.md)).
+needle and decoder were redesigned around them ([docs/calibration.md](docs/calibration.md)).
+- **2D simulator**: done. The fly reaches burnout on every seed, 831 km apoapsis vs 832 km
+for a cheating autopilot and 6 km hands-off; frozen weights fly identically; blind, it
+tumbles ([docs/results.md](docs/results.md)). The memory circuit is two synapses from the
+stick but cannot be woken without blinding the readout; that is measured, not assumed.
 - **Kerbal Space Program**: bridge and test vehicle built, awaiting a running kRPC server
-  for the first flight ([docs/ksp.md](docs/ksp.md)).
+for the first flight ([docs/ksp.md](docs/ksp.md)).
 
 ## Flight plan
 
 1. **Ground truth.** Vendor the neural backend, download the connectome, compile the
-   kernel, and measure how much wall-clock one 50 ms brain tick costs on this machine.
+  kernel, and measure how much wall-clock one 50 ms brain tick costs on this machine.
 2. **Simulator.** A small 2D rocket (thrust, gravity, drag, pitch torque, fuel, staging)
-   ticks in lockstep with neural time. Instrument panel → retina → brain → decoder →
+  ticks in lockstep with neural time. Instrument panel → retina → brain → decoder →
    controls → reward. Deterministic and headless, so we can run the control conditions
    (live plasticity, frozen weights, black input) and compare apoapsis distributions.
 3. **Kerbal Space Program.** Same brain, same decoder, same instrument panel, fed from
-   KSP 1.12 telemetry via [kRPC](https://github.com/krpc/krpc) and writing to the
+  KSP 1.12 telemetry via [kRPC](https://github.com/krpc/krpc) and writing to the
    vessel's pitch/yaw/roll/throttle. Episodes end in orbit, in the ground, or on a timer,
    then revert to launch.
 4. **Mission control.** A browser view of what the fly sees, what it fires, and how high
-   it got. Only after steps 2–3 produce something worth watching.
+  it got. Only after steps 2–3 produce something worth watching.
 
 ## The bet
 
 A rocket ascent is three sub-tasks. Two of them are foreign to a fly. One is not.
 
-| Sub-task | Fly-brain fit |
-| --- | --- |
+
+| Sub-task                       | Fly-brain fit                                                                                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Keep the nose up / on prograde | Flies stabilise against the horizon; steering descending neurons like `DNa02` exist for exactly this. We render a horizon that tilts with attitude error. |
-| Throttle | A motor-rate readout. Decodable, not natural. |
-| Staging | No biological analogue. Fires on fuel-empty so the fly is not blamed for it. |
+| Throttle                       | A motor-rate readout. Decodable, not natural.                                                                                                             |
+| Staging                        | No biological analogue. Fires on fuel-empty so the fly is not blamed for it.                                                                              |
+
 
 That is why the fly sees a **synthetic instrument panel** rather than raw game pixels.
 
@@ -74,6 +77,8 @@ uv run flybywire calibrate                    # which descending neurons see the
 uv run flybywire launch --pilot fly           # one launch in the 2D simulator
 uv run flybywire launch --pilot autopilot     # ...and the baselines: none, random, autopilot
 ./scripts/phase1_controls.sh                  # the whole Phase 1 protocol
+uv run python scripts/sweep.py --tau 50 300   # decoder settings, six flights in parallel
+uv run python scripts/probe_regimes.py        # why the memory circuit stays asleep
 uv run flybywire ksp --check                  # talk to a running KSP with kRPC
 ```
 

@@ -28,9 +28,9 @@ class Decoder:
         *,
         types=("DNp20", "DNpe017"),
         baseline_hz=None,
-        gain_hz=35.0,
+        gain_hz=70.0,
         threshold_hz=3.0,
-        tau_ms=300.0,
+        tau_ms=100.0,
         neural_ms=50.0,
     ):
         t = annotation.type.fillna("")
@@ -48,7 +48,9 @@ class Decoder:
         self.threshold_hz = threshold_hz
         self.tau_ms = tau_ms
         # Exponential smoothing across observations: single cells are too sparse to
-        # read in one 50 ms window.
+        # read in one 50 ms window. Lag hurts more than noise: 300 ms oscillated at
+        # +/-10 degrees, 500 ms tumbled, 50-150 ms all fly within 1.5 km of the
+        # autopilot (docs/results.md, decoder sweep).
         self.alpha = 1 - math.exp(-neural_ms / tau_ms)
         self.smoothed = {"L": 0.0, "R": 0.0}
         self.identities = {

@@ -53,9 +53,11 @@ about half as hard as a full-height bar.
 - **Needle**: a full-height bar on the edge of the side the nose must move toward, width
   proportional to the pitch error, capped at 20 px (`flybywire/instruments.py`).
 - **Decoder**: per side, the summed rate of `DNp20`+`DNpe017` minus that side's dark
-  baseline (L 13.0 Hz, R 28.5 Hz), exponentially smoothed over 300 ms because single
+  baseline (L 13.0 Hz, R 28.5 Hz), exponentially smoothed over 100 ms because single
   cells give one to three spikes per 50 ms window; right minus left, 3 Hz deadband, linear
-  to full stick at 35 Hz (`flybywire/pilot.py`).
+  to full stick at 70 Hz (`flybywire/pilot.py`). A full-width needle means 5° of error.
+  These three numbers came from the sweep in [results.md](results.md); the first version
+  used 300 ms / 35 Hz / 10° and oscillated.
 - **Throttle**: fixed at full. No motor readout responded.
 
 Read with a perfect eye (`--pilot panel-autopilot`), this instrument flies the 2D rocket
@@ -73,3 +75,56 @@ Consequence: reward and aversive currents are delivered and logged, the dopamine
 (~90 Hz each while stimulated), and nothing downstream can change. In this model with this
 instrument, the fly steers with the wiring it was born with. The frozen-weights control
 exists to demonstrate that claim rather than assume it.
+
+### It is not for lack of wiring
+
+Breadth-first search over the retained graph, from the six MBON07/MBON11 cells (the
+targets of the plastic synapses) to the four steering cells:
+
+| Edges kept | To `DNpe017` | To `DNp20` |
+| --- | --- | --- |
+| all | 2 hops: `MBON11 → AOTU019 → DNpe017` | 3 hops: `MBON11 → AOTU019 → DNp18 → DNp20` |
+| ≥ 4 synapses | 3 hops | 3 hops |
+| ≥ 10 synapses | 3 hops | 4 hops, one route through `DNa02` |
+
+And every Kenyon cell is 3–4 hops from a photoreceptor (266 of them at 3 hops). Learning
+*could* reach the stick. The problem is dynamical: the input that wakes the mushroom body
+is the input that blinds the readout.
+
+### Two regimes, and nothing in between
+
+Uniform background added under the needle, held 1 s, recorded 1 s (steering cells summed
+per side, both types):
+
+| Background | Needle | L / R Hz | Active KCs | Spikes/s, whole network | Wall ms per 50 ms |
+| --- | --- | --- | --- | --- | --- |
+| 15 | none | 14 / 29 | 0 | 269 k | 84 |
+| 15 | left | **58** / 28 | 0 | 327 k | 83 |
+| 15 | right | 12 / **68** | 0 | 415 k | 84 |
+| 25 | left | 50 / 44 | 599 | 524 k | 139 |
+| 25 | right | 34 / 52 | 963 | 581 k | 133 |
+| 40 | none | 44 / 48 | 1,498 | 1.02 M | 332 |
+| 40 | left | 47 / 44 | 2 | 609 k | 132 |
+| 60 | left | 40 / 40 | 1,521 | 1.17 M | 318 |
+| white field, dark needle | left | 36 / 47 | 1,528 | 1.21 M | 312 |
+| white field, dark needle | right | 39 / 26 | 1,486 | 1.03 M | 271 |
+
+Three things fall out of this table:
+
+- A faint background (15/255) is harmless and even sharpens the lateral contrast. Above
+  ~25 the Kenyon cells begin to fire and the left/right difference is gone.
+- The bright state is **bistable**. Identical input at background 40 landed once in the
+  high state (1.0 M spikes/s, 1,498 KCs) and once in the low state (609 k, 2 KCs); the
+  white field with a half-width dark needle did the same. A readout that depends on which
+  attractor the network fell into is not a readout.
+- Inverted contrast (white field, dark needle) does lateralise weakly in the right
+  direction (dark on a side lowers that side by ~10 Hz on a ~40 Hz baseline) but sits in
+  the bistable, 3×-compute regime.
+
+A brief flash was the last idea: white for 50, 100 or 200 ms during a reward tick, dark
+needle otherwise. The Kenyon cells produced 1–2 spikes in total; the high state takes
+seconds of bright input to build. The network did fall back to the low regime within
+~100 ms, so transients do not latch it, but there is nothing for the dopamine to gate.
+
+Learning stays out of reach in this model. That is a property of the retained network and
+this class of instrument, measured, not assumed.

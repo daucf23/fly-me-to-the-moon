@@ -22,6 +22,7 @@ def main():
     launch = sub.add_parser("launch", help="Fly the 2D simulator")
     add_flight_arguments(launch)
     launch.add_argument("--seed", type=int, default=0, help="Gust seed for episode 0; increments per episode")
+    launch.add_argument("--gust-std", type=float, default=0.06, help="Gust torque noise, rad/s^2 (default 0.06)")
 
     ksp = sub.add_parser("ksp", help="Fly Kerbal Space Program through kRPC")
     add_flight_arguments(ksp)
@@ -69,9 +70,9 @@ def add_flight_arguments(p):
     p.add_argument("--reward", choices=["attitude", "progress", "off"], default="attitude")
     p.add_argument("--frozen", action="store_true", help="Freeze plastic weights (control)")
     p.add_argument("--neural-ms", type=float, default=50.0)
-    p.add_argument("--error-scale-deg", type=float, default=10.0)
-    p.add_argument("--steer-gain-hz", type=float, default=35.0)
-    p.add_argument("--steer-tau-ms", type=float, default=300.0)
+    p.add_argument("--error-scale-deg", type=float, default=5.0, help="Error that draws a full-width needle")
+    p.add_argument("--steer-gain-hz", type=float, default=70.0, help="Rate difference that saturates the stick")
+    p.add_argument("--steer-tau-ms", type=float, default=100.0, help="Rate smoothing time constant")
     p.add_argument("--gravity-turn", action="store_true", help="Guidance target follows a turn instead of vertical")
     p.add_argument("--fresh", action="store_true", help="Ignore an existing brain checkpoint")
 
@@ -121,7 +122,7 @@ def run_launch(a):
     run_dir = default_run_dir(a, "sim")
     pilot = build_pilot(a, run_dir, seed=a.seed)
     settings = MissionSettings(input=a.input, reward=a.reward, error_scale_deg=a.error_scale_deg)
-    config = RocketConfig(dt=a.neural_ms / 1000)
+    config = RocketConfig(dt=a.neural_ms / 1000, gust_std=a.gust_std)
     target = gravity_turn_target if a.gravity_turn else vertical_target
     vehicle = Rocket2D(config, seed=a.seed, target=target)
     mission = Mission(vehicle, pilot, run_dir, settings)
