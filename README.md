@@ -15,7 +15,15 @@ No living fly is involved. Jebediah is not at risk. The fly, however, is.
 
 ## Status
 
-Pre-flight. See [Flight plan](#flight-plan).
+- **Ground truth**: done. Connectome downloaded and verified, kernel benchmarked
+  ([docs/ground-truth.md](docs/ground-truth.md)).
+- **Calibration**: done. Of 474 descending neuron types, two respond to the panel; the
+  needle and decoder were redesigned around them ([docs/calibration.md](docs/calibration.md)).
+- **2D simulator**: done. The fly reaches burnout on every seed, 781 km apoapsis vs 6.6 km
+  hands-off; frozen weights fly identically; blind, it tumbles
+  ([docs/results.md](docs/results.md)).
+- **Kerbal Space Program**: bridge and test vehicle built, awaiting a running kRPC server
+  for the first flight ([docs/ksp.md](docs/ksp.md)).
 
 ## Flight plan
 
@@ -59,9 +67,14 @@ You need Python 3.11/3.12 via [uv](https://docs.astral.sh/uv/), a C++17 compiler
 (`xcode-select --install` on macOS), several GB of disk, and 16 GB RAM or more.
 
 ```sh
-uv sync --extra test
-uv run flybywire prepare     # ~1.1 GB MaleCNS download, checksum-verified, then compile
-uv run flybywire bench       # how many brain ticks per second this machine manages
+uv sync --extra test --extra ksp
+uv run flybywire prepare                      # ~1.1 GB MaleCNS download, verified, compiled
+uv run flybywire bench                        # brain ticks per second on this machine
+uv run flybywire calibrate                    # which descending neurons see the needle
+uv run flybywire launch --pilot fly           # one launch in the 2D simulator
+uv run flybywire launch --pilot autopilot     # ...and the baselines: none, random, autopilot
+./scripts/phase1_controls.sh                  # the whole Phase 1 protocol
+uv run flybywire ksp --check                  # talk to a running KSP with kRPC
 ```
 
 Datasets, the compiled kernel, brain checkpoints, and run telemetry stay in `data/` and
