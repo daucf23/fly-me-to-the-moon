@@ -5,8 +5,10 @@
 Protocol: `scripts/phase1_controls.sh`. Three launches per pilot with gust seeds 3, 4, 5
 (held out: the decoder was tuned on seeds 0 and 1, see below). The rocket is a two-stage
 sounding rocket with destabilising aerodynamics; an unsteered one falls over about 20 s
-after liftoff. Guidance target is straight up unless stated. Score is the apoapsis at
-burnout (radial vis-viva), so the ceiling is set by the vehicle, not the sky.
+after liftoff. Guidance target is straight up unless stated. Score is the apoapsis of the
+osculating orbit at burnout, so the ceiling is set by the vehicle, not the sky. Gravity is
+central (the planet is round, pitch is measured from local vertical) so the orbit numbers
+are real ones.
 
 | Pilot | Sees | Outcomes | Median apoapsis | Median max altitude | Median mean steer error |
 | --- | --- | --- | --- | --- | --- |
@@ -24,15 +26,33 @@ Robustness, same seeds:
 | Condition | Fly | PD autopilot |
 | --- | --- | --- |
 | Gust torque doubled (`--gust-std 0.12`) | 829.2 km, 1.43° | 831.1 km, 0.70° |
-| Gravity-turn guidance (`--gravity-turn`, 80° by 45 km) | 617.6 km, 1.03° | 628.0 km, 1.42° |
+
+### To orbit
+
+The sounding rocket cannot orbit whatever the pilot does (best profile: periapsis −167 km).
+`--vehicle orbital` swaps in a 550 kg upper stage with a long, gentle burn (4.2 km/s in
+total); `--gravity-turn` follows a profile found by sweeping start/end altitude and final
+pitch with the autopilot: vertical to 1 km, then pitch linearly with altitude to 105° at
+80 km, i.e. the nose ends 15° below the horizon so burnout lands near apoapsis. There is
+no coast or circularisation burn, because the fly has no throttle, so the orbit is whatever
+the vehicle has at burnout, and "orbit" means both apsides above 70 km on a bound
+trajectory. The fly's needle now tracks a target that moves through 105° of pitch.
+
+| Pilot, seeds 3–5 | Outcomes | Periapsis × apoapsis (median) | Mean steer error |
+| --- | --- | --- | --- |
+| **Fly** | **orbit ×3** | **89.1 × 964 km** | **0.81°** |
+| PD autopilot | orbit ×3 | 89.6 × 1025 km | 0.73° |
+
+The apoapsis gap is the fly pitching over a touch late during the fast part of the turn;
+the periapsis, which is what decides whether you stay up, is within 0.5 km.
 
 What this does and does not show:
 
 - **The connectome steers the rocket.** With the calibrated `DNp20`/`DNpe017` readout the
   fly reaches burnout on every seed, leaves the atmosphere, and ends 0.4 km (0.05%) short
   of a controller that reads the true state. Every pilot without a working stick falls
-  over. On a moving target (the gravity turn) the fly tracks with less mean error than the
-  PD autopilot, which lags a moving setpoint.
+  over. Given a vehicle that can, and a turn to follow, it reaches orbit on every seed
+  (below).
 - **It is the wiring, not learning.** Live and frozen runs are identical to the last
   digit. The reward and aversive currents were delivered and the dopamine cells fired,
   but no Kenyon cell fired, so no plastic synapse could change. The plastic synapses are

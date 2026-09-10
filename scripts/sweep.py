@@ -39,9 +39,9 @@ def run(config, seed, out_root, extra):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--gain", type=float, nargs="+", default=[35.0])
-    p.add_argument("--tau", type=float, nargs="+", default=[300.0])
-    p.add_argument("--scale", type=float, nargs="+", default=[10.0])
+    p.add_argument("--gain", type=float, nargs="+", default=[70.0])
+    p.add_argument("--tau", type=float, nargs="+", default=[100.0])
+    p.add_argument("--scale", type=float, nargs="+", default=[5.0])
     p.add_argument("--seeds", type=int, nargs="+", default=[0, 1])
     p.add_argument("--jobs", type=int, default=6)
     p.add_argument("--out", type=Path, default=ROOT / "runs" / "sweep")
@@ -56,7 +56,8 @@ def main():
     with ThreadPoolExecutor(max_workers=a.jobs) as pool:
         for name, seed, summary in pool.map(lambda j: run(j[0], j[1], a.out, a.extra), jobs):
             results.setdefault(name, {})[seed] = summary
-            print(json.dumps({"config": name, "seed": seed, **{k: summary.get(k) for k in ["outcome", "max_apoapsis_m", "mean_abs_steer_error_deg", "error"]}}), flush=True)
+            keys = ["outcome", "max_apoapsis_m", "final_periapsis_m", "mean_abs_steer_error_deg", "error"]
+            print(json.dumps({"config": name, "seed": seed, **{k: summary.get(k) for k in keys}}), flush=True)
     print()
     print(f"{'config':34s} {'outcomes':18s} {'median apo km':>13s} {'min apo km':>10s} {'median |err|':>12s}")
     rows = []

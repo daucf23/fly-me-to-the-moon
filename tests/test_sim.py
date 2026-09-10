@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 import pytest
 
@@ -10,7 +12,15 @@ from flybywire.reward import (
     attitude_reinforcement,
     progress_reinforcement,
 )
-from flybywire.sim.rocket import Rocket2D, RocketConfig
+from flybywire.sim.rocket import (
+    ESCAPE_APOAPSIS,
+    MU,
+    ORBITAL_STAGES,
+    PLANET_RADIUS,
+    Rocket2D,
+    RocketConfig,
+    gravity_turn_target,
+)
 from flybywire.vehicle import Command
 
 
@@ -55,6 +65,42 @@ def test_random_pilot_is_no_better_than_autopilot():
     random = fly(RandomPilot(seed=1))
     steered = fly(Autopilot())
     assert random.max_apoapsis < steered.max_apoapsis
+
+
+def test_orbital_elements_match_textbook_cases():
+    rocket = Rocket2D(seed=0)
+    rocket.reset()
+    # Circular orbit at 100 km: both apsides at 100 km, bound.
+    r = PLANET_RADIUS + 100_000
+    rocket.px, rocket.py, rocket.vx, rocket.vy = 0.0, r, math.sqrt(MU / r), 0.0
+    apo, peri = rocket.orbit()
+    assert apo == pytest.approx(100_000, rel=1e-9) and peri == pytest.approx(100_000, rel=1e-9)
+    assert rocket.telemetry().extra["bound"]
+    # Straight up at 1 km/s from the pad: radial vis-viva apex, zero angular momentum.
+    rocket.px, rocket.py, rocket.vx, rocket.vy = 0.0, PLANET_RADIUS, 0.0, 1000.0
+    energy = 0.5 * 1000.0**2 - MU / PLANET_RADIUS
+    assert rocket.apoapsis() == pytest.approx(-MU / energy - PLANET_RADIUS)
+    # Escape speed: unbound.
+    rocket.vy = math.sqrt(2 * MU / PLANET_RADIUS) + 1
+    assert rocket.apoapsis() == ESCAPE_APOAPSIS and not rocket.telemetry().extra["bound"]
+
+
+def test_orbital_vehicle_reaches_orbit_under_autopilot_and_sounding_rocket_cannot():
+    config = RocketConfig(stages=ORBITAL_STAGES)
+    rocket = Rocket2D(config, seed=3, target=gravity_turn_target)
+    pilot = Autopilot()
+    t = rocket.reset()
+    while not t.done:
+        command, _ = pilot.act(None, t, "none")
+        t = rocket.step(command)
+    assert t.failure is None and t.extra["bound"] and t.extra["periapsis"] > 70_000
+    assert abs(t.pitch_deg - 105.0) < 5  # the turn is not a tumble
+    rocket = Rocket2D(RocketConfig(), seed=3, target=gravity_turn_target)
+    t = rocket.reset()
+    while not t.done:
+        command, _ = pilot.act(None, t, "none")
+        t = rocket.step(command)
+    assert t.extra["periapsis"] < 0
 
 
 def test_command_is_clipped_and_pad_is_not_a_crash():

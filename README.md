@@ -19,10 +19,12 @@ No living fly is involved. Jebediah is not at risk. The fly, however, is.
 ([docs/ground-truth.md](docs/ground-truth.md)).
 - **Calibration**: done. Of 474 descending neuron types, two respond to the panel; the
 needle and decoder were redesigned around them ([docs/calibration.md](docs/calibration.md)).
-- **2D simulator**: done. The fly reaches burnout on every seed, 831 km apoapsis vs 832 km
-for a cheating autopilot and 6 km hands-off; frozen weights fly identically; blind, it
-tumbles ([docs/results.md](docs/results.md)). The memory circuit is two synapses from the
-stick but cannot be woken without blinding the readout; that is measured, not assumed.
+- **2D simulator**: done. Straight up, the fly reaches 831 km apoapsis vs 832 km for a
+cheating autopilot and 6 km hands-off; given an orbital-class vehicle and a gravity turn
+to follow, **it reaches an 89 × 964 km orbit on every seed**. Frozen weights fly
+identically; blind, it tumbles ([docs/results.md](docs/results.md)). The memory circuit
+is two synapses from the stick but cannot be woken without blinding the readout; that is
+measured, not assumed ([docs/calibration.md](docs/calibration.md)).
 - **Kerbal Space Program**: bridge and test vehicle built, awaiting a running kRPC server
 for the first flight ([docs/ksp.md](docs/ksp.md)).
 
@@ -74,7 +76,8 @@ uv sync --extra test --extra ksp
 uv run flybywire prepare                      # ~1.1 GB MaleCNS download, verified, compiled
 uv run flybywire bench                        # brain ticks per second on this machine
 uv run flybywire calibrate                    # which descending neurons see the needle
-uv run flybywire launch --pilot fly           # one launch in the 2D simulator
+uv run flybywire launch --pilot fly           # one launch in the 2D simulator, straight up
+uv run flybywire launch --pilot fly --vehicle orbital --gravity-turn   # to orbit
 uv run flybywire launch --pilot autopilot     # ...and the baselines: none, random, autopilot
 ./scripts/phase1_controls.sh                  # the whole Phase 1 protocol
 uv run python scripts/sweep.py --tau 50 300   # decoder settings, six flights in parallel

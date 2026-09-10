@@ -23,6 +23,10 @@ def main():
     add_flight_arguments(launch)
     launch.add_argument("--seed", type=int, default=0, help="Gust seed for episode 0; increments per episode")
     launch.add_argument("--gust-std", type=float, default=0.06, help="Gust torque noise, rad/s^2 (default 0.06)")
+    launch.add_argument(
+        "--vehicle", choices=["sounding", "orbital"], default="sounding",
+        help="sounding: 3.5 km/s, scored by apoapsis. orbital: 4.2 km/s, can close an orbit with --gravity-turn",
+    )
 
     ksp = sub.add_parser("ksp", help="Fly Kerbal Space Program through kRPC")
     add_flight_arguments(ksp)
@@ -115,14 +119,14 @@ def write_provenance(run_dir, pilot, settings, vehicle_info, a):
 
 def run_launch(a):
     from .mission import Mission, MissionSettings
-    from .sim.rocket import Rocket2D, RocketConfig, gravity_turn_target, vertical_target
+    from .sim.rocket import VEHICLES, Rocket2D, RocketConfig, gravity_turn_target, vertical_target
 
     if a.episodes < 1:
         raise SystemExit("episodes must be >= 1")
     run_dir = default_run_dir(a, "sim")
     pilot = build_pilot(a, run_dir, seed=a.seed)
     settings = MissionSettings(input=a.input, reward=a.reward, error_scale_deg=a.error_scale_deg)
-    config = RocketConfig(dt=a.neural_ms / 1000, gust_std=a.gust_std)
+    config = RocketConfig(stages=VEHICLES[a.vehicle], dt=a.neural_ms / 1000, gust_std=a.gust_std)
     target = gravity_turn_target if a.gravity_turn else vertical_target
     vehicle = Rocket2D(config, seed=a.seed, target=target)
     mission = Mission(vehicle, pilot, run_dir, settings)

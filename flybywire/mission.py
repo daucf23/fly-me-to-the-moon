@@ -112,6 +112,14 @@ class Mission:
                     Image.fromarray(frame).save(self.run_dir / "latest-input.png")
         finally:
             events.close()
+        periapsis = telemetry.extra.get("periapsis")
+        # Both ends of the final orbit above the atmosphere: the fly is in space to stay.
+        in_orbit = (
+            telemetry.failure is None
+            and telemetry.extra.get("bound", True)
+            and periapsis is not None
+            and periapsis > self.s.goal_altitude
+        )
         summary = {
             "episode": index,
             "pilot": self.pilot.name,
@@ -121,9 +129,11 @@ class Mission:
             "flight_seconds": telemetry.time,
             "wall_seconds": round(time.time() - started, 2),
             "compute_seconds": round(compute, 2),
-            "outcome": telemetry.failure or "spent",
+            "outcome": telemetry.failure or ("orbit" if in_orbit else "spent"),
             "max_altitude_m": round(getattr(self.vehicle, "max_altitude", telemetry.altitude), 1),
             "max_apoapsis_m": round(getattr(self.vehicle, "max_apoapsis", telemetry.apoapsis), 1),
+            "final_apoapsis_m": round(telemetry.apoapsis, 1),
+            "final_periapsis_m": None if periapsis is None else round(periapsis, 1),
             "mean_abs_steer_error_deg": round(float(np.mean(abs_error)), 3) if abs_error else None,
             "stimuli": stimuli,
         }

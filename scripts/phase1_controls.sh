@@ -15,14 +15,14 @@ for pilot in none random autopilot panel-autopilot; do
   uv run flybywire launch --pilot "$pilot" "${common[@]}" --run-dir "runs/sim-$pilot"
 done
 uv run flybywire launch --pilot autopilot "${common[@]}" --run-dir runs/sim-autopilot-gusty --gust-std 0.12
-uv run flybywire launch --pilot autopilot "${common[@]}" --run-dir runs/sim-autopilot-turn --gravity-turn
+uv run flybywire launch --pilot autopilot "${common[@]}" --run-dir runs/sim-autopilot-orbit --vehicle orbital --gravity-turn
 
 fly() { uv run flybywire launch --pilot fly "${common[@]}" "$@" > /dev/null; }
 fly --run-dir runs/sim-fly &
 fly --run-dir runs/sim-fly-frozen --frozen &
 fly --run-dir runs/sim-fly-black --input black &
 fly --run-dir runs/sim-fly-gusty --gust-std 0.12 &
-fly --run-dir runs/sim-fly-turn --gravity-turn &
+fly --run-dir runs/sim-fly-orbit --vehicle orbital --gravity-turn &
 fly --run-dir runs/sim-fly-legacy --steer-gain-hz 35 --steer-tau-ms 300 --error-scale-deg 10 &
 wait
 
