@@ -1,0 +1,78 @@
+# Fly Me to the Moon
+
+**Fly by wire.** A fruit-fly connectome at the stick of a rocket.
+
+The full retained **MaleCNS v1.0** wiring diagram (166,700 neurons, 25.6 million
+connections) runs as a spiking network. It looks at a cockpit instrument panel through
+its own photoreceptors, and a handful of its descending neurons are wired to the
+rocket's controls. Reaching for altitude stimulates dopamine reward cells; falling,
+tumbling, or crashing stimulates aversive ones. An experimental plasticity rule can
+change the connections in between.
+
+Then we ask the only question that matters: **does the fly get to space?**
+
+No living fly is involved. Jebediah is not at risk. The fly, however, is.
+
+## Status
+
+Pre-flight. See [Flight plan](#flight-plan).
+
+## Flight plan
+
+1. **Ground truth.** Vendor the neural backend, download the connectome, compile the
+   kernel, and measure how much wall-clock one 50 ms brain tick costs on this machine.
+2. **Simulator.** A small 2D rocket (thrust, gravity, drag, pitch torque, fuel, staging)
+   ticks in lockstep with neural time. Instrument panel → retina → brain → decoder →
+   controls → reward. Deterministic and headless, so we can run the control conditions
+   (live plasticity, frozen weights, black input) and compare apoapsis distributions.
+3. **Kerbal Space Program.** Same brain, same decoder, same instrument panel, fed from
+   KSP 1.12 telemetry via [kRPC](https://github.com/krpc/krpc) and writing to the
+   vessel's pitch/yaw/roll/throttle. Episodes end in orbit, in the ground, or on a timer,
+   then revert to launch.
+4. **Mission control.** A browser view of what the fly sees, what it fires, and how high
+   it got. Only after steps 2–3 produce something worth watching.
+
+## The bet
+
+A rocket ascent is three sub-tasks. Two of them are foreign to a fly. One is not.
+
+| Sub-task | Fly-brain fit |
+| --- | --- |
+| Keep the nose up / on prograde | Flies stabilise against the horizon; steering descending neurons like `DNa02` exist for exactly this. We render a horizon that tilts with attitude error. |
+| Throttle | A motor-rate readout. Decodable, not natural. |
+| Staging | No biological analogue. Fires on fuel-empty so the fly is not blamed for it. |
+
+That is why the fly sees a **synthetic instrument panel** rather than raw game pixels.
+
+## What the fly is, and is not
+
+The wiring is reconstructed from a real animal. The physiology is a leaky
+integrate-and-fire approximation with declared, unvalidated assumptions. The decoder is a
+fixed, engineered mapping chosen by us. The reward and aversive currents are engineered
+reinforcement, not modeled pleasure or pain. Weight changes are not evidence of learning
+until the control conditions say otherwise. All of this is inherited from, and documented
+by, the upstream backend in [THIRD_PARTY.md](THIRD_PARTY.md).
+
+## Run it
+
+You need Python 3.11/3.12 via [uv](https://docs.astral.sh/uv/), a C++17 compiler
+(`xcode-select --install` on macOS), several GB of disk, and 16 GB RAM or more.
+
+```sh
+uv sync --extra test
+uv run flybywire prepare     # ~1.1 GB MaleCNS download, checksum-verified, then compile
+uv run flybywire bench       # how many brain ticks per second this machine manages
+```
+
+Datasets, the compiled kernel, brain checkpoints, and run telemetry stay in `data/` and
+`runs/` and are never committed.
+
+## Credits
+
+Neural backend adapted from [nftechie/stonkfly](https://github.com/nftechie/stonkfly) (MIT),
+itself descended from DOOMFLY. Wiring from the
+[MaleCNS v1.0](https://male-cns.janelia.org/) connectome (HHMI Janelia, Cambridge, Google
+Research) under CC BY 4.0. Inspired by everyone who, within a week of the map dropping,
+made the fly [trade crypto](https://github.com/nftechie/stonkfly),
+[doomscroll](https://github.com/mattyhempstead/fly-wirehead), and play Doom. This fly gets
+a rocket.

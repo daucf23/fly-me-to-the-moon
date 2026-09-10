@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fly-me-to-the-moon"
+version = "0.1.0"
+description = "Fly by wire: a MaleCNS fruit-fly connectome piloting rockets (2D sim, then Kerbal Space Program via kRPC)"
+requires-python = ">=3.11,<3.13"
+dependencies = ["numpy==2.4.6", "pandas==3.0.5", "pyarrow==25.0.1", "Pillow==12.3.0"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+ksp = ["krpc>=0.6.0"]
+
+[project.scripts]
+flybywire = "flybywire.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["flybywire*"]
+
+[tool.setuptools.package-data]
+"flybywire.neural" = ["*.cpp", "*.json"]
+"flybywire" = ["*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

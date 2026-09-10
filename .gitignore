@@ -1,0 +1,16 @@
+# Datasets, compiled kernel, brain checkpoints, run telemetry: local only.
+data/
+runs/
+*.partial
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
