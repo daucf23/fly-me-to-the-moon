@@ -226,7 +226,7 @@ class Autopilot:
         self.previous = None
 
     def act(self, frame, telemetry, reinforcement):
-        error = telemetry.pitch_error_deg
+        error = telemetry.steer_error_deg
         rate = 0.0 if self.previous is None else error - self.previous
         self.previous = error
         return Command(steer=self.gain * error + self.damping * rate, throttle=1.0), {}

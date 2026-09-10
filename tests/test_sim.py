@@ -46,7 +46,7 @@ def test_panel_autopilot_flies_from_the_needle_alone():
     pilot = PanelAutopilot()
     t = rocket.reset()
     while not t.done:
-        command, _ = pilot.act(render_panel(t.pitch_error_deg / 10.0), t, "none")
+        command, _ = pilot.act(render_panel(t.steer_error_deg / 10.0), t, "none")
         t = rocket.step(command)
     assert t.failure is None and rocket.max_apoapsis > 70_000
 

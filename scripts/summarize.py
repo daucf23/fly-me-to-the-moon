@@ -14,7 +14,7 @@ def load(run_dir):
 def main(run_dirs):
     print(
         f"{'run':22s} {'n':>2s} {'outcomes':24s} {'apoapsis km (median)':>21s} "
-        f"{'max alt km':>11s} {'|pitch err| deg':>16s} {'edges changed':>13s}"
+        f"{'max alt km':>11s} {'|steer err| deg':>16s} {'edges changed':>13s}"
     )
     for run_dir in run_dirs:
         rows = load(run_dir)
@@ -23,7 +23,7 @@ def main(run_dirs):
         outcomes = ",".join(r["outcome"] for r in rows)
         apo = statistics.median(r["max_apoapsis_m"] for r in rows) / 1000
         alt = statistics.median(r["max_altitude_m"] for r in rows) / 1000
-        err = statistics.median(r["mean_abs_pitch_error_deg"] or 0 for r in rows)
+        err = statistics.median(r["mean_abs_steer_error_deg"] or 0 for r in rows)
         changed = rows[-1].get("memory", {}).get("changed_edges", "-")
         print(
             f"{Path(run_dir).name:22s} {len(rows):2d} {outcomes:24s} {apo:21.1f} "

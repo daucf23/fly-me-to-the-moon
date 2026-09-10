@@ -178,13 +178,16 @@ class Rocket2D:
     # --- reporting -----------------------------------------------------------------
 
     def telemetry(self):
+        pitch = math.degrees(self.theta)
+        target = self.target(self.y)
         return Telemetry(
             time=round(self.t, 3),
             altitude=self.y,
             vertical_speed=self.vy,
             apoapsis=self.apoapsis(),
-            pitch_deg=math.degrees(self.theta),
-            target_pitch_deg=self.target(self.y),
+            steer_error_deg=target - pitch,
+            pitch_deg=pitch,
+            target_pitch_deg=target,
             fuel_fraction=self.fuel / self.c.stages[self.stage_index].fuel_mass,
             stage=self.stage_index,
             failure=self.failure,

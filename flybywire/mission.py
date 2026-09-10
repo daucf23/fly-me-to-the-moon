@@ -49,7 +49,7 @@ class Mission:
     def frame(self, telemetry):
         if self.s.input == "black":
             return black_panel()
-        error = telemetry.pitch_error_deg / self.s.error_scale_deg
+        error = telemetry.steer_error_deg / self.s.error_scale_deg
         progress = telemetry.apoapsis / self.s.goal_altitude
         return render_panel(error, progress)
 
@@ -59,8 +59,8 @@ class Mission:
         failed = current.failure is not None
         if self.s.reward == "attitude":
             return attitude_reinforcement(
-                previous.pitch_error_deg,
-                current.pitch_error_deg,
+                previous.steer_error_deg,
+                current.steer_error_deg,
                 climbing=current.vertical_speed > 0,
                 deadband_deg=self.s.attitude_deadband_deg,
                 failed=failed,
@@ -97,7 +97,7 @@ class Mission:
                 telemetry = self.vehicle.step(command)
                 ticks += 1
                 compute += neural.get("compute_seconds", 0.0)
-                abs_error.append(abs(telemetry.pitch_error_deg))
+                abs_error.append(abs(telemetry.steer_error_deg))
                 if ticks % self.s.log_every == 0 or telemetry.done:
                     row = {
                         "episode": index,
@@ -124,7 +124,7 @@ class Mission:
             "outcome": telemetry.failure or "spent",
             "max_altitude_m": round(getattr(self.vehicle, "max_altitude", telemetry.altitude), 1),
             "max_apoapsis_m": round(getattr(self.vehicle, "max_apoapsis", telemetry.apoapsis), 1),
-            "mean_abs_pitch_error_deg": round(float(np.mean(abs_error)), 3) if abs_error else None,
+            "mean_abs_steer_error_deg": round(float(np.mean(abs_error)), 3) if abs_error else None,
             "stimuli": stimuli,
         }
         if hasattr(self.pilot, "brain"):

@@ -1,6 +1,6 @@
 """What every rocket, simulated or Kerbal, has to tell the mission loop."""
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 
 
 @dataclass(frozen=True)
@@ -21,16 +21,14 @@ class Telemetry:
     altitude: float
     vertical_speed: float
     apoapsis: float
-    pitch_deg: float  # angle of the nose from vertical; + leans toward +x
+    steer_error_deg: float  # what the needle shows: + means the nose must move right
+    pitch_deg: float  # tilt of the nose from vertical, for the record
     target_pitch_deg: float
     fuel_fraction: float
     stage: int
     failure: str | None = None  # None while flying; "crash" | "tumble" otherwise
     done: bool = False
-
-    @property
-    def pitch_error_deg(self):
-        return self.target_pitch_deg - self.pitch_deg
+    extra: dict = field(default_factory=dict)
 
     def json(self):
         return asdict(self)
