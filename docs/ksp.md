@@ -236,6 +236,18 @@ took 437–524 m/s of the Poodle after the booster, TMI 848–867 m/s, correctio
     rather than waited on: `coast_to_mun` searches ±40 m/s prograde/radial for one
     (twice at most) before giving up, and only warps when there is a Mun patch to warp
     toward.
+12. **Fly mission 4, pad to water in one process** (`runs/mun-flies-4`, 37 min wall,
+    `thrust_authority` 2.0): ascent 0.5° mean pitch error; circularization 309 m/s and
+    TMI 855 m/s with no interlock events and no saturated ticks; again a second-pass
+    encounter, corrected 16 m/s a third of the way out, lost again to a 2 m/s residual
+    (that trajectory is sensitive), recovered with 25 m/s to a 15 km Mun periapsis;
+    flyby at 25.5 km and 860 m/s; exit at −69 km, corrected 113 m/s to 40.0 km and
+    trimmed 8.8; 4.4 G; drogue 9.9 km, mains 5.0 km, splashdown at 6 m/s, all three
+    aboard, no seat timeouts. Corrections total 163 m/s against the autopilot's 275.
+    The second-pass habit is the open problem: a TMI residual that would be noise on a
+    first-pass encounter is a lost one here. `coast_to_mun` now prefers a first-pass
+    encounter (correction searched in three axes right after TMI, `first_pass=True`);
+    see [handoff-2026-09-11.md](handoff-2026-09-11.md) for its status.
 12. Judge overshoot on velocity-to-be-gained. The remaining-Δv magnitude grows with
     every degree the nose wanders while burning; that is lateral error for the
     corrections to fix, and it ended fly mission 1's burn at 374 m/s.
