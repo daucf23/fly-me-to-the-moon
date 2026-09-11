@@ -46,7 +46,7 @@ class MunConfig:
     aoa_free_altitude: float = 45_000.0
     les_altitude: float = 55_000.0  # eject the escape tower above this (action group 1)
     mun_periapsis: float = 60_000.0  # flyby altitude
-    return_periapsis: float = 32_000.0  # Kerbin entry altitude
+    return_periapsis: float = 35_000.0  # Kerbin entry altitude (32 km executed to 25.7 km gave 11.9 G)
     correction_tolerance: float = 15_000.0  # fix the return periapsis if further off
     entry_altitude: float = 90_000.0  # separate the capsule, arm chutes (Abort) here
     authority: float = 0.7  # fraction of deflection the crew may command per axis
@@ -265,6 +265,7 @@ class MunMission:
         part of the plan, not a repair."""
         o = self.v.orbit
         now = self.sc.ut
+        self.hands_off()
         node = self.v.control.add_node(now + 300, prograde=860)
         evals = 0
 
@@ -283,6 +284,7 @@ class MunMission:
         best = grid(now + 240 + np.arange(0, o.period, 20.0), (845.0, 860.0, 875.0, 890.0))
         if best is None or best[0] >= 1e6:
             node.remove()
+            self.hands_on()
             raise RuntimeError("No Mun encounter found in one orbit of burn times")
         self.event("tmi_coarse", ut=round(best[1][0]), dv=best[1][1], mun_periapsis=round(best[2]), return_periapsis=best[3], evals=evals)
         best = grid(best[1][0] + np.arange(-60, 61, 4.0), np.arange(848.0, 872.1, 1.0), best)
@@ -294,6 +296,7 @@ class MunMission:
             return_periapsis=None if back is None else round(back), free_return=back is not None and back > 0,
             score=round(s, 3), evals=evals + n,
         )
+        self.hands_on()
         return node
 
     def correction_node(self, score_mun=True, max_dv=60.0):
@@ -301,14 +304,17 @@ class MunMission:
         plane that moves the predicted trajectory back onto the targets, found by the
         same pattern search. Outbound it targets both periapses; homebound only the
         entry corridor. Returns None if it would not help or would cost too much."""
+        self.hands_off()
         ut = self.sc.ut + 120.0
         node = self.v.control.add_node(ut, prograde=0.0, radial=0.0)
         mun, back = self.patches(node)
         before = self.trajectory_score(mun, back, score_mun)
         best = (before, [0.0, 0.0], mun, back)
-        # Coarse look first: the corridor may be several m/s away in either axis.
-        for p in np.arange(-20.0, 20.1, 2.0):
-            for r in np.arange(-20.0, 20.1, 4.0):
+        # Coarse look first: the corridor may be several m/s away in either axis, and
+        # on the way home, after a wide flyby, a couple of hundred.
+        span, step_p, step_r = (20.0, 2.0, 4.0) if score_mun else (max_dv, max_dv / 15, max_dv / 8)
+        for p in np.arange(-span, span + 0.1, step_p):
+            for r in np.arange(-span, span + 0.1, step_r):
                 node.prograde, node.radial = float(p), float(r)
                 mun, back = self.patches(node)
                 s = self.trajectory_score(mun, back, score_mun)
@@ -317,6 +323,7 @@ class MunMission:
         best, evals = self.pattern_search(node, ("prograde", "radial"), best, steps=(1.0, 1.0), floor=0.005, score_mun=score_mun)
         s, (p, r), mun, back = best
         dv = math.hypot(p, r)
+        self.hands_on()
         if dv > max_dv or s >= before - 1e-6 or dv < 0.05:
             node.remove()
             self.event("no_correction", reason="too expensive" if dv > max_dv else "no improvement", dv=round(dv, 2), score_before=round(before, 3), score_after=round(s, 3))
@@ -488,6 +495,8 @@ class MunMission:
                 rate = 0.0 if abs(de) > 45 else de / (ut - self.previous[axis][1])
             self.previous[axis] = (e, ut)
             controls[axis] = float(np.clip(c.authority * sticks[axis][0] + c.damping * rate, -1, 1))
+            if self.flags.get("power_low"):
+                controls[axis] = 0.0
         v.control.pitch = controls["pitch"]
         v.control.yaw = controls["yaw"]
         controls["roll"] = self.roll_damping()
@@ -559,12 +568,14 @@ class MunMission:
                 raise RuntimeError("No thrust after ignition; vessel uncontrollable or staging dead")
             return
 
+        # The escape tower comes off above les_altitude whatever phase we are in (Bob's
+        # MECO came under 55 km once and the tower rode the whole mission to splashdown),
+        # and in any case before entry: it sits over the capsule.
+        if not self.flags["les"] and (alt > c.les_altitude or ph == "entry"):
+            self.eject_escape_tower()
+
         if ph == "ascent":
             self.stage_if_needed(throttle)
-            if alt > c.les_altitude and not self.flags["les"]:
-                ctl.set_action_group(1, True)
-                self.flags["les"] = True
-                self.event("action_group", group=1, purpose="eject escape tower")
             at_target = o.apoapsis_altitude >= c.parking_altitude - 1_500
             # Once begun, the separation sequence runs to completion whatever the
             # apoapsis does (drag took it under the threshold half-way through once).
@@ -677,12 +688,21 @@ class MunMission:
             return
 
         if ph == "return_coast":
-            if not self.flags.get("corrected_back") and o.time_to_periapsis > 1_800:
-                self.flags["corrected_back"] = True
-                off = abs(o.periapsis_altitude - c.return_periapsis) > c.correction_tolerance
-                self.event("return_check", periapsis=round(o.periapsis_altitude), correcting=off)
+            # Two looks at the entry corridor: one right after the flyby, one inside the
+            # last hour when a small burn moves the periapsis by little and precisely.
+            t_peri = o.time_to_periapsis
+            look = None
+            if not self.flags.get("corrected_back") and t_peri > 1_800:
+                look, tolerance = "corrected_back", c.correction_tolerance
+            elif not self.flags.get("trimmed_back") and 600 < t_peri < 3_000:
+                look, tolerance = "trimmed_back", 3_000.0
+            if look:
+                self.flags[look] = True
+                off = abs(o.periapsis_altitude - c.return_periapsis) > tolerance
+                self.event("return_check", look=look, periapsis=round(o.periapsis_altitude), correcting=off)
                 if off:
-                    node = self.correction_node(score_mun=False)
+                    # Survival burn: worth most of what is left in the tank.
+                    node = self.correction_node(score_mun=False, max_dv=250.0 if look == "corrected_back" else 30.0)
                     if node is not None:
                         self.node, self.after_burn = node, "return_coast"
                         self.go("burn")
@@ -699,7 +719,22 @@ class MunMission:
             if not self.flags["abort"]:
                 ctl.abort = True
                 self.flags["abort"] = True
+                self.flags["abort_ut"] = self.sc.ut
                 self.event("action_group", group="abort", purpose="separate capsule, arm parachutes")
+            elif not self.flags.get("chutes_checked") and self.sc.ut - self.flags["abort_ut"] > 3.0:
+                # Trust, then verify. The action group is the crew's; the chute state
+                # is the computer's to check (autopilot mission 4 splashed down at
+                # 183 m/s with every chute still stowed).
+                self.flags["chutes_checked"] = True
+                self.v = self.sc.active_vessel
+                self.verify_parachutes()
+            if self.tick % 40 == 0:
+                # The capsule alone runs its wheels off one battery; the panels left with
+                # the Poodle. Low charge: hands off, the heat shield end is the stable end.
+                ec, ec_max = v.resources.amount("ElectricCharge"), max(v.resources.max("ElectricCharge"), 1.0)
+                if ec / ec_max < 0.2 and not self.flags.get("power_low"):
+                    self.flags["power_low"] = True
+                    self.event("power_low", charge=round(ec), of=round(ec_max), action="attitude hands off")
             if v.situation in (self.sc.VesselSituation.landed, self.sc.VesselSituation.splashed):
                 self.event("landed", situation=str(v.situation).split(".")[-1], altitude=round(alt))
                 self.go("done")
@@ -733,7 +768,9 @@ class MunMission:
                 self.flags["burn_dv0"] = remaining
                 self.event("burn_start", dv=round(remaining, 1), late=True)
             return
-        self.stage_if_needed(throttle)
+        # No staging here: the upper stage is the last engine, and a freshly relit
+        # throttle reads zero thrust for a tick (autopilot mission 5 jettisoned the
+        # Poodle that way, mid-correction).
         along = remaining if getattr(self, "burn_along", None) is None else self.burn_along
         least = self.flags["burn_min"] = min(self.flags.get("burn_min", remaining), remaining)
         # Done when Bob has let go with little left, or a computer backstop trips.
@@ -769,10 +806,16 @@ class MunMission:
         ut = self.sc.ut
         if self.on_upper_stage or ut - self.last_stage_ut < 1.5:
             return
+        # Flameout means no thrust for half a second at open throttle, not one reading.
         if throttle > 0 and v.thrust < 1.0:
-            ctl.activate_next_stage()
-            self.last_stage_ut = ut
-            self.event("stage", now=ctl.current_stage)
+            since = self.flags.setdefault("no_thrust_since", ut)
+            if ut - since >= 0.5:
+                ctl.activate_next_stage()
+                self.last_stage_ut = ut
+                self.flags.pop("no_thrust_since", None)
+                self.event("stage", now=ctl.current_stage)
+        else:
+            self.flags.pop("no_thrust_since", None)
 
     def roll_damping(self):
         """The computer holds roll rate at zero. Nobody flies roll: a rolling ship swaps
@@ -787,23 +830,79 @@ class MunMission:
         self.roll_rate = rate
         return float(np.clip(self.c.roll_damping * rate, -1, 1))
 
+    def eject_escape_tower(self):
+        ctl = self.v.control
+        ctl.set_action_group(1, True)
+        self.flags["les"] = True
+        time.sleep(0.5)
+        still = [p.title for p in self.v.parts.all if "escape" in p.title.lower()]
+        if still:
+            # The group did not take (already toggled, or the tower is on its own
+            # stage): fire the tower's own decoupler/engine directly.
+            for p in self.v.parts.all:
+                if "escape" in p.title.lower():
+                    if p.engine is not None:
+                        p.engine.active = True
+                    if p.decoupler is not None:
+                        p.decoupler.decouple()
+            time.sleep(0.5)
+            still = [p.title for p in self.v.parts.all if "escape" in p.title.lower()]
+        self.event("action_group", group=1, purpose="eject escape tower", ejected=not still)
+
+    def verify_parachutes(self):
+        """After Abort: every parachute must be armed or deploying. Arm the ones that are
+        not and report."""
+        try:
+            chutes = [p for p in self.v.parts.all if p.parachute is not None]
+        except Exception as e:
+            self.event("parachutes", error=str(e)[:80])
+            return
+        states = {}
+        for p in chutes:
+            try:
+                name = str(p.parachute.state).split(".")[-1]
+                if name in ("stowed", "cut"):
+                    try:
+                        p.parachute.arm()
+                    except Exception:
+                        p.parachute.deploy()
+                    name = f"{name}->" + str(p.parachute.state).split(".")[-1]
+                states[p.title] = name
+            except Exception as e:  # a chute that is burning off mid-query
+                states[getattr(p, "title", "?")] = f"error: {str(e)[:40]}"
+        self.event("parachutes", count=len(chutes), states=states)
+        if not chutes:
+            self.event("abort", reason="no parachutes on the vessel after Abort")
+
     def deploy_panels_if_clear(self, alt):
         if alt > 70_000 and not self.flags["panels"]:
             self.v.control.lights = True
             self.flags["panels"] = True
             self.event("action_group", group="lights", purpose="deploy solar panels")
 
+    def hands_off(self):
+        """Nothing stale may be on the controls while nobody is watching them: before a
+        warp, and before a solver that blocks the loop for half a minute (autopilot
+        mission 5 spun up during one). Sticks to zero, and the ship holds its attitude
+        under SAS until the loop is back; still one writer, since the crew's sticks are
+        zero for the duration."""
+        ctl = self.v.control
+        ctl.throttle, ctl.pitch, ctl.yaw, ctl.roll = 0.0, 0.0, 0.0, 0.0
+        ctl.sas = True
+
+    def hands_on(self):
+        self.v.control.sas = False
+        self.previous = {}
+
     def warp_to(self, ut):
         if ut <= self.sc.ut + 5:
             return
         if self.v.orbit.body.name == "Kerbin" and self.v.flight().mean_altitude < 70_000:
             return  # physics warp in air lets the aerodynamics fly the ship; wait for vacuum
-        # Nothing stale may be on the controls while nobody is watching them.
-        ctl = self.v.control
-        ctl.throttle, ctl.pitch, ctl.yaw, ctl.roll = 0.0, 0.0, 0.0, 0.0
+        self.hands_off()
         self.event("warp", to=round(ut, 1), seconds=round(ut - self.sc.ut))
         self.sc.warp_to(ut)
-        self.previous = {}
+        self.hands_on()
 
     def summary(self):
         o = self.v.orbit

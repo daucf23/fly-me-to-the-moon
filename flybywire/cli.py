@@ -59,7 +59,7 @@ def main():
     mun.add_argument("--steer-tau-ms", type=float, default=100.0)
     mun.add_argument("--parking-altitude", type=float, default=100_000.0)
     mun.add_argument("--mun-periapsis", type=float, default=60_000.0)
-    mun.add_argument("--return-periapsis", type=float, default=32_000.0)
+    mun.add_argument("--return-periapsis", type=float, default=35_000.0)
     mun.add_argument("--authority", type=float, default=0.7)
     mun.add_argument("--damping", type=float, default=0.03)
     mun.add_argument("--turn-end", type=float, default=40_000.0)
