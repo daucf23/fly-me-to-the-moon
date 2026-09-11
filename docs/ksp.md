@@ -166,6 +166,7 @@ backstops override them and say so in the event log (`"by": "Bob"` versus
 3. A heavy pod on top is aerodynamically unstable. The pitch program is capped to 3° of
    angle of attack below 25 km and 10° to 45 km; that is what a gravity turn is. Max-Q
    upset went from 40° to 6.6°, and circularization from 1.5 km/s to 524 m/s.
+   The recovery exception and fly crew ascent authority are described in item 15.
 4. The free-return corridor is about 8 s by 2 m/s wide at TMI. Solving it takes ~1200
    patched-conic evaluations through a node (~1 min): coarse grid over one orbit, fine
    grid in the encounter band, pattern search on a bounded score that weighs the return
@@ -265,3 +266,32 @@ took 437–524 m/s of the Poodle after the booster, TMI 848–867 m/s, correctio
     still hits; and `mun_flyby`, on entering the sphere with a periapsis under 20 km,
     burns one 3-axis correction to raise it. Ordering the failure modes was the fix:
     no return is recoverable on the way home (autopilot 8, fly 4 both did), impact is not.
+
+15. **The max-Q yaw departure is the gravity turn on the vessel's yaw axis.** The
+    saved stack is rolled about 90° while heading east; pitch/yaw needles are already
+    transformed correctly into the vessel frame. The diagnostic ascent
+    `runs/mun-ascent-11-baseline` reproduced a −13.77° yaw error and about 17° of
+    aerodynamic sideslip. With authority 0.7, `runs/mun-ascent-12-guard-authority`
+    peaked at −3.24°. This supports insufficient control authority against the
+    unstable aerodynamic loading; it does not establish that the stack is symmetric.
+    Atmospheric ascent now uses 0.7 on both vessel axes, so the gain is independent
+    of roll. Above 45 km or outside ascent it uses the existing crew gain (flies 0.5);
+    damping and upper-stage thrust scaling are unchanged. `--ascent-authority`
+    overrides the ascent gain; an explicit `--authority` still overrides both unless
+    `--ascent-authority` is also supplied.
+
+    The prograde limiter also has a recovery bound. Angles in `ascent_pitch` are
+    **from vertical**: lowering the nose increases the number. The command may not
+    exceed `program + cap`, even when prograde falls farther. Normal turns retain
+    the 3°/10° limit; recovery can exceed that angle of attack to avoid following a
+    falling trajectory into the sea. The failed fly-8 state (16.2 km, velocity 83.5°
+    from vertical) now asks for 55.0° instead of 80.5°. A regression test covers that
+    recorded state. Ascent logs now include commanded pitch, prograde heading, vessel
+    heading/roll, dynamic pressure, aerodynamic angles and active authority.
+
+    Normal CLI validation (`runs/mun-ascent-13-orbit`, stopped at `plan_tmi`) repeated
+    the improvement: −3.01° maximum negative yaw departure near max-Q, clean booster
+    separation, 99.1 × 96.0 km orbit, all three crew, zero seat timeouts. The steeper
+    ascent reached apoapsis on the booster and needed 1180.7 m/s to circularize; it
+    retained about 1483 m/s upper-stage vacuum delta-v (about 630 after typical TMI).
+    This validates ascent and orbit, not another complete Mun mission.

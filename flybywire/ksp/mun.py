@@ -48,7 +48,7 @@ class MunConfig:
     turn_start: float = 2_000.0  # pitch program: vertical below this (about 100 m/s)...
     turn_end: float = 40_000.0  # ...square-root ramp to turn_pitch at this altitude, then hold
     turn_pitch: float = 85.0
-    max_aoa_deg: float = 3.0  # thick air (below aoa_altitude): program stays this close to surface prograde
+    max_aoa_deg: float = 3.0  # thick air: limit the turn ahead of prograde and the departure below the program
     aoa_altitude: float = 25_000.0
     max_aoa_high_deg: float = 10.0  # thin air up to aoa_free_altitude: allowed to pull ahead this much
     aoa_free_altitude: float = 45_000.0
@@ -61,6 +61,7 @@ class MunConfig:
     drogue_altitude: float = 5_000.0  # drogue full deployment; armed at separation
     main_altitude: float = 3_000.0  # mains full deployment; armed once the drogue is out
     authority: float = 0.7  # fraction of deflection the crew may command per axis
+    ascent_authority: float = 0.7  # extra authority against max-Q loading, on either vessel axis
     damping: float = 0.03  # rate gyro, stick per deg/s
     # On the upper stage the Poodle's gimbal at full throttle more than doubles what the
     # wheels do (62-77 vs 31 deg/s^2 per unit stick, fly missions 2-3, rising as the
@@ -175,13 +176,17 @@ class MunMission:
         return c.turn_pitch * math.sqrt(frac)
 
     def ascent_pitch(self, altitude):
-        """The program, held within max_aoa_deg of surface prograde while the air is thick.
-        A heavy pod on top is aerodynamically unstable: the nose ahead of the velocity
-        vector at max Q is what flipped the first shakedown 40 degrees. This is what a
-        gravity turn is."""
+        """Limit the gravity turn, but retain an upright recovery target.
+
+        Angles here are measured FROM VERTICAL: a larger number lowers the nose.
+        Normally stay close to surface prograde. If the velocity falls below the
+        program, never follow it farther than program + cap; a symmetric prograde
+        clamp followed fly-8's falling trajectory all the way into the sea. Recovery
+        can therefore exceed the normal angle-of-attack cap.
+        """
         c = self.c
         program = self.program_pitch(altitude)
-        self.ascent_debug = {"program": round(program, 1), "prograde": None}
+        self.ascent_debug = {"program": round(program, 1), "prograde": None, "command": round(program, 1)}
         if altitude > c.aoa_free_altitude:
             return program
         body = self.v.orbit.body
@@ -191,8 +196,11 @@ class MunMission:
         up, north, east = self.sc.transform_direction(vel, body.reference_frame, self.v.surface_reference_frame)
         prograde_pitch = math.degrees(math.atan2(math.hypot(north, east), up))
         self.ascent_debug["prograde"] = round(prograde_pitch, 1)
+        self.ascent_debug["prograde_heading"] = round(math.degrees(math.atan2(east, north)) % 360, 1)
         cap = c.max_aoa_deg if altitude < c.aoa_altitude else c.max_aoa_high_deg
-        return min(max(program, prograde_pitch - cap), prograde_pitch + cap)
+        command = min(max(program, prograde_pitch - cap), prograde_pitch + cap, program + cap)
+        self.ascent_debug["command"] = round(command, 1)
+        return command
 
     def upper_engine(self):
         """The main engine with the lowest stage number, excluding the escape tower.
@@ -590,6 +598,7 @@ class MunMission:
         # burning (see MunConfig.thrust_authority); the throttle used is last tick's,
         # which is what the engine is doing now.
         scale = 1.0 / (1.0 + c.thrust_authority * getattr(self, "last_throttle", 0.0)) if self.flags.get("upper") else 1.0
+        authority = self.attitude_authority(truth["altitude"])
         controls = {}
         for axis in ("pitch", "yaw"):
             e = truth[f"{axis}_error_deg"]
@@ -600,7 +609,7 @@ class MunMission:
                 # (rear hemisphere in or out), not a rotation; the gyro ignores it.
                 rate = 0.0 if abs(de) > 45 else de / (ut - self.previous[axis][1])
             self.previous[axis] = (e, ut)
-            controls[axis] = float(np.clip(scale * (c.authority * sticks[axis][0] + c.damping * rate), -1, 1))
+            controls[axis] = float(np.clip(scale * (authority * sticks[axis][0] + c.damping * rate), -1, 1))
             if self.flags.get("power_low"):
                 controls[axis] = 0.0
         v.control.pitch = controls["pitch"]
@@ -622,6 +631,14 @@ class MunMission:
         self.phase_logic(truth, throttle)
 
         self.tick += 1
+        if self.phase == "ascent":
+            flight = v.flight()
+            self.ascent_debug.update(
+                heading=round(flight.heading, 1), roll=round(flight.roll, 1),
+                dynamic_pressure=round(flight.dynamic_pressure, 1),
+                angle_of_attack=round(flight.angle_of_attack, 2),
+                sideslip=round(flight.sideslip_angle, 2), authority=authority,
+            )
         row = {
             "tick": self.tick,
             "ut": round(ut, 2),
@@ -992,6 +1009,14 @@ class MunMission:
             self.go(nxt)
 
     # --- helpers -----------------------------------------------------------------------
+
+    def attitude_authority(self, altitude):
+        # The saved stack is rolled 90 degrees: Bill's yaw axis flies the gravity
+        # turn. Boost both vessel axes so the ascent gain does not depend on roll.
+        # The baseline probe at 0.5 departed 13.8 degrees at max Q; 0.7 held it to 3.3.
+        if self.phase in ("prelaunch", "ascent") and altitude < self.c.aoa_free_altitude:
+            return self.c.ascent_authority
+        return self.c.authority
 
     def stage_if_needed(self, throttle):
         v = self.v

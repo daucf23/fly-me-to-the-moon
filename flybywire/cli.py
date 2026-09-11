@@ -61,6 +61,7 @@ def main():
     mun.add_argument("--mun-periapsis", type=float, default=60_000.0)
     mun.add_argument("--return-periapsis", type=float, default=40_000.0)
     mun.add_argument("--authority", type=float, default=None, help="Fraction of deflection the crew may command (flies 0.5, autopilot 0.7)")
+    mun.add_argument("--ascent-authority", type=float, default=None, help="Attitude authority below 45 km during ascent (default 0.7, or explicit --authority)")
     mun.add_argument("--damping", type=float, default=None, help="Rate gyro, stick per deg/s (flies 0.12, autopilot 0.03)")
     mun.add_argument("--thrust-authority", type=float, default=2.0, help="Upper-stage gimbal authority relative to the wheels; augmentation is divided by 1 + this x throttle")
     mun.add_argument("--save-milestones", action="store_true", help="Quicksave after circularization and TMI (flybywire-orbit, flybywire-tmi)")
@@ -109,6 +110,7 @@ def run_mun(a):
         mun_periapsis=a.mun_periapsis,
         return_periapsis=a.return_periapsis,
         authority=authority if a.authority is None else a.authority,
+        ascent_authority=a.ascent_authority if a.ascent_authority is not None else (0.7 if a.authority is None else a.authority),
         damping=damping if a.damping is None else a.damping,
         thrust_authority=a.thrust_authority,
         error_scale_deg=a.error_scale_deg,
