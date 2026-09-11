@@ -244,8 +244,16 @@ class MunMission:
             o = getattr(node_or_orbit, "orbit", node_or_orbit)
             if o.body.name == "Kerbin":
                 nxt = o.next_orbit
+                if self.flags.get("flyby_done"):
+                    # Home is a direct fall. A "return" that first grazes the Mun's
+                    # sphere again is a prediction the live conics do not keep: fly 10's
+                    # 125 m/s correction was planned through an 879 km second pass to a
+                    # 52 km periapsis and executed, accurately, to −504 km.
+                    if nxt is not None and nxt.body.name == "Mun":
+                        return None, None
+                    return None, o.periapsis_altitude
                 if nxt is None or nxt.body.name != "Mun":
-                    return None, o.periapsis_altitude if self.flags.get("flyby_done") else None
+                    return None, None
                 o = nxt
             if o.body.name != "Mun":
                 return None, None
@@ -905,11 +913,12 @@ class MunMission:
             # Two looks at the entry corridor: one right after the flyby, one inside the
             # last hour when a small burn moves the periapsis by little and precisely.
             t_peri = o.time_to_periapsis
-            decision = self.return_look(self.flags, t_peri, o.periapsis_altitude)
+            _, back = self.patches(o)  # None if the live conics route home via the Mun again
+            decision = self.return_look(self.flags, t_peri, back)
             if decision:
                 look, off, max_dv = decision
                 self.flags[look] = True
-                self.event("return_check", look=look, periapsis=round(o.periapsis_altitude), trims=self.flags.get("trims_back", 0), correcting=off)
+                self.event("return_check", look=look, periapsis=round(o.periapsis_altitude), direct=back is not None, trims=self.flags.get("trims_back", 0), correcting=off)
                 if off:
                     # Survival burn: worth most of what is left in the tank.
                     node = self.correction_node(score_mun=False, max_dv=max_dv)
@@ -1047,10 +1056,14 @@ class MunMission:
         is a survival burn too: fly 9b came home at 46 km because 35 m/s was "too
         expensive", bottomed out at 46.9 km and went back up to 800 km."""
         c = self.c
+
+        def off(tolerance):
+            return periapsis is None or abs(periapsis - c.return_periapsis) > tolerance
+
         if not flags.get("corrected_back") and t_peri > 1_800:
-            return "corrected_back", abs(periapsis - c.return_periapsis) > c.correction_tolerance, 250.0
+            return "corrected_back", off(c.correction_tolerance), 250.0
         if not flags.get("trimmed_back") and 600 < t_peri < 3_000 and flags.get("trims_back", 0) < 3:
-            return "trimmed_back", abs(periapsis - c.return_periapsis) > 3_000.0, 250.0
+            return "trimmed_back", off(3_000.0), 250.0
         return None
 
     def attitude_authority(self, altitude):
