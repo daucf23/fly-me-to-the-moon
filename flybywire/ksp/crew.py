@@ -99,6 +99,45 @@ class FlyCrew:
         for p in self.pilots.values():
             p.begin_episode()
 
+    # The panel's route to the stick, in order: photoreceptors, optic lobe, projection
+    # neurons into the brain, central brain, descending neurons. A recording keeps a
+    # fixed sample of each so the whole path can be shown lighting up.
+    BRAIN_STRATA = ("ol_sensory", "ol_intrinsic", "visual_projection", "cb_intrinsic", "descending_neuron")
+
+    def brain_sample(self, per_stratum=200, seed=0):
+        """Fixed, seeded, stratified sample of neuron indices (same in every seat: the
+        three brains are copies) plus their annotation, for brain_frame()."""
+        from ..neural.common import annotations
+
+        pilot = next(iter(self.pilots.values()))
+        ids = pilot.brain.ids
+        a = annotations(ids)
+        superclass = a.superclass.fillna("").to_numpy()
+        side = a.somaSide.fillna("").to_numpy()
+        types = a.type.fillna("").to_numpy()
+        decoder = set(np.concatenate([pilot.decoder.left, pilot.decoder.right]).tolist())
+        rng = np.random.default_rng(seed)
+        chosen = []
+        for stratum in self.BRAIN_STRATA:
+            pool = np.flatnonzero(superclass == stratum)
+            forced = [i for i in pool if i in decoder]
+            rest = np.setdiff1d(pool, forced)
+            take = rng.choice(rest, size=min(per_stratum - len(forced), len(rest)), replace=False)
+            group = np.concatenate([np.asarray(forced, dtype=int), take]).astype(int)
+            # Left cells first, then right: one half of the raster per eye.
+            chosen.extend(sorted(group.tolist(), key=lambda i: (side[i] != "L", i)))
+        self.brain_columns = np.asarray(chosen, dtype=int)
+        return [
+            {"bodyId": str(ids[i]), "superclass": superclass[i], "side": side[i], "type": types[i], "decoder": i in decoder}
+            for i in chosen
+        ]
+
+    def brain_frame(self, role):
+        """This seat's spike counts over the last neural window for the sampled neurons,
+        one byte each (a count above 255 in 50 ms is not a fly neuron)."""
+        counts = self.pilots[role].brain.counts[self.brain_columns]
+        return np.minimum(counts, 255).astype(np.uint8).tobytes()
+
     def provenance(self):
         return {role: {"kerbal": NAMES.get(role), **p.provenance()} for role, p in self.pilots.items()}
 

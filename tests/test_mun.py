@@ -84,3 +84,40 @@ def test_no_return_look_inside_the_last_ten_minutes_or_when_on_target():
 
 def test_a_return_routed_via_the_mun_again_counts_as_off_target():
     assert return_mission().return_look({"corrected_back": True}, 1_500, None)[1] is True
+
+
+def test_brain_sample_follows_the_panel_pathway_and_keeps_the_decoder_cells(monkeypatch):
+    # No connectome: a fake annotation table with the five strata, two decoder cells.
+    import numpy as np
+    import pandas as pd
+
+    from flybywire.ksp import crew as crew_module
+    from flybywire.ksp.crew import FlyCrew
+
+    strata = FlyCrew.BRAIN_STRATA
+    n = 50
+    ids = np.arange(1000, 1000 + n * len(strata))
+    table = pd.DataFrame(
+        {
+            "superclass": np.repeat(strata, n),
+            "somaSide": np.tile(["L", "R"], n * len(strata) // 2),
+            "type": ["DNp20" if i in (240, 241) else "x" for i in range(len(ids))],
+        },
+        index=ids,
+    )
+    monkeypatch.setattr("flybywire.neural.common.annotations", lambda wanted: table.loc[wanted])
+    fake_pilot = SimpleNamespace(
+        brain=SimpleNamespace(ids=ids, counts=np.arange(len(ids)) % 300),
+        decoder=SimpleNamespace(left=np.array([240]), right=np.array([241])),
+    )
+    c = object.__new__(FlyCrew)
+    c.pilots = {"pitch": fake_pilot}
+    index = c.brain_sample(per_stratum=10)
+    assert len(index) == 50 and [e["superclass"] for e in index][::10] == list(strata)
+    assert sum(e["decoder"] for e in index) == 2
+    # Each stratum's block lists left cells before right ones.
+    block = [e["side"] for e in index[:10]]
+    assert block == sorted(block, key=lambda s: s != "L")
+    frame = np.frombuffer(c.brain_frame("pitch"), dtype=np.uint8)
+    assert len(frame) == 50 and frame.max() <= 255 and (frame == np.minimum(fake_pilot.brain.counts[c.brain_columns], 255)).all()
+    assert c.brain_sample(per_stratum=10) == index  # seeded: the same sample every run

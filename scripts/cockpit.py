@@ -2,8 +2,10 @@
 commanded, and what the computer finally sent to the ship, tick by tick.
 
 Every number drawn comes from the run's mission.jsonl; the panels are re-rendered from
-the logged errors with the same function the flies were shown. Nothing is animated that
-was not measured.
+the logged errors with the same function the flies were shown. With --record-brain the
+run also holds brain-<role>.u8, spike counts of a fixed 1,000-neuron sample along the
+panel's pathway (brain-index.json), drawn as a raster beside each panel. Nothing is
+animated that was not measured.
 
   replay RUN --out cockpit.mp4      one frame per telemetry row, piped to ffmpeg
   live RUN [--port 8765]            tail the log of a running flight; open the page
@@ -71,13 +73,45 @@ def gauge(d, x, y, w, h, value, color, label):
     d.text((x, y - 15), f"{label} {value:+.3f}", fill=color, font=F_SMALL)
 
 
-def draw_seat(d, img, x0, role, who, row, cfg):
+STRATA = [("ol_sensory", "eye"), ("ol_intrinsic", "optic lobe"), ("visual_projection", "projection"),
+          ("cb_intrinsic", "central brain"), ("descending_neuron", "descending")]
+CELL = 4
+
+
+def draw_raster(d, x, y, counts, brain):
+    """The sampled neurons of one seat for this tick: strata top to bottom, left-eye
+    cells in the left block and right-eye cells in the right, brightness = spikes in
+    the last 50 ms. Decoder cells (the four the stick reads) in orange."""
+    for stratum, label in STRATA:
+        d.text((x, y), label, fill=DIM, font=F_SMALL)
+        y += 13
+        k = {"L": 0, "R": 0}
+        for j in brain["by_stratum"][stratum]:
+            side = "L" if brain["side"][j] == "L" else "R"
+            col = k[side] % 10 + (0 if side == "L" else 11)
+            r = k[side] // 10
+            k[side] += 1
+            c = int(counts[j])
+            if c == 0:
+                fill = (30, 30, 36)
+            elif brain["decoder"][j]:
+                fill = FLY
+            else:
+                v = min(255, 90 + 55 * c)
+                fill = (v, v, v)
+            d.rectangle([x + col * CELL, y + r * CELL, x + col * CELL + CELL - 2, y + r * CELL + CELL - 2], fill=fill)
+        y += (max(k.values()) + 9) // 10 * CELL + 6
+
+
+def draw_seat(d, img, x0, role, who, row, cfg, brain=None, counts=None):
     d.text((x0 + 10, HEADER + 6), f"{who} - {role}", fill=INK, font=F_BIG)
     panel = Image.fromarray(panel_for(role, row, cfg)).resize((90 * PANEL_SCALE, 160 * PANEL_SCALE), Image.NEAREST)
-    px = x0 + (COL - panel.width) // 2
+    px = x0 + 10 if counts is not None else x0 + (COL - panel.width) // 2
     py = HEADER + 32
     img.paste(panel, (px, py))
     d.rectangle([px - 1, py - 1, px + panel.width, py + panel.height], outline=DIM)
+    if counts is not None:
+        draw_raster(d, px + panel.width + 12, py, counts, brain)
     if role == "throttle":
         cap = "engine off, panel dark" if row.get("dv_remaining") is None else f"dv to go {row['dv_remaining']:.1f} m/s"
     else:
@@ -111,7 +145,7 @@ def draw_seat(d, img, x0, role, who, row, cfg):
         gauge(d, x0 + 26, y, 200, 12, row["controls"][role], SHIP, f"to ship: {cfg['authority']} x stick + gyro")
 
 
-def render_frame(row, cfg, t0):
+def render_frame(row, cfg, t0, brain=None, i=None):
     img = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
     t = row["ut"] - t0
@@ -131,7 +165,10 @@ def render_frame(row, cfg, t0):
         x0 = i * COL
         if i:
             d.line([x0, HEADER, x0, H - 30], fill=GRID)
-        draw_seat(d, img, x0, role, who, row, cfg)
+        counts = None
+        if brain is not None and i is not None and role in brain["frames"] and i < len(brain["frames"][role]):
+            counts = brain["frames"][role][i]
+        draw_seat(d, img, x0, role, who, row, cfg, brain, counts)
     d.text(
         (10, H - 22),
         "panel -> fly connectome -> descending neurons -> stick -> computer augmentation -> ship.   orange: the fly   blue: the ship",
@@ -146,6 +183,26 @@ def load_config(run):
     return p["config"]
 
 
+def load_brain(run):
+    """brain-index.json plus one memory-mapped (ticks x neurons) uint8 array per seat, or None."""
+    path = run / "brain-index.json"
+    if not path.exists():
+        return None
+    neurons = json.loads(path.read_text())["neurons"]
+    n = len(neurons)
+    frames = {}
+    for f in run.glob("brain-*.u8"):
+        size = f.stat().st_size
+        if size >= n:
+            frames[f.stem.split("-", 1)[1]] = np.memmap(f, dtype=np.uint8, mode="r", shape=(size // n, n))
+    return {
+        "frames": frames,
+        "side": [e["side"] for e in neurons],
+        "decoder": [e["decoder"] for e in neurons],
+        "by_stratum": {s: [j for j, e in enumerate(neurons) if e["superclass"] == s] for s, _ in STRATA},
+    }
+
+
 def rows_of(path):
     with open(path) as f:
         for line in f:
@@ -156,15 +213,16 @@ def rows_of(path):
 def replay(args):
     run = Path(args.run)
     cfg = load_config(run)
-    rows = list(rows_of(run / "mission.jsonl"))[:: args.every]
-    t0 = rows[0]["ut"]
+    rows = list(enumerate(rows_of(run / "mission.jsonl")))[:: args.every]
+    t0 = rows[0][1]["ut"]
+    brain = load_brain(run)
     cmd = ["ffmpeg", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(args.fps), "-i", "-",
            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20", args.out]
     ff = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.DEVNULL)
-    for i, row in enumerate(rows):
-        ff.stdin.write(render_frame(row, cfg, t0).tobytes())
-        if i % 500 == 0:
-            print(f"{i}/{len(rows)}", file=sys.stderr)
+    for k, (i, row) in enumerate(rows):
+        ff.stdin.write(render_frame(row, cfg, t0, brain, i).tobytes())
+        if k % 500 == 0:
+            print(f"{k}/{len(rows)}", file=sys.stderr)
     ff.stdin.close()
     ff.wait()
     print(f"{len(rows)} frames -> {args.out} ({len(rows) / args.fps:.0f} s)")
@@ -176,7 +234,7 @@ PAGE = b"""<html><body style="margin:0;background:#0c0c10"><img id=f src=/frame.
 
 def live(args):
     run = Path(args.run)
-    state = {"png": None, "t0": None, "cfg": None}
+    state = {"png": None, "t0": None, "cfg": None, "i": -1}
 
     def tail():
         while not (run / "provenance.json").exists() or not (run / "mission.jsonl").exists():
@@ -187,6 +245,7 @@ def live(args):
             pending = backlog[-1:] if backlog else []
             if backlog:
                 state["t0"] = json.loads(backlog[0])["ut"]
+                state["i"] = len(backlog) - 2
             while True:
                 line = pending.pop() if pending else f.readline()
                 if not line.endswith(b"\n"):
@@ -196,8 +255,10 @@ def live(args):
                 row = json.loads(line)
                 if state["t0"] is None:
                     state["t0"] = row["ut"]
+                state["i"] += 1
+                brain = load_brain(run)  # re-mapped each tick: the files are still growing
                 buf = io.BytesIO()
-                render_frame(row, state["cfg"], state["t0"]).save(buf, "PNG")
+                render_frame(row, state["cfg"], state["t0"], brain, state["i"]).save(buf, "PNG")
                 state["png"] = buf.getvalue()
 
     threading.Thread(target=tail, daemon=True).start()

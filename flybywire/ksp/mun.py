@@ -83,6 +83,7 @@ class MunConfig:
     rcs_disarm_deg: float = 5.0
     stop_after: str | None = None  # end the run when this phase begins (shakedowns)
     save_milestones: bool = False  # quicksave after circularization and TMI, to restart from
+    record_brain: bool = False  # per tick, per seat: spike counts of a fixed neuron sample (brain-<role>.u8)
     wall_timeout: float = 3 * 3600.0
 
 
@@ -112,6 +113,7 @@ class MunMission:
         self.lost = {}  # role -> consecutive watchdog timeouts
         self.rear_signs = None  # turn direction chosen while the target is behind the nose
         self.log = None
+        self.brain_logs = {}
         self.tick = 0
         self.t_wall0 = time.time()
 
@@ -481,6 +483,10 @@ class MunMission:
         self.v = self.to_pad()
         self.crew.begin_episode()
         self.log = (self.run_dir / "mission.jsonl").open("w")
+        if self.c.record_brain and hasattr(self.crew, "brain_sample"):
+            index = self.crew.brain_sample()
+            (self.run_dir / "brain-index.json").write_text(json.dumps({"neurons": index, "dtype": "uint8", "record": "one frame per mission.jsonl row"}))
+            self.brain_logs = {role: (self.run_dir / f"brain-{role}.u8").open("wb") for role in self.crew.roles}
         # One writer. SAS on the same axis as a fly is two hands on one stick.
         self.v.control.sas = False
         self.v.control.rcs = self.c.rcs == "always"
@@ -498,6 +504,8 @@ class MunMission:
             return self.summary()
         finally:
             self.log.close()
+            for f in self.brain_logs.values():
+                f.close()
             try:
                 self.v.control.throttle = 0.0
                 self.v.control.sas = True
@@ -684,12 +692,16 @@ class MunMission:
             "sticks": {r: round(s[0], 4) for r, s in sticks.items()},
             "controls": {**{k: round(x, 4) for k, x in controls.items()}, "throttle": round(throttle, 3)},
             "neural": {r: {k: s[1][k] for k in ("left_hz", "right_hz", "steer", "compute_seconds") if k in s[1]} for r, s in sticks.items()},
+            "authority": authority,
+            "wall": round(time.time(), 3),
         }
         if self.phase == "entry":
             g = v.flight().g_force
             row["g_force"] = round(g, 2)
             self.flags["max_g"] = max(self.flags.get("max_g", 0.0), g)
         self.log.write(json.dumps(row) + "\n")
+        for role, f in self.brain_logs.items():
+            f.write(self.crew.brain_frame(role))
         if self.tick % 20 == 0:
             from PIL import Image
 

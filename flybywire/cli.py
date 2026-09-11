@@ -68,6 +68,7 @@ def main():
     mun.add_argument("--turn-end", type=float, default=40_000.0)
     mun.add_argument("--turn-pitch", type=float, default=85.0)
     mun.add_argument("--rcs", choices=["off", "turns", "always"], default="off", help="Thrusters spend monopropellant; wheels and gimbal are enough for this stack")
+    mun.add_argument("--record-brain", action="store_true", help="Record sampled spike counts per seat per tick for the cockpit brain raster (brain-<role>.u8)")
     mun.add_argument("--stop-after", default=None, help="Stop when this phase begins (e.g. plan_tmi) for shakedowns")
     a = p.parse_args()
 
@@ -91,6 +92,19 @@ def main():
         run_ksp(a)
     elif a.command == "mun":
         run_mun(a)
+
+
+def revision():
+    """The code that flew: git commit plus whether the tree was clean."""
+    import subprocess
+
+    try:
+        root = Path(__file__).resolve().parents[1]
+        sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+        dirty = bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=root, text=True).strip())
+        return {"commit": sha, "dirty": dirty}
+    except Exception as e:
+        return {"error": str(e)}
 
 
 def run_mun(a):
@@ -118,6 +132,7 @@ def run_mun(a):
         rcs=a.rcs,
         stop_after=a.stop_after,
         save_milestones=a.save_milestones,
+        record_brain=a.record_brain,
     )
     run_dir = a.run_dir or Path("runs") / f"mun-{a.crew}"
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -126,7 +141,7 @@ def run_mun(a):
         **({"neural_ms": a.neural_ms, "decoder_kwargs": {"gain_hz": a.steer_gain_hz, "tau_ms": a.steer_tau_ms}} if a.crew == "flies" else {}),
     )
     (run_dir / "provenance.json").write_text(
-        json.dumps({"config": config.__dict__, "crew": crew.name, "seats": crew.provenance(), "args": vars(a)}, indent=2, default=str)
+        json.dumps({"revision": revision(), "config": config.__dict__, "crew": crew.name, "seats": crew.provenance(), "args": vars(a)}, indent=2, default=str)
     )
     mission = MunMission(config, crew, run_dir)
     try:
