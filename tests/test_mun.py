@@ -101,6 +101,7 @@ def test_brain_sample_follows_the_panel_pathway_and_keeps_the_decoder_cells(monk
         {
             "superclass": np.repeat(strata, n),
             "somaSide": np.tile(["L", "R"], n * len(strata) // 2),
+            "rootSide": None,
             "type": ["DNp20" if i in (240, 241) else "x" for i in range(len(ids))],
         },
         index=ids,

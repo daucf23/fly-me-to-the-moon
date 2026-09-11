@@ -82,6 +82,8 @@ def draw_raster(d, x, y, counts, brain):
     """The sampled neurons of one seat for this tick: strata top to bottom, left-eye
     cells in the left block and right-eye cells in the right, brightness = spikes in
     the last 50 ms. Decoder cells (the four the stick reads) in orange."""
+    d.text((x + 6, y - 14), "L eye", fill=DIM, font=F_SMALL)
+    d.text((x + 50, y - 14), "R eye", fill=DIM, font=F_SMALL)
     for stratum, label in STRATA:
         d.text((x, y), label, fill=DIM, font=F_SMALL)
         y += 13
@@ -104,7 +106,7 @@ def draw_raster(d, x, y, counts, brain):
 
 
 def draw_seat(d, img, x0, role, who, row, cfg, brain=None, counts=None):
-    d.text((x0 + 10, HEADER + 6), f"{who} - {role}", fill=INK, font=F_BIG)
+    d.text((x0 + 10, HEADER + 4), f"{who} - {role}", fill=INK, font=F_BIG)
     panel = Image.fromarray(panel_for(role, row, cfg)).resize((90 * PANEL_SCALE, 160 * PANEL_SCALE), Image.NEAREST)
     px = x0 + 10 if counts is not None else x0 + (COL - panel.width) // 2
     py = HEADER + 32
@@ -161,9 +163,9 @@ def render_frame(row, cfg, t0, brain=None, i=None):
         fill=DIM,
         font=F,
     )
-    for i, (role, who, _) in enumerate(SEATS):
-        x0 = i * COL
-        if i:
+    for seat, (role, who, _) in enumerate(SEATS):
+        x0 = seat * COL
+        if seat:
             d.line([x0, HEADER, x0, H - 30], fill=GRID)
         counts = None
         if brain is not None and i is not None and role in brain["frames"] and i < len(brain["frames"][role]):

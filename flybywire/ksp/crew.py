@@ -18,8 +18,10 @@ Three kernels run in parallel threads: the C kernel releases the GIL, so a tick 
 about as much wall-clock as one brain.
 """
 
+import json
 import math
 import time
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import TimeoutError as FuturesTimeout
 
@@ -105,15 +107,24 @@ class FlyCrew:
     BRAIN_STRATA = ("ol_sensory", "ol_intrinsic", "visual_projection", "cb_intrinsic", "descending_neuron")
 
     def brain_sample(self, per_stratum=200, seed=0):
-        """Fixed, seeded, stratified sample of neuron indices (same in every seat: the
-        three brains are copies) plus their annotation, for brain_frame()."""
+        """Fixed sample of neuron indices (same in every seat: the three brains are
+        copies) plus their annotation, for brain_frame(). Preferably the cells that
+        scripts/brain_sample.py measured responding to the needle (neural/brain_sample.json);
+        without that file, a seeded stratified random sample, which is mostly dark."""
         from ..neural.common import annotations
 
         pilot = next(iter(self.pilots.values()))
         ids = pilot.brain.ids
+        measured = Path(__file__).resolve().parents[1] / "neural" / "brain_sample.json"
+        if measured.exists():
+            neurons = json.loads(measured.read_text())["neurons"]
+            index = {str(b): i for i, b in enumerate(ids)}
+            if all(n["bodyId"] in index for n in neurons):
+                self.brain_columns = np.asarray([index[n["bodyId"]] for n in neurons], dtype=int)
+                return neurons
         a = annotations(ids)
         superclass = a.superclass.fillna("").to_numpy()
-        side = a.somaSide.fillna("").to_numpy()
+        side = a.somaSide.fillna(a.rootSide).fillna("").to_numpy()  # photoreceptors carry their eye in rootSide
         types = a.type.fillna("").to_numpy()
         decoder = set(np.concatenate([pilot.decoder.left, pilot.decoder.right]).tolist())
         rng = np.random.default_rng(seed)

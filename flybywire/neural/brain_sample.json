@@ -1,0 +1,10007 @@
+{
+ "method": "Choose the neurons the cockpit raster shows, by measurement.\n\nA random sample of the connectome is almost dark: the network fires ~1.8 Hz per neuron\non average, so a cell rarely spikes in a 50 ms window. This probe shows one brain the\nthree panels a seat can see (dark, full bar left, full bar right), each settled 1 s and\nrecorded 2 s, and keeps per pathway stratum the cells whose rate moves most with the\nneedle. The decoder's four cells are always kept. Output: flybywire/neural/brain_sample.json,\nread by FlyCrew.brain_sample(); the same 1,000 cells in every recording.",
+ "settle_s": 1.0,
+ "record_s": 2.0,
+ "neurons": [
+  {
+   "bodyId": "53093",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "61381",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "80352",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "83396",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "96819",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "111273",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "112479",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "113190",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "116643",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "117185",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "117246",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "120431",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "123051",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "123821",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "124821",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R8p",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "125797",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "127349",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "127452",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "128178",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "129922",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "130137",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "131534",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "132068",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "132372",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "132455",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "132648",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "133087",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "133691",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "134296",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "137613",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "138203",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "138429",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "138658",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "138712",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "138903",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "139907",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "140113",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "140350",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "140617",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "141616",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "143555",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "143558",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "143912",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "144223",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "144614",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "146443",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "146690",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "148269",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "149316",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "149491",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "149613",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "151389",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "151605",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "151670",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "151672",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "152117",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "152224",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "152331",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "153792",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "154985",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "155314",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "156131",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "156150",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "156722",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "157517",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "157625",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "157702",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "158215",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "158223",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "158733",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "159116",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "159645",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "159689",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "160416",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "160494",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "162702",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "164130",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "164381",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "164439",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "164656",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "164836",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "165030",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "165150",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "165735",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R8y",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "166003",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "166269",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "166471",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R8p",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "166892",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "168001",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "168295",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "168450",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "168994",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "169064",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "169600",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "170543",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R8y",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "170546",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "170621",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "170811",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "172057",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "172181",
+   "superclass": "ol_sensory",
+   "side": "L",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 132.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "54944",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "55303",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "66667",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "67840",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "77095",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "79144",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "81286",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "84219",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "89397",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "95486",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "98422",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "99504",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "99945",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "102522",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "104044",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "108118",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "108593",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "109342",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "111987",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "112574",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "113364",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "114343",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "114750",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "115044",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "116281",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "116809",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "116989",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "117610",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "117823",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "117958",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "118493",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "118538",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "119809",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "120634",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "120673",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "120782",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "121284",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "121475",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "121591",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "121826",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "122037",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R8p",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "122205",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "122209",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "122376",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "123110",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "123705",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "124475",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "124814",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "124986",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "125168",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "125377",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "125407",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "125796",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "126103",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "126946",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "127008",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "127429",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "127446",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "127946",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "128517",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "128999",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "129195",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "129641",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "129697",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "130195",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "130244",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "130335",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "130353",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "130716",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "130931",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "131068",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "131077",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "131317",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "132065",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "132951",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "133116",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R8p",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "133423",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "133732",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "133979",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "133997",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "134015",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "134055",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "134095",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "134403",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "134478",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "134618",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "135144",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "135599",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "135682",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "135902",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "135953",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "135997",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "136001",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "136470",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "136915",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "137169",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "137704",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "137951",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "138077",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "138169",
+   "superclass": "ol_sensory",
+   "side": "R",
+   "type": "R1-R6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 132.0
+  },
+  {
+   "bodyId": "11434",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "Dm6",
+   "decoder": false,
+   "dark_hz": 60.0,
+   "left_hz": 4.0,
+   "right_hz": 56.5
+  },
+  {
+   "bodyId": "47743",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 55.5,
+   "left_hz": 0.0,
+   "right_hz": 54.0
+  },
+  {
+   "bodyId": "565475",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.5,
+   "left_hz": 0.0,
+   "right_hz": 54.5
+  },
+  {
+   "bodyId": "13505",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "18993",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "23514",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 54.5
+  },
+  {
+   "bodyId": "32436",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 54.0
+  },
+  {
+   "bodyId": "32922",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 54.5
+  },
+  {
+   "bodyId": "48050",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 54.0
+  },
+  {
+   "bodyId": "93139",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 54.0
+  },
+  {
+   "bodyId": "516748",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 54.5
+  },
+  {
+   "bodyId": "536373",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 54.0
+  },
+  {
+   "bodyId": "541818",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "545831",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 54.0
+  },
+  {
+   "bodyId": "547136",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "23054",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "28449",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 54.5
+  },
+  {
+   "bodyId": "30031",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "30632",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "30926",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "50015",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "60825",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "514397",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "537158",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 54.0
+  },
+  {
+   "bodyId": "540416",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "545921",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "570389",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 0.0,
+   "right_hz": 54.5
+  },
+  {
+   "bodyId": "12925",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "18048",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "21473",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "36754",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "42913",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "46696",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "72043",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "512113",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "535306",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "14405",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "14536",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "17264",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "21422",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "22007",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "22030",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "24822",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "26616",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "27376",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "29251",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "29605",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "515692",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "523965",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "526877",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "535246",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "540084",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "547005",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "556493",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "18839",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.0,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "22311",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.0,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "35880",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.0,
+   "left_hz": 0.0,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "518394",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.0,
+   "left_hz": 0.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "524821",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.0,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "580958",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.0,
+   "left_hz": 0.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "37064",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.5,
+   "left_hz": 0.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "518163",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.5,
+   "left_hz": 0.0,
+   "right_hz": 51.5
+  },
+  {
+   "bodyId": "556494",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.5,
+   "left_hz": 0.0,
+   "right_hz": 51.5
+  },
+  {
+   "bodyId": "14007",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.0,
+   "left_hz": 0.0,
+   "right_hz": 51.0
+  },
+  {
+   "bodyId": "18759",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.0,
+   "left_hz": 0.0,
+   "right_hz": 52.5
+  },
+  {
+   "bodyId": "518303",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.0,
+   "left_hz": 0.0,
+   "right_hz": 51.0
+  },
+  {
+   "bodyId": "525536",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.0,
+   "left_hz": 0.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "534384",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.0,
+   "left_hz": 0.0,
+   "right_hz": 50.5
+  },
+  {
+   "bodyId": "542323",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.0,
+   "left_hz": 0.0,
+   "right_hz": 51.5
+  },
+  {
+   "bodyId": "20850",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 50.5,
+   "left_hz": 0.0,
+   "right_hz": 50.5
+  },
+  {
+   "bodyId": "520538",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 50.5,
+   "left_hz": 0.0,
+   "right_hz": 51.0
+  },
+  {
+   "bodyId": "82152",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 46.0,
+   "left_hz": 0.0,
+   "right_hz": 45.5
+  },
+  {
+   "bodyId": "529703",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.0,
+   "left_hz": 10.5,
+   "right_hz": 53.0
+  },
+  {
+   "bodyId": "524186",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.5,
+   "left_hz": 13.5,
+   "right_hz": 54.5
+  },
+  {
+   "bodyId": "552630",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 41.0,
+   "left_hz": 0.0,
+   "right_hz": 41.0
+  },
+  {
+   "bodyId": "18922",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 15.0,
+   "right_hz": 54.0
+  },
+  {
+   "bodyId": "19832",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L2",
+   "decoder": false,
+   "dark_hz": 39.0,
+   "left_hz": 0.0,
+   "right_hz": 39.0
+  },
+  {
+   "bodyId": "54136",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "Dm1",
+   "decoder": false,
+   "dark_hz": 19.5,
+   "left_hz": 58.5,
+   "right_hz": 20.5
+  },
+  {
+   "bodyId": "21189",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L2",
+   "decoder": false,
+   "dark_hz": 38.0,
+   "left_hz": 0.0,
+   "right_hz": 38.0
+  },
+  {
+   "bodyId": "104892",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 38.0,
+   "left_hz": 0.0,
+   "right_hz": 37.5
+  },
+  {
+   "bodyId": "515279",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L2",
+   "decoder": false,
+   "dark_hz": 38.0,
+   "left_hz": 0.0,
+   "right_hz": 38.0
+  },
+  {
+   "bodyId": "76509",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "Dm4",
+   "decoder": false,
+   "dark_hz": 37.5,
+   "left_hz": 0.0,
+   "right_hz": 39.5
+  },
+  {
+   "bodyId": "901458",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.0,
+   "left_hz": 15.0,
+   "right_hz": 52.0
+  },
+  {
+   "bodyId": "36338",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L2",
+   "decoder": false,
+   "dark_hz": 36.5,
+   "left_hz": 0.0,
+   "right_hz": 36.5
+  },
+  {
+   "bodyId": "519505",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 51.5,
+   "left_hz": 15.0,
+   "right_hz": 53.5
+  },
+  {
+   "bodyId": "540509",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 36.5,
+   "left_hz": 0.0,
+   "right_hz": 37.0
+  },
+  {
+   "bodyId": "43393",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 36.0,
+   "left_hz": 0.0,
+   "right_hz": 36.5
+  },
+  {
+   "bodyId": "46605",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 36.0,
+   "left_hz": 0.0,
+   "right_hz": 36.5
+  },
+  {
+   "bodyId": "53243",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 36.0,
+   "left_hz": 0.0,
+   "right_hz": 35.0
+  },
+  {
+   "bodyId": "85038",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 36.0,
+   "left_hz": 0.0,
+   "right_hz": 36.0
+  },
+  {
+   "bodyId": "100111",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 36.0,
+   "left_hz": 0.0,
+   "right_hz": 36.5
+  },
+  {
+   "bodyId": "121868",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "Dm12",
+   "decoder": false,
+   "dark_hz": 36.0,
+   "left_hz": 0.0,
+   "right_hz": 36.0
+  },
+  {
+   "bodyId": "213021",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 36.0,
+   "left_hz": 0.0,
+   "right_hz": 36.0
+  },
+  {
+   "bodyId": "513318",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 36.0,
+   "left_hz": 0.0,
+   "right_hz": 35.5
+  },
+  {
+   "bodyId": "535305",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 36.0,
+   "left_hz": 0.0,
+   "right_hz": 35.0
+  },
+  {
+   "bodyId": "547135",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 35.5,
+   "left_hz": 0.0,
+   "right_hz": 35.0
+  },
+  {
+   "bodyId": "40560",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L2",
+   "decoder": false,
+   "dark_hz": 35.0,
+   "left_hz": 0.0,
+   "right_hz": 35.0
+  },
+  {
+   "bodyId": "72883",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "Dm12",
+   "decoder": false,
+   "dark_hz": 35.0,
+   "left_hz": 0.0,
+   "right_hz": 35.0
+  },
+  {
+   "bodyId": "100637",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "L3",
+   "decoder": false,
+   "dark_hz": 35.0,
+   "left_hz": 0.0,
+   "right_hz": 34.5
+  },
+  {
+   "bodyId": "148735",
+   "superclass": "ol_intrinsic",
+   "side": "L",
+   "type": "Dm12",
+   "decoder": false,
+   "dark_hz": 35.0,
+   "left_hz": 0.0,
+   "right_hz": 34.5
+  },
+  {
+   "bodyId": "12047",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "Dm19",
+   "decoder": false,
+   "dark_hz": 132.5,
+   "left_hz": 130.5,
+   "right_hz": 49.0
+  },
+  {
+   "bodyId": "13265",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "Dm6",
+   "decoder": false,
+   "dark_hz": 72.5,
+   "left_hz": 71.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "13260",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "Dm6",
+   "decoder": false,
+   "dark_hz": 58.0,
+   "left_hz": 58.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28145",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 58.0,
+   "left_hz": 57.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "33890",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 56.5,
+   "left_hz": 56.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "23857",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 55.5,
+   "left_hz": 55.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "35355",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 55.5,
+   "left_hz": 56.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "70736",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 55.5,
+   "left_hz": 56.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28240",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 55.0,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "34999",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 55.0,
+   "left_hz": 55.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "42891",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 55.0,
+   "left_hz": 55.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "74247",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 55.0,
+   "left_hz": 55.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27600",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.5,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29943",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.5,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "31447",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.5,
+   "left_hz": 55.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "34243",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.5,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "34342",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.5,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "41856",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.5,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "901806",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.5,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "24429",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "26596",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27606",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27733",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28987",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29546",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "30476",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "33719",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "34556",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "35160",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "36542",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "39218",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "46799",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "81438",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 54.0,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "20988",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "21550",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "25475",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "26686",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "26784",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27521",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27532",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28480",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28918",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29301",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29302",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29338",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "30185",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "30639",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "30733",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "31344",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "34493",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "40132",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "40259",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "40561",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "41884",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "67725",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "218454",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "21861",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 51.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "23481",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "23915",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "26550",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27229",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27320",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27458",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28342",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28368",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28739",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28764",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 54.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28942",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29456",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29699",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29716",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "30293",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "30764",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 54.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "31133",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "31485",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "31625",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "32028",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "32043",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "32858",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "33200",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "33387",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "33524",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "36442",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "48771",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "77237",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 53.0,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "20630",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "24629",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "26156",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27192",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27317",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "27465",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28744",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28859",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "28966",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29162",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29274",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29312",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29606",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29971",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 53.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "29980",
+   "superclass": "ol_intrinsic",
+   "side": "R",
+   "type": "L1",
+   "decoder": false,
+   "dark_hz": 52.5,
+   "left_hz": 52.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12737",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "aMe12",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 64.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12517",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "aMe12",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 63.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "532334",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "aMe12",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 61.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12211",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "aMe12",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 45.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12356",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP9",
+   "decoder": false,
+   "dark_hz": 6.5,
+   "left_hz": 28.0,
+   "right_hz": 8.5
+  },
+  {
+   "bodyId": "10002",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "OCG01d",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10006",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10019",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "H2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10034",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "HSE",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10042",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "vCal2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10067",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPLp1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10073",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10081",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "OCG01b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10130",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP28",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10142",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP24",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10149",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT79",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10161",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10164",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP26",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10174",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT43",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10178",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10181",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "HSN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10200",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT87",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10214",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LPT50",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10229",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LoVP102",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10248",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT1a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10251",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP53",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10256",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10272",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10309",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT1b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10340",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10398",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT1d",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10400",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT83",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10419",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "HSS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10445",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT11",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10450",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT62",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10478",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "OCG01e",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10485",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LPT54",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10533",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10541",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10556",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP47",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10573",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LC10a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10579",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10586",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "Nod4",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10595",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LPT26",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10610",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP17",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10675",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT66",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10685",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LoVP101",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10714",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT61a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10718",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT1c",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10796",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LPT22",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10801",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LPLC4",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10818",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10862",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LoVP109",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10882",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe11",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10936",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT61b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10954",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "Nod1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10955",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "vCal3",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10958",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP52",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11015",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe3",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11040",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP18",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11090",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LoVP90a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11136",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LoVP45",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11163",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11165",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "Nod2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11187",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LoVP54",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11219",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT82a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11225",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "Nod5",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11267",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP12",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11277",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LoVP90c",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11299",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LPT49",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11300",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT82b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11322",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP36",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11337",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "vCal1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11339",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11348",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11358",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP29",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11382",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "VSm",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11384",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11417",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11430",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LPT52",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11454",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPaMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11485",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPLo1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11498",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LPLC2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11545",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LoVP53",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11562",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP18",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11590",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP23",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11591",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT78",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11660",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT80",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11692",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LC12",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11726",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11729",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP56",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11735",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVP49",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11747",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LC11",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11793",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "HST",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11794",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LC31b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11853",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "MeVPMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11899",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "TmY14",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11913",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT52",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11943",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT52",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11973",
+   "superclass": "visual_projection",
+   "side": "L",
+   "type": "LT84",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12740",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "aMe12",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 59.5
+  },
+  {
+   "bodyId": "13190",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "aMe12",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 35.5
+  },
+  {
+   "bodyId": "12764",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP9",
+   "decoder": false,
+   "dark_hz": 19.0,
+   "left_hz": 19.0,
+   "right_hz": 42.5
+  },
+  {
+   "bodyId": "10189",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe2",
+   "decoder": false,
+   "dark_hz": 4.0,
+   "left_hz": 5.5,
+   "right_hz": 20.0
+  },
+  {
+   "bodyId": "10012",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10015",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "HSN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10016",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "HSE",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10023",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "HSS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10025",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "H2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10037",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10076",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "OCG01b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10112",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10121",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPLp1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10125",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10170",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10190",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10206",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10231",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT1b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10235",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "OCG01d",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10250",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT79",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10266",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT87",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10284",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10311",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10312",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10335",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP102",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10343",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10367",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10372",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT1d",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10381",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "OCG01e",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10387",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT83",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10403",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10439",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT1a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10476",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT11",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10480",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP53",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10481",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LPT50",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10682",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LPT54",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10693",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP101",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10723",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP24",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10729",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "Nod4",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10764",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT1c",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10766",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10771",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT66",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10803",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP47",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10896",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10901",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP52",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10907",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10915",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "Nod1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11009",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LPT22",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11031",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LPT21",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11055",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT62",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11077",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "vCal3",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11089",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "vCal1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11117",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LPT27",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11124",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "Nod2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11134",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VSm",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11146",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11153",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LC22",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11157",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11161",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP100",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11169",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LPT52",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11202",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe11",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11291",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT82a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11293",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "Nod3",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11335",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11346",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "Nod1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11372",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LC9",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11375",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPLo1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11396",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe3",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11435",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP54",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11446",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP49",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11463",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11473",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT61a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11522",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT86",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11551",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "VS",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11579",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT82a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11595",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP23",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11609",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LPT49",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11670",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11690",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP29",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11696",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LPT26",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11769",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP18",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11773",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP36",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11812",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LC31b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11842",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP56",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11887",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT82b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11901",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "5thsLNv_LNd6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11907",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP90a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11926",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP85",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11947",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPLo1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11953",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LT51",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12048",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVP57",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12070",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPMe6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12094",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP90c",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12127",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "OCG01c",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12145",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP53",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12172",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "MeVPaMe2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12202",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LoVP90b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12236",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "LC31b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12254",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "5thsLNv_LNd6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "12295",
+   "superclass": "visual_projection",
+   "side": "R",
+   "type": "aMe20",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "15985",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "aMe24",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 65.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "521721",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "aMe22",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 64.5,
+   "right_hz": 18.5
+  },
+  {
+   "bodyId": "16602",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "LoVC23",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 44.5,
+   "right_hz": 40.0
+  },
+  {
+   "bodyId": "16717",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "LoVC23",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 25.0,
+   "right_hz": 40.5
+  },
+  {
+   "bodyId": "524398",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "aMe23",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 30.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "22706",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PLP231",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 24.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10648",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "aMe_TBD1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 8.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "16984",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PLP231",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 6.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10017",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AMMC-A1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10018",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "LAL138",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10020",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AMMC-A1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10021",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CB2049",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10032",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "GNG116",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10035",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AstA1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10043",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "ER5",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10044",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "SMP108",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10049",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "VA7m_lPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10070",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AOTU019",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10074",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PVLP010",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10075",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "DA1_lPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10089",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PLP034",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10094",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP597",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10096",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "lLN2F_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10097",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "oviIN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10098",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP442",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10103",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "GNG104",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10109",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "VES041",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10111",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "DM3_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10115",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP016",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10116",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "VES074",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10120",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "OA-VPM4",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10126",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "DP1m_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10127",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "VES064",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10133",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "lLN2F_b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10134",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "VL2a_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10136",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PS304",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10139",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP040",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10145",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PVLP130",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10147",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "LHAD1g1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10148",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AOTU041",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10153",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "SAD051_b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10159",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "GNG702m",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10166",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "IB008",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10172",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP080",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10173",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PVLP151",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10184",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CL366",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10186",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CL361",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10193",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CB2207",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10194",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CB2377",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10203",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PS100",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10207",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PS124",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10208",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "DM1_lPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10212",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AOTU042",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10217",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "pC1x_b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10219",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AOTU023",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10224",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP001",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10238",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PLP012",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10240",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "WED092",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10243",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "VES104",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10257",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AMMC-A1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10262",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "V_ilPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10268",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CRE023",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10273",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "SIP136m",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10279",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "SAD113",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10285",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CRE011",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10305",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "LHPV12a1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10319",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP215",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10321",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "VL2p_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10326",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "SMP001",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10332",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "SMP568_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10339",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "SLP170",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10347",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "LHPV6q1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10348",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP501",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10356",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "LHPV5e3",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10357",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CB0381",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10359",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "DL1_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10364",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PVLP061",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10368",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CRE004",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10369",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "LAL198",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10371",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "WED203",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10373",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PVLP141",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10376",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "lLN2F_b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10386",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PVLP031",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10392",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP474",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10396",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "FB2F_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10397",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "lLN2T_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10405",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "mAL_m5a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10407",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP609",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10412",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "CL036",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10420",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "GNG667",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10421",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP079",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10422",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "SMP251",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10429",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "VM6_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10435",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "AVLP032",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10437",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "IB007",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10448",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PVLP093",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10453",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "FB6A_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10454",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "PS307",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10457",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "mALD1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10459",
+   "superclass": "cb_intrinsic",
+   "side": "L",
+   "type": "lLN2F_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11465",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "LoVC23",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 68.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "517704",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "LoVC23",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 65.5,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "14613",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "aMe22",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 14.5,
+   "right_hz": 40.5
+  },
+  {
+   "bodyId": "20674",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "aMe24",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 33.0,
+   "right_hz": 38.5
+  },
+  {
+   "bodyId": "16880",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "PLP231",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.5
+  },
+  {
+   "bodyId": "19061",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "PLP231",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.5
+  },
+  {
+   "bodyId": "10005",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AOTU019",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10013",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "MBON01",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10031",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AOTU041",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10039",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "VL2a_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10041",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "OA-VUMa1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10057",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "mALD1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10079",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "MBON06",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10080",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "OA-VUMa3",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10082",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP016",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10083",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP748m",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10084",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "DP1m_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10099",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "ExR6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10101",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "PS100",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10110",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "OA-VUMa1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10113",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG106",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10122",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "SMP108",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10128",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "SAD103",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10137",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "VES022",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10138",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "oviIN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10140",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "lLN1_bc",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10144",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "SMP001",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10146",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AMMC-A1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10155",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP280",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10167",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "VES041",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10168",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "OA-VUMa6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10169",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "lLN2F_b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10175",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "OA-VUMa6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10176",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "DM1_lPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10185",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "OA-VUMa8",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10187",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "OA-VPM3",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10191",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG661",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10196",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "CB0530",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10198",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "VA7l_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10201",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "lLN2T_c",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10202",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG103",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10205",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "GNG003",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10209",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "LHPV12a1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10210",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "LAL074",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10215",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "CB0677",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10230",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "SIP136m",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10233",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "SIP105m",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10239",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AOTU042",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10241",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP001",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10246",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "SAD096",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10252",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "CL001",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10254",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "lLN2F_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10258",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "PLP124",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10263",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG300",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10267",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "MBON14",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10277",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AMMC-A1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10287",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "AVLP606",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10288",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "CB0582",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10290",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "LAL138",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10292",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG702m",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10297",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "LHAD1g1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10299",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AstA1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10307",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP083",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10310",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG073",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10315",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "SAD073",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10323",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "CL366",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10324",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "ExR1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10325",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP572",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10328",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "SMP709m",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10329",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "PVLP137",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10333",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "PS306",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10353",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP538",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10363",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "SIP029",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10365",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG114",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10370",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "ATL001",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10374",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "SAD112_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10375",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP535",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10378",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AL-MBDL1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10382",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP548_e",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10385",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG572",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10390",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "VA2_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10393",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "CL257",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10395",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "CL365",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10399",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "PPL202",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10402",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "MZ_lv2PN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10404",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AVLP082",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10406",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AOTU012",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10408",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "VP1d+VP4_l2PN2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10410",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "AOTU035",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10413",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "CB4248",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10423",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "DP1l_adPN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10456",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "lLN2F_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10462",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG636",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10467",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG111",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10473",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "il3LN6",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10479",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "PS196_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10486",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "LHPV10b1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10489",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "GNG502",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10490",
+   "superclass": "cb_intrinsic",
+   "side": "M",
+   "type": "GNG671",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10491",
+   "superclass": "cb_intrinsic",
+   "side": "R",
+   "type": "ALIN1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10162",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp20",
+   "decoder": true,
+   "dark_hz": 6.5,
+   "left_hz": 28.5,
+   "right_hz": 8.5
+  },
+  {
+   "bodyId": "10527",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe017",
+   "decoder": true,
+   "dark_hz": 6.5,
+   "left_hz": 28.5,
+   "right_hz": 9.0
+  },
+  {
+   "bodyId": "10010",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp01",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10030",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "pIP1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10045",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg100",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10048",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp18",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10090",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "aSP22",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10091",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe042",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10118",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNb05",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10123",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg30",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10124",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg105",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10135",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge031",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10141",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg15",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10143",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp30",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10160",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg90",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10163",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge036",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10177",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg16",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10192",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg75",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10197",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp02",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10221",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge037",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10223",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe056",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10228",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp06",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10234",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp35",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10244",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp55",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10247",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg74_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10249",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp31",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10259",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp11",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10274",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg108",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10286",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe053",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10295",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg34",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10301",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge050",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10341",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp19",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10361",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg40",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10377",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge054",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10394",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg98",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10416",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNde002",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10417",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp103",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10425",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp10",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10442",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNa01",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10444",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge035",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10446",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp73",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10449",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe025",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10458",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp13",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10469",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNbe001",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10482",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg35",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10520",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg74_b",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10535",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg37",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10536",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg29",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10552",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp29",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10562",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp26",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10580",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp70",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10582",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge040",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10587",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge011",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10589",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp43",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10590",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe052",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10649",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp38",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10654",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNb01",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10662",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge003",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10674",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp59",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10676",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg49",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10680",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp48",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10686",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge132",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10700",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe001",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10705",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNc02",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10711",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNb07",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10712",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp36",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10713",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp42",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10724",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp62",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10727",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe002",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10734",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg93",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10739",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg24",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10740",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge143",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10752",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp03",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10770",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp23",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10783",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp09",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10800",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNbe007",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10810",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp66",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10834",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe013",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10842",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "CB0429",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10844",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge053",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10853",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge049",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10884",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNa15",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10885",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg88",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10888",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNb06",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10930",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "pMP2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10931",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNpe045",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10952",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge107",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10968",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp34",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10971",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNa11",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10979",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge103",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11002",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNae002",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11006",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge129",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11028",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNb09",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11036",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg80",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11057",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNbe004",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11063",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNge032",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11072",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNp12",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11074",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg13",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11075",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg99",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11078",
+   "superclass": "descending_neuron",
+   "side": "L",
+   "type": "DNg96",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10059",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp20",
+   "decoder": true,
+   "dark_hz": 19.0,
+   "left_hz": 19.5,
+   "right_hz": 42.5
+  },
+  {
+   "bodyId": "555871",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNpe017",
+   "decoder": true,
+   "dark_hz": 9.5,
+   "left_hz": 9.5,
+   "right_hz": 26.0
+  },
+  {
+   "bodyId": "10001",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp01",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10026",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp18",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10033",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg56",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10038",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "pIP1",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10054",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNpe013",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10056",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg100",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10063",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp27",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10065",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNb05",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10068",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp30",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10104",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "aSP22",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10106",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp11",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10117",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp02",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10131",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg74_a",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10151",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge103",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10195",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp29",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10213",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge083",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10216",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge037",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10218",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg35",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10236",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg99",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10237",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg30",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10245",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp36",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10264",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp31",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10280",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp47",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10281",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg108",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10283",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp103",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10296",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge054",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10304",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge041",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10313",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge031",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10336",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg22",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10342",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNc02",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10354",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp73",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10360",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNa02",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10366",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp59",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10379",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNa10",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10384",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp63",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10388",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp13",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10411",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNb09",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10433",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp10",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10440",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg16",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10447",
+   "superclass": "descending_neuron",
+   "side": "M",
+   "type": "DNge138",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10460",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNa09",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10464",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp08",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10499",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge039",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10504",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp62",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10506",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg37",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10543",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNa16",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10544",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg88",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10548",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg80",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10558",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp35",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10575",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNde002",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10577",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg96",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10578",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNpe034",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10584",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp06",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10601",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNpe025",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10643",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge059",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10664",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp33",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10668",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge006",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10672",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNae009",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10703",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge036",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10710",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg102",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10717",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg93",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10732",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNpe056",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10759",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNb01",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10760",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNa01",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10763",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "MDN",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10765",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "pMP2",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10805",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNb02",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10813",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp43",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10822",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge047",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10823",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp48",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10833",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge062",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10837",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNa15",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10838",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNde005",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10846",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge107",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10856",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge129",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10873",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg39",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10895",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg90",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10923",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg40",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10924",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNa04",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10957",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp69",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10959",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg98",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10967",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNg70",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10975",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNa03",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10976",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge146",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10985",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNbe004",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "10989",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp03",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11020",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp05",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11048",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge068",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11065",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp14",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11066",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNa13",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11067",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNb06",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11088",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp55",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11103",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge141",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11116",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "pIP10",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11133",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp70",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11137",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp04",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11158",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNge026",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  },
+  {
+   "bodyId": "11159",
+   "superclass": "descending_neuron",
+   "side": "R",
+   "type": "DNp71",
+   "decoder": false,
+   "dark_hz": 0.0,
+   "left_hz": 0.0,
+   "right_hz": 0.0
+  }
+ ]
+}
