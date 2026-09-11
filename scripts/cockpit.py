@@ -185,8 +185,9 @@ def render_frame(row, cfg, t0, brain=None, i=None):
         if seat:
             d.line([x0, HEADER, x0, H - 30], fill=GRID)
         counts = None
-        if brain is not None and i is not None and role in brain["frames"] and i < len(brain["frames"][role]):
-            counts = brain["frames"][role][i]
+        if brain is not None and i is not None and role in brain["frames"]:
+            frames = brain["frames"][role]
+            counts = frames[min(i, len(frames) - 1)]  # live: the brain files are buffered a few ticks behind the rows
         draw_seat(d, img, x0, role, who, row, cfg, brain, counts)
     d.text(
         (10, H - 22),
@@ -257,8 +258,15 @@ def replay(args):
     print(f"{len(rows)} frames -> {args.out} ({len(rows) / args.fps:.0f} s)")
 
 
-PAGE = b"""<html><body style="margin:0;background:#0c0c10"><img id=f src=/frame.png>
-<script>setInterval(()=>{f.src='/frame.png?'+Date.now()},200)</script></body></html>"""
+PAGE = b"""<html><body style="margin:0;background:#0c0c10;overflow:hidden">
+<img id=f src=/frame.png style="width:100vw;height:auto;display:block;image-rendering:auto">
+<script>
+// Load the next frame off-screen and swap only when it has arrived: no flash between frames.
+let busy=false;
+setInterval(()=>{ if(busy) return; busy=true; const n=new Image();
+  n.onload=()=>{f.src=n.src; busy=false}; n.onerror=()=>{busy=false};
+  n.src='/frame.png?'+Date.now(); },100);
+</script></body></html>"""
 
 
 def live(args):
@@ -281,14 +289,17 @@ def live(args):
                     time.sleep(0.05)  # nothing new, or a row still being written
                     f.seek(f.tell() - len(line))
                     continue
-                row = json.loads(line)
-                if state["t0"] is None:
-                    state["t0"] = row["ut"]
-                state["i"] += 1
-                brain = load_brain(run)  # re-mapped each tick: the files are still growing
-                buf = io.BytesIO()
-                render_frame(row, state["cfg"], state["t0"], brain, state["i"]).save(buf, "PNG")
-                state["png"] = buf.getvalue()
+                try:
+                    row = json.loads(line)
+                    if state["t0"] is None:
+                        state["t0"] = row["ut"]
+                    state["i"] += 1
+                    brain = load_brain(run)  # re-mapped each tick: the files are still growing
+                    buf = io.BytesIO()
+                    render_frame(row, state["cfg"], state["t0"], brain, state["i"]).save(buf, "PNG")
+                    state["png"] = buf.getvalue()
+                except Exception as e:  # a half-written file must not kill the window
+                    print(f"frame skipped: {e!r}", file=sys.stderr, flush=True)
 
     threading.Thread(target=tail, daemon=True).start()
 
