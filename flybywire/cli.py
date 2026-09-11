@@ -60,8 +60,10 @@ def main():
     mun.add_argument("--parking-altitude", type=float, default=100_000.0)
     mun.add_argument("--mun-periapsis", type=float, default=60_000.0)
     mun.add_argument("--return-periapsis", type=float, default=40_000.0)
-    mun.add_argument("--authority", type=float, default=0.7)
-    mun.add_argument("--damping", type=float, default=0.03)
+    mun.add_argument("--authority", type=float, default=None, help="Fraction of deflection the crew may command (flies 0.5, autopilot 0.7)")
+    mun.add_argument("--damping", type=float, default=None, help="Rate gyro, stick per deg/s (flies 0.12, autopilot 0.03)")
+    mun.add_argument("--thrust-authority", type=float, default=1.0, help="Upper-stage gimbal authority relative to the wheels; augmentation is divided by 1 + this x throttle")
+    mun.add_argument("--save-milestones", action="store_true", help="Quicksave after circularization and TMI (flybywire-orbit, flybywire-tmi)")
     mun.add_argument("--turn-end", type=float, default=40_000.0)
     mun.add_argument("--turn-pitch", type=float, default=85.0)
     mun.add_argument("--rcs", choices=["off", "turns", "always"], default="off", help="Thrusters spend monopropellant; wheels and gimbal are enough for this stack")
@@ -92,8 +94,9 @@ def main():
 
 def run_mun(a):
     from .ksp.crew import make_crew
-    from .ksp.mun import MunConfig, MunMission
+    from .ksp.mun import CREW_AUGMENTATION, MunConfig, MunMission
 
+    authority, damping = CREW_AUGMENTATION[a.crew]
     config = MunConfig(
         address=a.address,
         rpc_port=a.rpc_port,
@@ -105,12 +108,14 @@ def run_mun(a):
         turn_pitch=a.turn_pitch,
         mun_periapsis=a.mun_periapsis,
         return_periapsis=a.return_periapsis,
-        authority=a.authority,
-        damping=a.damping,
+        authority=authority if a.authority is None else a.authority,
+        damping=damping if a.damping is None else a.damping,
+        thrust_authority=a.thrust_authority,
         error_scale_deg=a.error_scale_deg,
         dv_scale=a.dv_scale,
         rcs=a.rcs,
         stop_after=a.stop_after,
+        save_milestones=a.save_milestones,
     )
     run_dir = a.run_dir or Path("runs") / f"mun-{a.crew}"
     run_dir.mkdir(parents=True, exist_ok=True)

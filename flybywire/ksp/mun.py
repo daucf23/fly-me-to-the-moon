@@ -28,6 +28,14 @@ import numpy as np
 from .crew import Panels, angle_errors, choose_rear_signs, throttle_from_steer
 from .vehicle import ESCAPE_APOAPSIS
 
+# Control augmentation per crew: (authority, damping). The autopilot crew damps itself.
+# A fly is a 0.13 stick/deg proportional controller with a 0.3 s lag that saturates near
+# 5 deg (measured on fly mission 1); on the Poodle stage the wheels give about 21 deg/s^2
+# per unit stick, so at 0.7 / 0.03 the loop had a damping ratio of 0.2 and sat in a
+# +-8 deg limit cycle for the whole mission. 0.5 / 0.12 settles a 20 deg error in ~6 s
+# and stays damped from the booster (with gimbal) to the bare upper stage.
+CREW_AUGMENTATION = {"flies": (0.5, 0.12), "autopilot": (0.7, 0.03)}
+
 
 @dataclass(frozen=True)
 class MunConfig:
@@ -53,6 +61,12 @@ class MunConfig:
     main_altitude: float = 3_000.0  # mains full deployment; armed once the drogue is out
     authority: float = 0.7  # fraction of deflection the crew may command per axis
     damping: float = 0.03  # rate gyro, stick per deg/s
+    # On the upper stage the Poodle's gimbal at full throttle doubles what the wheels do
+    # (62 vs 31 deg/s^2 per unit stick, fly mission 2), and a loop tuned for the wheels
+    # chatters against the stops the moment the engine lights. Authority and damping are
+    # both divided by (1 + thrust_authority * throttle) there. Not on the booster: the
+    # Mainsail's gimbal is the whole authority, and the loop was tuned with it lit.
+    thrust_authority: float = 1.0
     roll_damping: float = 0.1  # computer holds roll rate: stick per deg/s
     error_scale_deg: float = 5.0
     dv_scale: float = 40.0
@@ -64,7 +78,11 @@ class MunConfig:
     rcs_arm_deg: float = 20.0
     rcs_disarm_deg: float = 5.0
     stop_after: str | None = None  # end the run when this phase begins (shakedowns)
+    save_milestones: bool = False  # quicksave after circularization and TMI, to restart from
     wall_timeout: float = 3 * 3600.0
+
+
+MILESTONE_SAVES = {"plan_tmi": "flybywire-orbit", "coast_to_mun": "flybywire-tmi"}
 
 
 class MunMission:
@@ -103,11 +121,25 @@ class MunMission:
 
     def go(self, phase):
         self.event("phase", to=phase)
+        if phase not in ("prelaunch", "ascent"):
+            self.flags["upper"] = True  # whatever is left to burn is the upper stage
+        if self.c.save_milestones and phase in MILESTONE_SAVES and self.tick > 0:
+            self.save_milestone(MILESTONE_SAVES[phase])
         if phase == self.c.stop_after:
             self.event("stop", reason=f"--stop-after {phase}")
             phase = "done"
         self.phase = phase
         self.previous = {}
+
+    def save_milestone(self, name):
+        """A quicksave to restart the mission from (to_pad recognises an orbiting vessel).
+        Only in vacuum with the engine off; KSP refuses to save under acceleration."""
+        try:
+            self.v.control.throttle = 0.0
+            self.sc.save(name)
+            self.event("quicksave", name=name)
+        except Exception as e:
+            self.event("quicksave", name=name, error=str(e)[:80])
 
     # --- geometry ------------------------------------------------------------------
 
@@ -341,7 +373,8 @@ class MunMission:
 
     def to_pad(self):
         """Load the quicksave if asked or if nothing controllable sits on the pad. Never
-        reverts, never recovers."""
+        reverts, never recovers. A save made in orbit (save_milestone) is accepted too;
+        fly() then picks the phase up from there."""
         sc = self.sc
 
         def ready():
@@ -349,7 +382,7 @@ class MunMission:
                 v = sc.active_vessel
                 return (
                     self.conn.krpc.current_game_scene == self.conn.krpc.GameScene.flight
-                    and v.situation == sc.VesselSituation.pre_launch
+                    and v.situation in (sc.VesselSituation.pre_launch, sc.VesselSituation.orbiting, sc.VesselSituation.escaping)
                     and v.control.state != sc.ControlState.none
                     and v.control.current_stage >= 0
                 )
@@ -380,6 +413,8 @@ class MunMission:
         self.v.control.throttle = 0.0
         self.last_stage_ut = -1e9
         self.event("start", vessel=self.v.name, crew=[k.name for k in self.v.crew], mass=round(self.v.mass), sas=self.v.control.sas, rcs=self.c.rcs, monopropellant=round(self.v.resources.amount("MonoPropellant"), 1))
+        if self.v.situation != self.sc.VesselSituation.pre_launch:
+            self.resume_in_space()
         try:
             while self.phase != "done":
                 if time.time() - self.t_wall0 > self.c.wall_timeout:
@@ -394,6 +429,27 @@ class MunMission:
                 self.v.control.sas = True
             except Exception:
                 pass
+
+    def resume_in_space(self):
+        """Pick the mission up from a save made in flight: in Kerbin orbit with no Mun
+        encounter that is plan_tmi; on a Mun-bound patch it is coast_to_mun; inside the
+        Mun's sphere the flyby; homebound the return coast. The ascent-only jobs
+        (tower, panels) are marked done; the action groups are harmless if repeated."""
+        o = self.v.orbit
+        self.flags["les"] = self.flags["panels"] = True
+        for n in self.v.control.nodes:
+            n.remove()
+        if o.body.name == "Mun":
+            phase = "mun_flyby"
+        elif self.flags.get("flyby_done") or (o.next_orbit is None and o.periapsis_altitude < 70_000 and o.apoapsis_altitude > 1e6):
+            self.flags["flyby_done"] = True
+            phase = "return_coast"
+        elif o.next_orbit is not None and o.next_orbit.body.name == "Mun":
+            phase = "coast_to_mun"
+        else:
+            phase = "plan_tmi"
+        self.event("resume", situation=str(self.v.situation).split(".")[-1], body=o.body.name, apoapsis=round(min(o.apoapsis_altitude, ESCAPE_APOAPSIS)), periapsis=round(o.periapsis_altitude))
+        self.go(phase)
 
     def truth(self):
         """What the flight computer knows this tick; the crew sees only its needles."""
@@ -421,18 +477,21 @@ class MunMission:
             # The remaining vector swings wildly in the last metres per second and
             # would have Jeb and Bill chasing it while Bob is still burning.
             frame = o.body.non_rotating_reference_frame
-            if self.burn_direction is None:
-                self.burn_direction = self.node.direction(frame)
-            target = self.in_vessel(self.burn_direction, frame)
             dv = None
-            if self.burn_started:
-                # Velocity-to-be-gained, signed along the burn attitude. Past the node
-                # the remaining vector reverses; Bob must see nothing then, or he
-                # relights into the overshoot (autopilot mission 2 burned 850 m/s
-                # extra that way).
-                remaining = self.node.remaining_burn_vector(frame)
-                self.burn_along = float(np.dot(remaining, self.burn_direction))
-                dv = max(0.0, self.burn_along)
+            try:
+                if self.burn_direction is None:
+                    self.burn_direction = self.node.direction(frame)
+                target = self.in_vessel(self.burn_direction, frame)
+                if self.burn_started:
+                    # Velocity-to-be-gained, signed along the burn attitude. Past the node
+                    # the remaining vector reverses; Bob must see nothing then, or he
+                    # relights into the overshoot (autopilot mission 2 burned 850 m/s
+                    # extra that way).
+                    remaining = self.node.remaining_burn_vector(frame)
+                    self.burn_along = float(np.dot(remaining, self.burn_direction))
+                    dv = max(0.0, self.burn_along)
+            except RuntimeError:
+                target = self.prograde()  # node gone; burn_logic ends the mission this tick
         elif ph == "mun_flyby":
             target = self.prograde()
         elif ph == "entry":
@@ -485,7 +544,11 @@ class MunMission:
                 else:
                     sticks[role] = (float(np.clip(0.08 * truth[f"{role}_error_deg"], -1, 1)), {"computer": True})
 
-        # Control augmentation: the crew commands attitude, a rate gyro damps.
+        # Control augmentation: the crew commands attitude, a rate gyro damps. Both are
+        # scaled down for the gimbal's share of the authority once the upper stage is
+        # burning (see MunConfig.thrust_authority); the throttle used is last tick's,
+        # which is what the engine is doing now.
+        scale = 1.0 / (1.0 + c.thrust_authority * getattr(self, "last_throttle", 0.0)) if self.flags.get("upper") else 1.0
         controls = {}
         for axis in ("pitch", "yaw"):
             e = truth[f"{axis}_error_deg"]
@@ -496,7 +559,7 @@ class MunMission:
                 # (rear hemisphere in or out), not a rotation; the gyro ignores it.
                 rate = 0.0 if abs(de) > 45 else de / (ut - self.previous[axis][1])
             self.previous[axis] = (e, ut)
-            controls[axis] = float(np.clip(c.authority * sticks[axis][0] + c.damping * rate, -1, 1))
+            controls[axis] = float(np.clip(scale * (c.authority * sticks[axis][0] + c.damping * rate), -1, 1))
             if self.flags.get("power_low"):
                 controls[axis] = 0.0
         v.control.pitch = controls["pitch"]
@@ -513,6 +576,7 @@ class MunMission:
                 self.event("rcs", armed=False, monopropellant=round(v.resources.amount("MonoPropellant"), 1))
         throttle = throttle_from_steer(sticks["throttle"][0]) if truth["dv_remaining"] is not None else 0.0
         v.control.throttle = throttle
+        self.last_throttle = throttle
 
         self.phase_logic(truth, throttle)
 
@@ -580,6 +644,13 @@ class MunMission:
         if not self.flags["les"] and (alt > c.les_altitude or ph == "entry"):
             self.eject_escape_tower()
 
+        # Back in the air with the mission still ahead of us: the orbit was never made
+        # (fly mission 1 planned TMI on the way down and hit the ground with the node up).
+        if ph not in ("ascent", "entry") and o.body.name == "Kerbin" and alt < 70_000 and v.flight(o.body.reference_frame).vertical_speed < -50:
+            self.event("abort", reason="fell back into the atmosphere", altitude=round(alt), periapsis=round(o.periapsis_altitude))
+            self.go("done")
+            return
+
         if ph == "ascent":
             self.stage_if_needed(throttle)
             at_target = o.apoapsis_altitude >= c.parking_altitude - 1_500
@@ -605,6 +676,7 @@ class MunMission:
                     while not self.on_upper_stage:
                         ctl.activate_next_stage()
                     self.last_stage_ut = self.sc.ut
+                    self.flags["upper"] = True
                     self.event("stage", now=ctl.current_stage, reason="upper stage on line")
                 return
             # Bob cuts the engine as the bar shrinks; the computer only backs him up.
@@ -753,7 +825,15 @@ class MunMission:
         c = self.c
         v = self.v
         node = self.node
-        remaining = node.remaining_delta_v
+        try:
+            remaining = node.remaining_delta_v
+        except RuntimeError as e:
+            # KSP drops the node when the vessel is lost or the game reloads under us
+            # (fly mission 1 hit the ground with a node up). End with a summary, not a
+            # traceback.
+            self.event("abort", reason="maneuver node lost", detail=str(e).splitlines()[0][:80], altitude=round(truth["altitude"]))
+            self.go("done")
+            return
         self.deploy_panels_if_clear(truth["altitude"])
         initial = self.flags.get("burn_dv0", remaining)
         if self.sc.ut > node.ut + 240 and remaining > 0.9 * initial:
@@ -781,7 +861,11 @@ class MunMission:
         # throttle reads zero thrust for a tick (autopilot mission 5 jettisoned the
         # Poodle that way, mid-correction).
         along = remaining if getattr(self, "burn_along", None) is None else self.burn_along
-        least = self.flags["burn_min"] = min(self.flags.get("burn_min", remaining), remaining)
+        # Overshoot is judged on the velocity still to be gained along the burn attitude.
+        # The remaining vector's magnitude also grows with every degree the nose wanders
+        # off the vector while burning; that is lateral error for the correction burns,
+        # not a reason to stop (fly mission 1 was cut at 374 m/s to go that way).
+        least = self.flags["burn_min"] = min(self.flags.get("burn_min", along), along)
         # Done when Bob has let go with little left, or a computer backstop trips.
         by = None
         if along < 2.0 and throttle < 0.1:
@@ -790,7 +874,7 @@ class MunMission:
             by = "computer backstop: velocity-to-be-gained reversed"
         elif remaining < 0.3:
             by = "computer backstop: cutoff"
-        elif remaining > least + 3.0:
+        elif along > least + 3.0:
             by = "computer backstop: overshoot"
         if by:
             v.control.throttle = 0.0
@@ -822,6 +906,8 @@ class MunMission:
                 ctl.activate_next_stage()
                 self.last_stage_ut = ut
                 self.flags.pop("no_thrust_since", None)
+                if self.on_upper_stage:
+                    self.flags["upper"] = True
                 self.event("stage", now=ctl.current_stage)
         else:
             self.flags.pop("no_thrust_since", None)
