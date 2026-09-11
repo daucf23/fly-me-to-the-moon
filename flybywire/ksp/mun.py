@@ -423,7 +423,6 @@ class MunMission:
         if self.c.quicksave or not ready():
             if not self.c.quicksave:
                 raise RuntimeError("No controllable vessel on the pad and no --quicksave given")
-            self.event("load", quicksave=self.c.quicksave)
             ut_before = sc.ut
             t_load = time.monotonic()
             sc.load(self.c.quicksave)
@@ -437,6 +436,9 @@ class MunMission:
                 good = good + 1 if ready() and loaded else 0
             if good < 4:
                 raise RuntimeError("Quicksave did not produce a controllable vessel on the pad")
+            # Logged once the save is up so the event carries the mission's clock, not the
+            # clock of whatever was on screen before.
+            self.event("load", quicksave=self.c.quicksave, ut_before=round(ut_before, 1), seconds=round(time.monotonic() - t_load, 1))
         return sc.active_vessel
 
     def fly(self):
