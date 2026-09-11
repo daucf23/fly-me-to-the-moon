@@ -46,9 +46,11 @@ class MunConfig:
     aoa_free_altitude: float = 45_000.0
     les_altitude: float = 55_000.0  # eject the escape tower above this (action group 1)
     mun_periapsis: float = 60_000.0  # flyby altitude
-    return_periapsis: float = 35_000.0  # Kerbin entry altitude (32 km executed to 25.7 km gave 11.9 G)
+    return_periapsis: float = 40_000.0  # Kerbin entry altitude (32 km executed to 25.7 km gave 11.9 G)
     correction_tolerance: float = 15_000.0  # fix the return periapsis if further off
     entry_altitude: float = 90_000.0  # separate the capsule, arm chutes (Abort) here
+    drogue_altitude: float = 5_000.0  # drogue full deployment; armed at separation
+    main_altitude: float = 3_000.0  # mains full deployment; armed once the drogue is out
     authority: float = 0.7  # fraction of deflection the crew may command per axis
     damping: float = 0.03  # rate gyro, stick per deg/s
     roll_damping: float = 0.1  # computer holds roll rate: stick per deg/s
@@ -722,21 +724,24 @@ class MunMission:
                 self.flags["abort_ut"] = self.sc.ut
                 self.event("action_group", group="abort", purpose="separate capsule, arm parachutes")
             elif not self.flags.get("chutes_checked") and self.sc.ut - self.flags["abort_ut"] > 3.0:
-                # Trust, then verify. The action group is the crew's; the chute state
-                # is the computer's to check (autopilot mission 4 splashed down at
-                # 183 m/s with every chute still stowed).
+                # The action group separates the capsule; the chutes are the computer's.
                 self.flags["chutes_checked"] = True
                 self.v = self.sc.active_vessel
-                self.verify_parachutes()
+                self.set_chute_altitudes()
+            elif self.flags.get("chutes_checked") and not self.flags.get("main_released") and alt < 15_000 and self.tick % 10 == 0:
+                self.release_chutes(alt)
             if self.tick % 40 == 0:
                 # The capsule alone runs its wheels off one battery; the panels left with
                 # the Poodle. Low charge: hands off, the heat shield end is the stable end.
-                ec, ec_max = v.resources.amount("ElectricCharge"), max(v.resources.max("ElectricCharge"), 1.0)
-                if ec / ec_max < 0.2 and not self.flags.get("power_low"):
+                ec, ec_max = v.resources.amount("ElectricCharge"), v.resources.max("ElectricCharge")
+                if ec_max > 0 and ec / ec_max < 0.2 and not self.flags.get("power_low"):
                     self.flags["power_low"] = True
-                    self.event("power_low", charge=round(ec), of=round(ec_max), action="attitude hands off")
+                    self.event("power_low", charge=round(ec), of=round(ec_max), vessel=v.name, parts=len(v.parts.all), action="attitude hands off")
             if v.situation in (self.sc.VesselSituation.landed, self.sc.VesselSituation.splashed):
                 self.event("landed", situation=str(v.situation).split(".")[-1], altitude=round(alt))
+                self.go("done")
+            elif self.tick % 20 == 0 and (v.crew_count == 0 or not v.parts.all):
+                self.event("abort", reason="vessel lost", altitude=round(alt), parts=len(v.parts.all), crew=v.crew_count)
                 self.go("done")
             return
 
@@ -849,30 +854,82 @@ class MunMission:
             still = [p.title for p in self.v.parts.all if "escape" in p.title.lower()]
         self.event("action_group", group=1, purpose="eject escape tower", ejected=not still)
 
-    def verify_parachutes(self):
-        """After Abort: every parachute must be armed or deploying. Arm the ones that are
-        not and report."""
+    # Parachutes go through the generic part-module interface. kRPC's Parachute class
+    # throws on every call when the RealChute mod is installed, even for stock chutes
+    # (autopilot missions 4 and 7 splashed down with every chute stowed).
+    def parachutes(self):
+        """[(part, ModuleParachute module, is_drogue)] on the current vessel."""
+        out = []
         try:
-            chutes = [p for p in self.v.parts.all if p.parachute is not None]
+            for p in self.v.parts.all:
+                for m in p.modules:
+                    if m.name == "ModuleParachute":
+                        out.append((p, m, "drogue" in p.title.lower()))
+                        break
         except Exception as e:
             self.event("parachutes", error=str(e)[:80])
-            return
+        return out
+
+    @staticmethod
+    def chute_status(m):
+        """'stowed', 'released' (Deploy Chute already triggered) or 'error'."""
+        try:
+            return "stowed" if m.has_event("Deploy Chute") else "released"
+        except Exception:
+            return "error"
+
+    @staticmethod
+    def chute_safe(m):
+        try:
+            return m.get_field("Safe to deploy?") == "Safe"
+        except Exception:
+            return False
+
+    def set_chute_altitudes(self):
+        """After Abort: full deployment altitudes, drogue drogue_altitude, mains
+        main_altitude. Nothing is released here; release_chutes does that on the way down."""
+        c = self.c
+        chutes = self.parachutes()
         states = {}
-        for p in chutes:
+        for p, m, drogue in chutes:
             try:
-                name = str(p.parachute.state).split(".")[-1]
-                if name in ("stowed", "cut"):
-                    try:
-                        p.parachute.arm()
-                    except Exception:
-                        p.parachute.deploy()
-                    name = f"{name}->" + str(p.parachute.state).split(".")[-1]
-                states[p.title] = name
-            except Exception as e:  # a chute that is burning off mid-query
-                states[getattr(p, "title", "?")] = f"error: {str(e)[:40]}"
-        self.event("parachutes", count=len(chutes), states=states)
+                m.set_field_float("Altitude", c.drogue_altitude if drogue else c.main_altitude)
+                states[p.title] = f"{self.chute_status(m)} alt={m.get_field('Altitude')} safe={m.get_field('Safe to deploy?')}"
+            except Exception as e:
+                states[p.title] = f"error: {str(e)[:40]}"
+        self.event("parachutes", count=len(chutes), drogue_altitude=c.drogue_altitude, main_altitude=c.main_altitude, states=states)
         if not chutes:
             self.event("abort", reason="no parachutes on the vessel after Abort")
+
+    def release_chutes(self, alt):
+        """Drogue first, then mains. Each group is released once the module reports it
+        safe below its release altitude, or unconditionally 2 km lower. A released stock
+        chute semi-deploys at its minimum pressure and opens fully at its Altitude field."""
+        c = self.c
+        for group, release_alt in (("drogue", c.drogue_altitude + 5_000), ("main", c.main_altitude + 2_000)):
+            flag = f"{group}_released"
+            if self.flags.get(flag) or alt > release_alt:
+                continue
+            chutes = [(p, m) for p, m, d in self.parachutes() if d == (group == "drogue")]
+            if not chutes:
+                self.flags[flag] = True
+                self.event("parachutes", group=group, released=[], reason="none on the vessel", altitude=round(alt))
+                continue
+            safe = all(self.chute_safe(m) for _, m in chutes)
+            if not safe and alt > release_alt - 2_000:
+                continue
+            released = []
+            for p, m in chutes:
+                if self.chute_status(m) != "stowed":
+                    continue
+                try:
+                    m.trigger_event("Deploy Chute")
+                    released.append(p.title)
+                except Exception as e:
+                    released.append(f"{p.title}: error {str(e)[:40]}")
+            self.flags[flag] = True
+            self.event("parachutes", group=group, released=released, safe=safe, altitude=round(alt),
+                       status={p.title: self.chute_status(m) for p, m in chutes})
 
     def deploy_panels_if_clear(self, alt):
         if alt > 70_000 and not self.flags["panels"]:
