@@ -32,12 +32,16 @@ time, staging and all, to 435 km against the autopilot's 443
 Bill on yaw, Bob on the throttle, and a flight computer that plans the burns and works
 the action groups. Every attitude and every throttle of a free-return flyby of the Mun
 and a splashdown under chutes, all three Kerbals aboard, passed through a connectome:
-pad to water in one 33-minute run, flyby at 194 km, 4.4 G on entry (`runs/mun-flies-8`;
-also `mun-flies-4` at 25 km), after mission 6 taught the planner that hitting the Mun
+pad to landing in one 35-minute run with no operator input, flyby at 82 km, entry at
+27 km and 4.8 G (`runs/mun-flies-11-rc`; earlier `mun-flies-8` at 194 km / 4.4 G and
+`mun-flies-4` at 25 km), after mission 6 taught the planner that hitting the Mun
 is worse than missing the way home. The autopilot crew flew it first
 (300 km flyby). What it took: a rate gyro tuned to the fly's lag, less stick once the
 gimbal joins the wheels, and a score that puts impact below every other failure
-([docs/ksp.md](docs/ksp.md#fly-me-to-the-mun)).
+([docs/ksp.md](docs/ksp.md#fly-me-to-the-mun)). To watch the flies fly:
+`scripts/cockpit.py` replays or shows live, per seat, the panel the fly saw, a raster of
+1,000 measured neurons from eye to descending cells, the two cells the stick reads, the
+fly's stick and what the ship received (`--record-brain` on the flight).
 
 ## Flight plan
 
