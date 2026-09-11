@@ -245,11 +245,12 @@ class MunMission:
             if o.body.name == "Kerbin":
                 nxt = o.next_orbit
                 if self.flags.get("flyby_done"):
-                    # Home is a direct fall. A "return" that first grazes the Mun's
-                    # sphere again is a prediction the live conics do not keep: fly 10's
-                    # 125 m/s correction was planned through an 879 km second pass to a
-                    # 52 km periapsis and executed, accurately, to −504 km.
-                    if nxt is not None and nxt.body.name == "Mun":
+                    # Home is a direct fall. A "return" that grazes the Mun's sphere again
+                    # before periapsis is a prediction the live conics do not keep: fly
+                    # 10a's 125 m/s correction was planned through an 879 km second pass
+                    # to a 52 km periapsis and executed, accurately, to −504 km. A Mun
+                    # encounter after periapsis is just the conics ignoring the air.
+                    if nxt is not None and nxt.body.name == "Mun" and o.time_to_soi_change < o.time_to_periapsis:
                         return None, None
                     return None, o.periapsis_altitude
                 if nxt is None or nxt.body.name != "Mun":
