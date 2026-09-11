@@ -251,17 +251,21 @@ class MunMission:
     def trajectory_score(self, mun, back, score_mun=True):
         """Lower is better. The return periapsis is the survival number and weighs ten
         times the flyby altitude: 10 km off on the return costs what 30 km off at the
-        Mun costs. No return at all (captured, escaped, no encounter) is far worse."""
+        Mun costs. No return at all (captured, escaped, no encounter) is far worse, and
+        hitting the Mun is worse than that: a flyby without a free return can still be
+        fixed on the way home (autopilot 8, fly 4), a trajectory into the Mun cannot.
+        Fly mission 6 scored an impact with a perfect return at 113 against 400 for a
+        safe miss, planned it, corrected onto it, and flew into the ground."""
         c = self.c
         if back is None and mun is None:
             return 1e6
+        if score_mun and mun is None:
+            return 1e6
+        if score_mun and mun < 15_000:
+            return 1000.0 + (15_000 - mun) / 100.0  # graded so the search can climb out
         s = 400.0 if back is None else ((back - c.return_periapsis) / 1e4) ** 2
         if score_mun:
-            if mun is None:
-                return 1e6
             s += 0.1 * ((mun - c.mun_periapsis) / 1e4) ** 2
-            if mun < 15_000:
-                s += 100.0  # too close to the Mun's mountains
         return s
 
     def pattern_search(self, node, params, best, steps, floor, budget=300, score_mun=True, score=None):
@@ -334,6 +338,10 @@ class MunMission:
         self.event("tmi_fine", node_ut=round(best[1][0]), dv=best[1][1], mun_periapsis=round(best[2]), return_periapsis=best[3], evals=evals)
         best, n = self.pattern_search(node, ("ut", "prograde"), best, steps=(2.0, 0.5), floor=0.02)
         s, (ut, dv), mun, back = best
+        if mun < 15_000:
+            node.remove()
+            self.hands_on()
+            raise RuntimeError(f"Best TMI found hits the Mun (periapsis {round(mun)} m); not flying it")
         self.event(
             "node", purpose="tmi", dv=round(dv, 3), node_ut=round(ut, 2), mun_periapsis=round(mun),
             return_periapsis=None if back is None else round(back), free_return=back is not None and back > 0,
@@ -817,6 +825,16 @@ class MunMission:
                 self.event("soi", body=o.body.name, periapsis=round(o.periapsis_altitude), apoapsis=round(min(o.apoapsis_altitude, ESCAPE_APOAPSIS)))
                 self.go("return_coast")
                 return
+            if o.periapsis_altitude < 20_000 and not self.flags.get("flyby_raised") and o.time_to_periapsis > 600:
+                # Into the mountains: raise the periapsis now, from inside the sphere,
+                # where a few m/s move it by tens of km. Once; then whatever it is.
+                self.flags["flyby_raised"] = True
+                self.event("flyby_check", periapsis=round(o.periapsis_altitude), time_to_periapsis=round(o.time_to_periapsis), correcting=True)
+                node = self.correction_node(score_mun=True, max_dv=200.0, span=40.0)
+                if node is not None:
+                    self.node, self.after_burn = node, "mun_flyby"
+                    self.go("burn")
+                    return
             t_soi = o.time_to_soi_change
             if o.time_to_periapsis < t_soi and o.time_to_periapsis > c.warp_lead + 30:
                 self.warp_to(self.sc.ut + o.time_to_periapsis - c.warp_lead)
