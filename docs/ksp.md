@@ -255,3 +255,13 @@ took 437–524 m/s of the Poodle after the booster, TMI 848–867 m/s, correctio
     `flybywire-tmi` after TMI; `--quicksave flybywire-orbit` resumes from there (the
     mission recognises an orbiting vessel and picks the phase from the patched conics),
     so a burn or the entry can be worked on without the seven-minute ascent.
+14. **Fly mission 6 hit the Mun**, and the flying was not at fault. The score charged a
+    Mun periapsis under 15 km a flat +100 on top of the return term, while "no return"
+    cost 400; a trajectory through the Mun with a perfect free return therefore scored
+    113, better than any safe miss without one. The TMI solver planned −47 km, the
+    midcourse correction "improved" it to −55 km, and the capsule stopped 2.4 km above
+    the surface at 77,758 s. Now anything under 15 km scores `1000 + (15 km − pe)/100`,
+    graded so a search can climb out; `solve_free_return` refuses a best solution that
+    still hits; and `mun_flyby`, on entering the sphere with a periapsis under 20 km,
+    burns one 3-axis correction to raise it. Ordering the failure modes was the fix:
+    no return is recoverable on the way home (autopilot 8, fly 4 both did), impact is not.
