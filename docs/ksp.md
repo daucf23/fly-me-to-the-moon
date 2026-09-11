@@ -23,6 +23,30 @@
    off; the bridge turns it off anyway. Alternatively pass `--craft "Fly By Wire"` and the
    bridge will launch it itself when it cannot revert.
 
+## Lessons from the first night (KSP 1.12.5, kRPC 0.6.0)
+
+- **Never revert through kRPC.** `revert_to_launch` brings the vessel back with a dead
+  staging stack (`current_stage` reads −1 and staging commands do nothing). The bridge no
+  longer reverts or recovers anything. Make a quicksave with the crewed vessel sitting on
+  the pad and pass `--quicksave "<name>"`; the bridge loads it before every episode that
+  does not already find a controllable vessel on the pad.
+- **An empty pod is a brick.** `launch_vessel` with no crew gives a vessel KSP will not let
+  anyone control (`control.state == none`); the bridge checks this and refuses. `--crew`
+  names the Kerbals to seat if you do launch from the VAB (`--craft`); the quicksave route
+  sidesteps it.
+- **Recovering can strand crew.** Recovering the pad while the previous flight was still
+  in the air marked its crew Missing. Hence: no recovery, quicksaves only.
+- **Big rockets need a rate gyro.** A 100 t stack with a Mk1-3 pod's reaction wheel and a
+  Mainsail gimbal has enormous yaw authority and no aerodynamic damping. Given the full
+  stick, the fly's ±1° hold became a growing oscillation and tumbled at 27 km. With the
+  pilot limited to 30% deflection plus rate damping (`--yaw-authority 0.3 --yaw-damping
+  0.03`, both on the vehicle side, the fly still the only source of the attitude signal)
+  the same fly held the same rocket within ±1° through max-Q, staging and the upper-stage
+  burn, and left the atmosphere.
+- Staging is automatic and stops at the last stage that lights a real engine; escape
+  towers and parachutes are never fired. Clamps release once thrust reaches 90% of what
+  is available.
+
 ## Preflight
 
 ```sh
@@ -36,10 +60,11 @@ possible, and whether the vessel has fins (it should not).
 ## Flying
 
 ```sh
-uv run flybywire ksp --pilot autopilot --episodes 1     # sanity: PD on yaw, PD on pitch
-uv run flybywire ksp --pilot none --episodes 1          # nobody on yaw: should fall over
-uv run flybywire ksp --pilot fly --episodes 3           # the fly on yaw
-uv run flybywire ksp --pilot fly --frozen --episodes 3  # control
+Q="--quicksave 'quicksave #1' --timeout 900"
+uv run flybywire ksp --pilot autopilot --episodes 1 $Q   # sanity: PD on yaw, PD on pitch
+uv run flybywire ksp --pilot none --episodes 1 $Q        # nobody on yaw: should fall over
+uv run flybywire ksp --pilot fly --episodes 3 $Q         # the fly on yaw
+uv run flybywire ksp --pilot fly --frozen --episodes 3 $Q  # control
 ```
 
 What the bridge does each tick:
@@ -47,11 +72,12 @@ What the bridge does each tick:
 1. Reads telemetry through kRPC streams and computes the yaw and pitch angles from the
    nose to the target direction in the vessel's own frame (so roll drift cannot swap axes).
 2. Draws the yaw error on the instrument panel; the pilot returns a stick position.
-3. Writes `control.yaw` from the pilot, `control.pitch` from a plain proportional loop
+3. Writes `control.yaw` from the pilot through the control augmentation (authority
+   limit plus rate damping), `control.pitch` from a plain proportional loop
    (`--no-pitch-hold` to disable, not advised), throttle full, and stages when thrust
    drops to zero with fuel remaining.
-4. Ends the episode at burnout, on impact, on a tilt past 90°, or at `--timeout`, then
-   reverts to launch for the next one.
+4. Ends the episode at burnout, on impact, on losing attitude past 90° from the target, or
+   at `--timeout`, then loads the quicksave for the next one.
 
 **The fly holds one axis.** In the 2D simulator it held the only axis there was. In KSP it
 holds yaw; pitch is a two-line controller with no brain in it, and roll is left alone. If

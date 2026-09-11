@@ -15,19 +15,27 @@ from dataclasses import dataclass
 
 from ..vehicle import Command, Telemetry
 
+ESCAPE_APOAPSIS = 6_000_000.0  # reported for unbound trajectories, as in the 2D sim
+
 
 @dataclass(frozen=True)
 class KerbalConfig:
     address: str = "127.0.0.1"
     rpc_port: int = 50000
     stream_port: int = 50001
-    craft: str | None = None  # VAB craft name to launch when a revert is not possible
+    craft: str | None = None  # VAB craft name to launch fresh (only if no quicksave)
+    crew: tuple[str, ...] = ("Jebediah Kerman",)  # an empty pod has no control at all
+    quicksave: str | None = None  # preferred reset: load this save (vessel on the pad, crewed)
     launch_site: str = "LaunchPad"
     dt: float = 0.05  # game seconds per tick in lockstep mode
     lockstep: bool = False  # pause KSP while the brain thinks
     pitch_hold: bool = True
     pitch_gain: float = 0.05  # stick per degree
     pitch_damping: float = 0.4  # stick per degree/tick
+    # Control augmentation on the fly's axis, as on a real rocket: the pilot commands
+    # attitude, a rate gyro damps. Big stacks have far more authority than the 2D sim.
+    yaw_authority: float = 0.3  # fraction of full deflection the pilot may command
+    yaw_damping: float = 0.03  # stick per degree/second of yaw-error rate
     tumble_deg: float = 90.0
     timeout: float = 600.0
     invert_yaw: bool = False
@@ -95,26 +103,53 @@ class KerbalRocket:
             time.sleep(0.5)
         raise TimeoutError("Vessel did not appear on the pad")
 
+    def _staging_ready(self, v, timeout=8.0):
+        """After Revert to Launch through kRPC, KSP does not rebuild the staging stack:
+        the vessel sits on the pad reporting stage -1 (briefly a stale value first) and
+        staging commands do nothing. Require a sane, stable reading."""
+        deadline = time.monotonic() + timeout
+        good = 0
+        while time.monotonic() < deadline:
+            try:
+                controllable = v.control.state != self.sc.ControlState.none
+                good = good + 1 if controllable and v.control.current_stage >= 0 else 0
+            except Exception:
+                good = 0
+            if good >= 4:
+                return True
+            time.sleep(0.5)
+        return False
+
+    def _relaunch(self):
+        """Reset the world for the next episode. Preferred: load a quicksave with a crewed
+        vessel on the pad. Otherwise launch the named craft from the VAB. Nothing here
+        recovers or reverts: reverting through kRPC leaves the staging broken, and
+        recovering can strand crew that is still flying."""
+        if self.c.quicksave:
+            self.sc.load(self.c.quicksave)
+        elif self.c.craft:
+            self.sc.launch_vessel("VAB", self.c.craft, self.c.launch_site, list(self.c.crew), False)
+        else:
+            raise RuntimeError(
+                "No controllable vessel on the pad and neither --quicksave nor --craft given"
+            )
+        v = self._wait_for_pad()
+        if not self._staging_ready(v):
+            raise RuntimeError("Vessel on the pad is not controllable (no crew or probe core?) or has dead staging")
+        return v
+
     def _to_pad(self):
-        v = None
         try:
             if self.conn.krpc.current_game_scene == self.scenes.flight:
                 v = self.sc.active_vessel
                 if v.situation == self.situations.pre_launch and self.flights == 0:
-                    return v
+                    if self._staging_ready(v, timeout=3.0):
+                        return v
         except Exception:
-            v = None
-        if self.sc.can_revert_to_launch:
-            self.sc.revert_to_launch()
-            return self._wait_for_pad()
-        if self.c.craft:
-            self.sc.launch_vessel("VAB", self.c.craft, self.c.launch_site)
-            return self._wait_for_pad()
-        raise RuntimeError(
-            "Cannot revert to launch and no --craft given; put a vessel on the pad first"
-        )
+            pass
+        return self._relaunch()
 
-    def reset(self):
+    def reset(self, _retry=True):
         self._clear_streams()
         if self.c.lockstep:
             self.conn.krpc.paused = False
@@ -129,15 +164,19 @@ class KerbalRocket:
         surface = v.surface_reference_frame
         body = v.reference_frame
         flight = v.flight()
+        # Speeds need a frame the vessel moves in; the default one is fixed to the vessel.
+        moving = v.flight(v.orbit.body.reference_frame)
         self.s = {
             "ut": self._stream(getattr, self.sc, "ut"),
             "altitude": self._stream(getattr, flight, "mean_altitude"),
-            "vertical_speed": self._stream(getattr, flight, "vertical_speed"),
-            "speed": self._stream(getattr, flight, "speed"),
+            "vertical_speed": self._stream(getattr, moving, "vertical_speed"),
+            "speed": self._stream(getattr, moving, "speed"),
             "q": self._stream(getattr, flight, "dynamic_pressure"),
             "pitch": self._stream(getattr, flight, "pitch"),
             "heading": self._stream(getattr, flight, "heading"),
             "apoapsis": self._stream(getattr, v.orbit, "apoapsis_altitude"),
+            "periapsis": self._stream(getattr, v.orbit, "periapsis_altitude"),
+            "eccentricity": self._stream(getattr, v.orbit, "eccentricity"),
             "situation": self._stream(getattr, v, "situation"),
             "thrust": self._stream(getattr, v, "thrust"),
             "stage": self._stream(getattr, self.control, "current_stage"),
@@ -146,6 +185,15 @@ class KerbalRocket:
             "east": self._stream(self.sc.transform_direction, (0.0, 0.0, 1.0), surface, body),
         }
         self.fuel_max = max(v.resources.max("LiquidFuel"), 1e-6)
+        # Staging stops at the last stage that lights a real engine. Escape towers and
+        # parachutes stay untouched: the rocket's business, but not this rocket's.
+        engine_stages = [
+            e.part.stage
+            for e in v.parts.engines
+            if e.part.stage >= 0 and "escape" not in e.part.title.lower()
+        ]
+        self.min_stage = min(engine_stages) if engine_stages else 0
+        self.clamped = bool(v.parts.launch_clamps)
         self.t0 = self.s["ut"]()
         self.pad_altitude = self.s["altitude"]()
         self.max_altitude = 0.0  # above the pad
@@ -153,12 +201,25 @@ class KerbalRocket:
         self.lifted_off = False
         self.last_stage_ut = -1e9
         self.previous_pitch_error = None
+        self.previous_yaw = None
         self.failure = None
         self.done = False
         self.flights += 1
+        self.next_tick = time.monotonic()
         self.control.throttle = 1.0
         self.control.activate_next_stage()
         self.last_stage_ut = self.s["ut"]()
+        # Ignition must actually happen; a vessel with dead staging just sits there.
+        deadline = time.monotonic() + 6.0
+        while time.monotonic() < deadline and self.s["thrust"]() < 1.0:
+            time.sleep(0.2)
+        if self.s["thrust"]() < 1.0:
+            if _retry and self.c.craft:
+                self._clear_streams()
+                self.vessel = self._relaunch()
+                self.flights -= 1
+                return self.reset(_retry=False)
+            raise RuntimeError("Ignition produced no thrust; the vessel has no control or dead staging")
         if self.c.lockstep:
             self.conn.krpc.paused = True
         return self.telemetry()
@@ -197,7 +258,14 @@ class KerbalRocket:
             return self.telemetry()
         cmd = command.clipped()
         yaw_error, pitch_error = self.errors()
-        self.control.yaw = -cmd.steer if self.c.invert_yaw else cmd.steer
+        ut = self.s["ut"]()
+        yaw_rate = 0.0
+        if self.previous_yaw is not None and ut > self.previous_yaw[1]:
+            yaw_rate = (yaw_error - self.previous_yaw[0]) / (ut - self.previous_yaw[1])
+        self.previous_yaw = (yaw_error, ut)
+        yaw = self.c.yaw_authority * cmd.steer + self.c.yaw_damping * yaw_rate
+        yaw = max(-1.0, min(1.0, yaw))
+        self.control.yaw = -yaw if self.c.invert_yaw else yaw
         if self.c.pitch_hold:
             rate = 0.0 if self.previous_pitch_error is None else pitch_error - self.previous_pitch_error
             self.previous_pitch_error = pitch_error
@@ -209,18 +277,28 @@ class KerbalRocket:
             self.conn.krpc.paused = False
             time.sleep(self.c.dt)
             self.conn.krpc.paused = True
+        else:
+            # Real time: pace the loop to dt so a brainless pilot does not spin at kHz.
+            now = time.monotonic()
+            time.sleep(max(0.0, self.next_tick - now))
+            self.next_tick = max(self.next_tick + self.c.dt, now)
         self._stage_if_needed(cmd.throttle)
         return self.telemetry()
 
     def _stage_if_needed(self, throttle):
         ut = self.s["ut"]()
-        if (
-            throttle > 0
-            and self.s["thrust"]() < 1.0
-            and self.s["fuel"]() > 0.5
-            and ut - self.last_stage_ut > self.c.stage_cooldown
-            and self.s["stage"]() > 0
-        ):
+        if ut - self.last_stage_ut < self.c.stage_cooldown or self.s["stage"]() <= self.min_stage:
+            return
+        thrust = self.s["thrust"]()
+        if self.clamped:
+            # Engines lit and spooled up: let go of the pad.
+            available = self.vessel.available_thrust
+            if available > 0 and thrust > 0.9 * available:
+                self.control.activate_next_stage()
+                self.last_stage_ut = ut
+                self.clamped = bool(self.vessel.parts.launch_clamps)
+            return
+        if throttle > 0 and thrust < 1.0 and self.s["fuel"]() > 0.5:
             self.control.activate_next_stage()
             self.last_stage_ut = ut
 
@@ -245,6 +323,10 @@ class KerbalRocket:
                 done=True, extra={"error": type(e).__name__},
             )
         t = ut - self.t0
+        bound = self.s["eccentricity"]() < 1.0
+        if not bound or apoapsis < 0:
+            apoapsis = ESCAPE_APOAPSIS  # KSP reports a negative apoapsis for hyperbolae
+        apoapsis = min(apoapsis, ESCAPE_APOAPSIS)  # and an astronomical one just short of e = 1
         if altitude > self.pad_altitude + 5:
             self.lifted_off = True
         self.max_altitude = max(self.max_altitude, altitude - self.pad_altitude)
@@ -252,11 +334,14 @@ class KerbalRocket:
         landed = situation in (self.situations.landed, self.situations.splashed)
         if self.lifted_off and landed:
             self.failure = "crash"
-        if tilt > self.c.tumble_deg:
-            self.failure = "tumble"
-        spent = fuel <= 0.01 and thrust < 1.0
-        self.done = bool(self.failure or spent or t >= self.c.timeout)
         target = self.target(altitude - self.pad_altitude)
+        # Attitude lost relative to guidance, not to the vertical: a turn is not a tumble.
+        if abs(tilt - target) > self.c.tumble_deg:
+            self.failure = "tumble"
+        # Spent: no thrust and either no fuel or nothing left that we are willing to stage.
+        no_more_stages = int(self.s["stage"]()) <= self.min_stage and ut - self.last_stage_ut > 5.0
+        spent = self.lifted_off and thrust < 1.0 and (fuel <= 0.01 or no_more_stages)
+        self.done = bool(self.failure or spent or t >= self.c.timeout)
         return Telemetry(
             time=round(t, 3),
             altitude=altitude - self.pad_altitude,
@@ -271,6 +356,8 @@ class KerbalRocket:
             done=self.done,
             extra={
                 "ut": ut,
+                "periapsis": self.s["periapsis"](),
+                "bound": bound,
                 "pitch_error_deg": pitch_error,
                 "heading": self.s["heading"](),
                 "speed": self.s["speed"](),

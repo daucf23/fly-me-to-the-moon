@@ -33,11 +33,15 @@ def main():
     ksp.add_argument("--address", default="127.0.0.1", help="kRPC server host (LAN OK)")
     ksp.add_argument("--rpc-port", type=int, default=50000)
     ksp.add_argument("--stream-port", type=int, default=50001)
-    ksp.add_argument("--craft", default=None, help="VAB craft to launch when revert is impossible")
+    ksp.add_argument("--craft", default=None, help="VAB craft to launch fresh for every episode (recommended; revert breaks staging)")
+    ksp.add_argument("--crew", nargs="*", default=["Jebediah Kerman"], help="Kerbals to seat; an empty pod has no control")
+    ksp.add_argument("--quicksave", default=None, help="Save to load before each episode (crewed vessel on the pad); preferred over --craft")
     ksp.add_argument("--lockstep", action="store_true", help="Pause KSP while the brain thinks")
     ksp.add_argument("--no-pitch-hold", action="store_true", help="Nobody holds pitch (not advised)")
     ksp.add_argument("--invert-yaw", action="store_true")
     ksp.add_argument("--invert-pitch", action="store_true")
+    ksp.add_argument("--yaw-authority", type=float, default=0.3, help="Fraction of full yaw deflection the pilot may command")
+    ksp.add_argument("--yaw-damping", type=float, default=0.03, help="Rate-gyro damping, stick per deg/s (0 to disable)")
     ksp.add_argument("--timeout", type=float, default=600.0)
     ksp.add_argument("--check", action="store_true", help="Connect, report the vessel, do not fly")
     a = p.parse_args()
@@ -157,11 +161,15 @@ def run_ksp(a):
         rpc_port=a.rpc_port,
         stream_port=a.stream_port,
         craft=a.craft,
+        crew=tuple(a.crew),
+        quicksave=a.quicksave,
         dt=a.neural_ms / 1000,
         lockstep=a.lockstep,
         pitch_hold=not a.no_pitch_hold,
         invert_yaw=a.invert_yaw,
         invert_pitch=a.invert_pitch,
+        yaw_authority=a.yaw_authority,
+        yaw_damping=a.yaw_damping,
         timeout=a.timeout,
     )
     target = gravity_turn_target if a.gravity_turn else vertical_target
@@ -181,7 +189,7 @@ def run_ksp(a):
                     "heading": f.heading,
                     "liquid_fuel": v.resources.amount("LiquidFuel"),
                     "stage": v.control.current_stage,
-                    "can_revert_to_launch": vehicle.sc.can_revert_to_launch,
+                    "can_revert_to_launch": vehicle.sc.can_revert_to_launch(),
                     "parts": len(v.parts.all),
                     "has_fins": any(
                         "fin" in p.name.lower() or "winglet" in p.name.lower() for p in v.parts.all
