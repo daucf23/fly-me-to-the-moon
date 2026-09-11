@@ -535,6 +535,10 @@ class MunMission:
             "controls": {**{k: round(x, 4) for k, x in controls.items()}, "throttle": round(throttle, 3)},
             "neural": {r: {k: s[1][k] for k in ("left_hz", "right_hz", "steer", "compute_seconds") if k in s[1]} for r, s in sticks.items()},
         }
+        if self.phase == "entry":
+            g = v.flight().g_force
+            row["g_force"] = round(g, 2)
+            self.flags["max_g"] = max(self.flags.get("max_g", 0.0), g)
         self.log.write(json.dumps(row) + "\n")
         if self.tick % 20 == 0:
             from PIL import Image
@@ -871,32 +875,41 @@ class MunMission:
         return out
 
     @staticmethod
-    def chute_status(m):
+    def deploy_event(m):
+        return next((e for e in m.event_list if e.gui_name == "Deploy Chute"), None)
+
+    @staticmethod
+    def chute_field(m, name):
+        try:
+            return next((f.value for f in m.field_list if f.gui_name == name), None)
+        except Exception:
+            return None
+
+    def chute_status(self, m):
         """'stowed', 'released' (Deploy Chute already triggered) or 'error'."""
         try:
-            return "stowed" if m.has_event("Deploy Chute") else "released"
+            return "stowed" if self.deploy_event(m) is not None else "released"
         except Exception:
             return "error"
 
-    @staticmethod
-    def chute_safe(m):
-        try:
-            return m.get_field("Safe to deploy?") == "Safe"
-        except Exception:
-            return False
+    def chute_safe(self, m):
+        return self.chute_field(m, "Safe to deploy?") == "Safe"
 
     def set_chute_altitudes(self):
         """After Abort: full deployment altitudes, drogue drogue_altitude, mains
-        main_altitude. Nothing is released here; release_chutes does that on the way down."""
+        main_altitude. Nothing is released here; release_chutes does that on the way down.
+        The module's field list can be empty for a few seconds after separation, so the
+        read-back is reported separately from the set."""
         c = self.c
         chutes = self.parachutes()
         states = {}
         for p, m, drogue in chutes:
             try:
                 m.set_field_float("Altitude", c.drogue_altitude if drogue else c.main_altitude)
-                states[p.title] = f"{self.chute_status(m)} alt={m.get_field('Altitude')} safe={m.get_field('Safe to deploy?')}"
+                result = "set"
             except Exception as e:
-                states[p.title] = f"error: {str(e)[:40]}"
+                result = f"set error: {str(e)[:40]}"
+            states[p.title] = f"{result} {self.chute_status(m)} alt={self.chute_field(m, 'Altitude')} safe={self.chute_field(m, 'Safe to deploy?')}"
         self.event("parachutes", count=len(chutes), drogue_altitude=c.drogue_altitude, main_altitude=c.main_altitude, states=states)
         if not chutes:
             self.event("abort", reason="no parachutes on the vessel after Abort")
@@ -920,10 +933,14 @@ class MunMission:
                 continue
             released = []
             for p, m in chutes:
-                if self.chute_status(m) != "stowed":
+                if self.chute_status(m) == "released":
                     continue
-                try:
-                    m.trigger_event("Deploy Chute")
+                try:  # a failed status read is no reason to keep the chute stowed
+                    e = self.deploy_event(m)
+                    if e is None:
+                        m.trigger_event("Deploy Chute")
+                    else:
+                        e.trigger()
                     released.append(p.title)
                 except Exception as e:
                     released.append(f"{p.title}: error {str(e)[:40]}")
@@ -973,6 +990,7 @@ class MunMission:
             "free_return": next((e.get("free_return") for e in self.events if e.get("purpose") == "tmi"), None),
             "mun_periapsis": next((e.get("altitude") for e in self.events if e["event"] == "mun_periapsis"), None),
             "landed": any(e["event"] == "landed" for e in self.events),
+            "max_g": round(self.flags.get("max_g", 0.0), 1),
             "final_body": o.body.name,
             "final_periapsis": round(o.periapsis_altitude),
             "monopropellant": round(self.v.resources.amount("MonoPropellant"), 1),

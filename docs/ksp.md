@@ -123,8 +123,10 @@ burn, stages, works the action groups and warps the coasts. Phases: ascent (grav
 turn, booster to depletion or early separation, escape tower off on action group 1
 above 55 km), coast, circularize, deploy the solar panels (Lights), solve and burn the
 trans-Munar injection, mid-course correction a third of the way out, flyby, return
-correction, Abort at 90 km (capsule off the Poodle, chutes armed), retrograde hold to
-splashdown. It never reverts and never recovers; `--quicksave` is the reset.
+correction to a 40 km periapsis and a trim, Abort at 90 km (capsule off the Poodle),
+retrograde hold, drogue released below 10 km and mains below 5 km once each chute
+reports itself safe, splashdown. It never reverts and never recovers; `--quicksave` is
+the reset.
 
 **Three authorities on one ship.** The computer is the only writer to the controls. The
 flies produce advisory sticks; a rate gyro damps them (`--damping`); the computer's
@@ -171,6 +173,31 @@ backstops override them and say so in the event log (`"by": "Bob"` versus
    the return periapsis at −31 km and +1 s at −5 km. No crew executes to that; the
    mid-course correction (two-axis, prograde/radial, same search) is the plan.
 
+**What the full missions taught** (autopilot crew, eight attempts to the first splashdown):
+
+5. Cut on velocity-to-be-gained, not on the remaining-Δv magnitude. Crossing the node
+   at 1.54 m/s reversed the remaining vector, Bob's bar regrew, and the ship burned
+   850 m/s to escape. The bar is the signed component along the planned burn direction,
+   clamped at zero; a reversal is a cutoff.
+6. Solvers block the loop for up to a minute. Stale sticks during a blind solve put the
+   ship in a tumble; now `hands_off()` zeroes the sticks and hands SAS the attitude for
+   the duration, `hands_on()` returns it.
+7. Never stage inside a burn. A freshly relit engine reads zero thrust for one tick,
+   which looked like flameout and jettisoned the Poodle. Flameout is now half a second
+   sustained, and only during ascent.
+8. Trust, then verify the action groups. The escape tower is checked in every phase
+   (fallback: fire it as an engine). The Abort group separated the capsule but never
+   opened a chute in two missions; and with the RealChute mod installed, kRPC's
+   `Parachute` class throws on every call, even for stock chutes, so the two missions
+   before that silently armed nothing. The chutes are now driven through the generic
+   part-module interface (`ModuleParachute`: `Altitude` field, `Safe to deploy?` field,
+   `Deploy Chute` event), drogue set to 5000 m and mains to 3000 m at separation,
+   released in that order once safe.
+9. The return leg needs room: the flyby exit was −75 km at Kerbin twice, fixed by a
+   100–230 m/s correction at the SOI exit, then a ~20 m/s trim half an orbit later.
+   Mission 8: flyby 300 km, entry periapsis 40.0 km, drogue at 9988 m, mains at 4975 m,
+   splashdown at 6 m/s with all three aboard, 31 minutes of wall time.
+
 Budget: Mainsail stage 64 t of propellant (≈3.0 km/s vacuum), Poodle 2.48 km/s. Orbit
-took 524 m/s of the Poodle after the booster, TMI 867 m/s, leaving ~1 km/s for
-corrections.
+took 437–524 m/s of the Poodle after the booster, TMI 848–867 m/s, corrections 26 +
+228 + 21 m/s on mission 8.

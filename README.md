@@ -28,10 +28,11 @@ measured, not assumed ([docs/calibration.md](docs/calibration.md)).
 - **Kerbal Space Program**: the fly has flown a 100 t crewed stack off the pad in real
 time, staging and all, to 435 km against the autopilot's 443
 ([docs/ksp.md](docs/ksp.md)).
-- **Fly me to the Mun**: in progress. Three seats, three brains: Jeb on pitch, Bill on
-yaw, Bob on the throttle, and a flight computer that plans the burns and works the
-action groups. Free-return flyby and splashdown; the autopilot crew flies each phase
-first ([docs/ksp.md](docs/ksp.md#fly-me-to-the-mun)).
+- **Fly me to the Mun**: the autopilot crew has flown the whole mission: a 300 km
+free-return flyby of the Mun and a splashdown under chutes with all three Kerbals
+aboard. Three seats, three brains: Jeb on pitch, Bill on yaw, Bob on the throttle, and
+a flight computer that plans the burns and works the action groups. The fly crew is
+next ([docs/ksp.md](docs/ksp.md#fly-me-to-the-mun)).
 
 ## Flight plan
 
