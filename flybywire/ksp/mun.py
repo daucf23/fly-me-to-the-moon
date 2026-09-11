@@ -55,7 +55,7 @@ class MunConfig:
     les_altitude: float = 55_000.0  # eject the escape tower above this (action group 1)
     mun_periapsis: float = 60_000.0  # flyby altitude
     mun_floor: float = 30_000.0  # below this a trajectory is scored as an impact (peaks reach 7.1 km)
-    return_periapsis: float = 40_000.0  # Kerbin entry altitude (32 km executed to 25.7 km gave 11.9 G)
+    return_periapsis: float = 35_000.0  # Kerbin entry altitude: 40 km gave 4.4-4.9 G, 46 and 51 km skipped, 25.7 km gave 11.9 G
     correction_tolerance: float = 15_000.0  # fix the return periapsis if further off
     entry_altitude: float = 90_000.0  # separate the capsule, arm chutes (Abort) here
     drogue_altitude: float = 5_000.0  # drogue full deployment; armed at separation

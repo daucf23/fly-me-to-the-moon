@@ -79,7 +79,7 @@ def test_trim_looks_again_after_each_burn_up_to_three_times():
 def test_no_return_look_inside_the_last_ten_minutes_or_when_on_target():
     m = return_mission()
     assert m.return_look({"corrected_back": True}, 500, 46_000) is None
-    assert m.return_look({"corrected_back": True}, 1_500, 41_000)[1] is False
+    assert m.return_look({"corrected_back": True}, 1_500, 36_000)[1] is False
 
 
 def test_a_return_routed_via_the_mun_again_counts_as_off_target():
