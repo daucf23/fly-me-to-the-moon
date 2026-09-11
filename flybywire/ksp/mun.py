@@ -125,7 +125,8 @@ class MunMission:
         self.event("phase", to=phase)
         if phase not in ("prelaunch", "ascent"):
             self.flags["upper"] = True  # whatever is left to burn is the upper stage
-        if self.c.save_milestones and phase in MILESTONE_SAVES and self.tick > 0:
+        if self.c.save_milestones and phase in MILESTONE_SAVES and self.tick > 0 and MILESTONE_SAVES[phase] not in self.flags.setdefault("saved", set()):
+            self.flags["saved"].add(MILESTONE_SAVES[phase])  # once: coast_to_mun is re-entered after every correction
             self.save_milestone(MILESTONE_SAVES[phase])
         if phase == self.c.stop_after:
             self.event("stop", reason=f"--stop-after {phase}")
@@ -263,12 +264,19 @@ class MunMission:
                 s += 100.0  # too close to the Mun's mountains
         return s
 
-    def pattern_search(self, node, params, best, steps, floor, budget=300, score_mun=True):
+    def pattern_search(self, node, params, best, steps, floor, budget=300, score_mun=True, score=None):
         """Coordinate pattern search on node attributes (e.g. ("ut", "prograde")).
         Bounded score, no derivatives: the patched-conic response is discontinuous
-        wherever an encounter appears or vanishes. best = (score, values, mun, back)."""
+        wherever an encounter appears or vanishes. best = (score, values, mun, back).
+        score(node) -> (s, mun, back) replaces the default patches + trajectory_score."""
         steps = np.array(steps, dtype=float)
         evals = 0
+
+        def default_score(n):
+            mun, back = self.patches(n)
+            return self.trajectory_score(mun, back, score_mun), mun, back
+
+        score = score or default_score
         while np.any(steps > floor) and evals < budget:
             improved = False
             for i in range(len(params)):
@@ -277,8 +285,7 @@ class MunMission:
                     values[i] += sign * steps[i]
                     for p, x in zip(params, values):
                         setattr(node, p, float(x))
-                    mun, back = self.patches(node)
-                    s = self.trajectory_score(mun, back, score_mun)
+                    s, mun, back = score(node)
                     evals += 1
                     if s < best[0] - 1e-9:
                         best, improved = (s, values, mun, back), True
@@ -335,39 +342,52 @@ class MunMission:
         self.hands_on()
         return node
 
-    def correction_node(self, score_mun=True, max_dv=60.0, span=20.0):
-        """Mid-course correction: a small burn 120 s from now in the prograde/radial
-        plane that moves the predicted trajectory back onto the targets, found by the
-        same pattern search. Outbound it targets both periapses; homebound only the
-        entry corridor. Returns None if it would not help or would cost too much."""
+    def correction_node(self, score_mun=True, max_dv=60.0, span=20.0, first_pass=False):
+        """Mid-course correction: a small burn 120 s from now that moves the predicted
+        trajectory back onto the targets, found by the same pattern search. Coarse
+        grid in the prograde/radial plane, then the pattern search in all three axes:
+        a crew's residual after a long burn is lateral, and some of it is out of plane.
+        Outbound it targets both periapses; homebound only the entry corridor.
+        first_pass: only an encounter inside one orbit counts (a burn that misses the
+        corridor tends to find the Mun a revolution later, sensitive and slow).
+        Returns None if it would not help or would cost too much."""
         self.hands_off()
         ut = self.sc.ut + 120.0
-        node = self.v.control.add_node(ut, prograde=0.0, radial=0.0)
-        mun, back = self.patches(node)
-        before = self.trajectory_score(mun, back, score_mun)
-        best = (before, [0.0, 0.0], mun, back)
+        node = self.v.control.add_node(ut, prograde=0.0, radial=0.0, normal=0.0)
+        period = self.v.orbit.period
+
+        def score_of(node_or_orbit):
+            mun, back = self.patches(node_or_orbit)
+            if first_pass and mun is not None:
+                o = getattr(node_or_orbit, "orbit", node_or_orbit)
+                t_soi = o.time_to_soi_change
+                if math.isnan(t_soi) or t_soi > period:
+                    mun, back = None, None
+            return self.trajectory_score(mun, back, score_mun), mun, back
+
+        before, mun, back = score_of(node)
+        best = (before, [0.0, 0.0, 0.0], mun, back)
         # Coarse look first: the corridor may be several m/s away in either axis, and
         # on the way home, after a wide flyby, a couple of hundred.
         span, step_p, step_r = (span, span / 10, span / 5) if score_mun else (max_dv, max_dv / 15, max_dv / 8)
         for p in np.arange(-span, span + 0.1, step_p):
             for r in np.arange(-span, span + 0.1, step_r):
                 node.prograde, node.radial = float(p), float(r)
-                mun, back = self.patches(node)
-                s = self.trajectory_score(mun, back, score_mun)
+                s, mun, back = score_of(node)
                 if s < best[0]:
-                    best = (s, [float(p), float(r)], mun, back)
-        best, evals = self.pattern_search(node, ("prograde", "radial"), best, steps=(1.0, 1.0), floor=0.005, score_mun=score_mun)
-        s, (p, r), mun, back = best
-        dv = math.hypot(p, r)
+                    best = (s, [float(p), float(r), 0.0], mun, back)
+        best, evals = self.pattern_search(node, ("prograde", "radial", "normal"), best, steps=(1.0, 1.0, 1.0), floor=0.005, score_mun=score_mun, score=score_of)
+        s, (p, r, nrm), mun, back = best
+        dv = math.sqrt(p * p + r * r + nrm * nrm)
         self.hands_on()
         if dv > max_dv or s >= before - 1e-6 or dv < 0.05:
             node.remove()
-            self.event("no_correction", reason="too expensive" if dv > max_dv else "no improvement", dv=round(dv, 2), score_before=round(before, 3), score_after=round(s, 3))
+            self.event("no_correction", reason="too expensive" if dv > max_dv else "no improvement", dv=round(dv, 2), score_before=round(before, 3), score_after=round(s, 3), first_pass=first_pass)
             return None
         self.event(
-            "node", purpose="correction", prograde=round(p, 3), radial=round(r, 3), dv=round(dv, 3),
+            "node", purpose="correction", prograde=round(p, 3), radial=round(r, 3), normal=round(nrm, 3), dv=round(dv, 3),
             mun_periapsis=None if mun is None else round(mun), return_periapsis=None if back is None else round(back),
-            score_before=round(before, 3), score_after=round(s, 3), evals=evals,
+            score_before=round(before, 3), score_after=round(s, 3), evals=evals, first_pass=first_pass,
         )
         return node
 
@@ -733,44 +753,57 @@ class MunMission:
                 return
             t_soi = o.time_to_soi_change
             encounter = not math.isnan(t_soi) and t_soi > 0 and o.next_orbit is not None and o.next_orbit.body.name == "Mun"
+            first_pass = encounter and t_soi < o.period
             corrections = self.flags.get("corrections_out", 0)
             # Two kinds of look. The free-return corridor is 2 m/s wide and a crew's
-            # burn is good to ten (fly mission 3 left no encounter at all: apoapsis
-            # 13,400 km against the Mun's 12,000), so a lost encounter is corrected at
-            # once, while it is cheap, up to twice. With an encounter, one look a third
-            # of the way out: is the return still on target?
+            # burn leaves ~10 m/s of lateral residual (fly missions 3 and 4), which
+            # loses the first-pass encounter and, this close to a 2:1 resonance with
+            # the Mun, finds a sensitive one a revolution later instead. So without a
+            # first-pass encounter the correction is made at once, while it is cheap,
+            # up to twice; if none is in reach the later encounter is flown. With a
+            # first-pass encounter, one look a third of the way out: is the return
+            # still on target?
             look = None
-            if not encounter:
+            if not first_pass and not self.flags.get("later_pass_accepted"):
                 if corrections >= 2:
-                    self.event("abort", reason="no Mun encounter after corrections", apoapsis=round(min(o.apoapsis_altitude, ESCAPE_APOAPSIS)))
-                    self.go("done")
-                    return
-                look = "lost_encounter"
-            elif not self.flags.get("midcourse_looked"):
+                    if not encounter:
+                        self.event("abort", reason="no Mun encounter after corrections", apoapsis=round(min(o.apoapsis_altitude, ESCAPE_APOAPSIS)))
+                        self.go("done")
+                        return
+                    self.flags["later_pass_accepted"] = True
+                else:
+                    look = "lost_encounter"
+            elif encounter and not self.flags.get("midcourse_looked"):
                 if t_soi < 0.66 * self.flags.setdefault("t_soi0", t_soi):
                     look = "midcourse"
             if look:
                 if look == "midcourse":
                     self.flags["midcourse_looked"] = True
                 mun, back = self.patches(o)
-                off_target = (
+                off_target = look == "lost_encounter" or (
                     back is None or mun is None
                     or abs(back - c.return_periapsis) > c.correction_tolerance
                     or abs(mun - c.mun_periapsis) > 3 * c.correction_tolerance
                 )
-                self.event("midcourse_check", look=look, mun_periapsis=mun, return_periapsis=back, correcting=off_target)
+                self.event("midcourse_check", look=look, mun_periapsis=mun, return_periapsis=back, first_pass=first_pass, t_soi=None if math.isnan(t_soi) else round(t_soi), correcting=off_target)
                 if off_target:
-                    node = self.correction_node(score_mun=True, max_dv=60.0 if encounter else 150.0, span=20.0 if encounter else 40.0)
+                    if look == "lost_encounter":
+                        node = self.correction_node(score_mun=True, max_dv=150.0, span=40.0, first_pass=True)
+                    else:
+                        node = self.correction_node(score_mun=True, max_dv=60.0, span=20.0)
                     if node is not None:
                         self.flags["corrections_out"] = corrections + 1
                         self.flags.pop("t_soi0", None)  # the encounter moves; measure the leg afresh
                         self.node, self.after_burn = node, "coast_to_mun"
                         self.go("burn")
                         return
-                    if not encounter:
-                        self.event("abort", reason="no correction restores the Mun encounter")
-                        self.go("done")
-                        return
+                    if look == "lost_encounter":
+                        if not encounter:
+                            self.event("abort", reason="no correction restores the Mun encounter")
+                            self.go("done")
+                            return
+                        self.flags["later_pass_accepted"] = True
+                        self.event("later_pass", reason="no first-pass free return within 150 m/s; flying the later encounter", t_soi=round(t_soi))
             if encounter and t_soi > c.warp_lead + 30:
                 aligned = abs(truth["pitch_error_deg"]) < 10 and abs(truth["yaw_error_deg"]) < 10
                 if aligned:

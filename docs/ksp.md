@@ -215,14 +215,27 @@ took 437–524 m/s of the Poodle after the booster, TMI 848–867 m/s, correctio
     simulation settles a 20° error in ~6 s from the booster to the bare upper stage.
     Fly mission 2 held pitch to 0.5° mean through the ascent.
 11. The gimbal is a second actuator. With the Poodle lit the same stick gives 62 deg/s²
-    (one-tick-delayed regression, r = 0.95) against 31 with it off, and a rate loop
-    tuned for the wheels chattered between the stops at 1 Hz, ±3°, the moment the
-    engine came up, in the ascent and in the burn alike. On the upper stage the
-    augmentation is divided by `1 + thrust_authority × throttle` (default 1.0); the
-    booster is exempt, its gimbal *is* the authority and the loop was tuned lit. Fly
-    mission 3: circularization 216 m/s with 0.45° mean pitch error under thrust and no
-    interlock events; TMI 855 m/s with 1.0° mean, a few 5–7° excursions in the last
-    third as the stage lightened.
+    (one-tick-delayed regression, r = 0.95) against 31 with it off, and 75 by the end
+    of TMI as the tanks empty; a rate loop tuned for the wheels chattered between the
+    stops at 1 Hz, ±3°, the moment the engine came up, in the ascent and in the burn
+    alike. On the upper stage the augmentation is divided by `1 + thrust_authority ×
+    throttle` (default 2.0, which keeps the loop where the coast has it up to ~95
+    deg/s²); the booster is exempt, its gimbal *is* the authority and the loop was
+    tuned lit. Fly mission 3 at 1.0: circularization 216 m/s with 0.45° mean pitch
+    error under thrust and no interlock events; TMI 855 m/s with 1.0° mean and, in the
+    last third, 8% of ticks with the gyro on the stop and 5–8° excursions that
+    stretched the burn from 56 to 70 s.
+11b. A stretched burn misses the corridor. That TMI left an apoapsis of 13,400 km
+    against a Mun at 12,000 and, as far as the live game's conics could see, no
+    encounter; a save of the same moment, reloaded, showed one on the *second* orbit
+    (80,000 s out). The mission flew that: correction 21 m/s at a third of the way,
+    flyby at 124 km, exit at 33 km, trim 16.6 m/s to 40.0 km, 4.5 G, mains at 5 km,
+    splashdown at 6.5 m/s with all three aboard (`runs/mun-flies-3` to TMI,
+    `runs/mun-flies-3c` from the `flybywire-tmi` save to the water). A crew burn is
+    good to ~10 m/s and the corridor is 2, so a lost encounter is now corrected at once
+    rather than waited on: `coast_to_mun` searches ±40 m/s prograde/radial for one
+    (twice at most) before giving up, and only warps when there is a Mun patch to warp
+    toward.
 12. Judge overshoot on velocity-to-be-gained. The remaining-Δv magnitude grows with
     every degree the nose wanders while burning; that is lateral error for the
     corrections to fix, and it ended fly mission 1's burn at 374 m/s.
