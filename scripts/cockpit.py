@@ -29,13 +29,29 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from flybywire.instruments import black_panel, render_panel  # noqa: E402
 from flybywire.pilot import DEFAULT_BASELINE_HZ  # noqa: E402
 
-W, H = 900, 620
+W, H = 900, 640
 COL = 300
-HEADER = 60
+HEADER = 80
 PANEL_SCALE = 2
 HZ_FULL = 120.0  # neuron bar full scale
 SEATS = [("pitch", "Jeb", "pitch"), ("yaw", "Bill", "yaw"), ("throttle", "Bob", "throttle")]
 BG, INK, DIM, FLY, SHIP, GRID = (12, 12, 16), (235, 235, 235), (120, 120, 130), (255, 170, 40), (90, 190, 255), (50, 50, 60)
+
+
+# What a viewer needs to know in each phase. The flies see only their panels; this is
+# for the people watching.
+CAPTIONS = {
+    "prelaunch": "Three fruit-fly brains on the sticks. Each sees one instrument and nothing else.",
+    "ascent": "Jeb flies pitch, Bill yaw, Bob the throttle. The computer picks the target and damps their twitches.",
+    "coast_to_apoapsis": "Engine off. The computer plans the circularization burn; the flies keep the nose on target.",
+    "burn": "Burning. Bob's bar is the delta-v to go; when it vanishes his neurons go quiet and the engine stops.",
+    "plan_tmi": "The computer searches for a free-return path around the Mun. The flies wait.",
+    "coast_to_mun": "Coasting to the Mun under time warp. The flies keep the nose on the next burn.",
+    "mun_flyby": "Inside the Mun's gravity. Too low a flyby and the computer plans an emergency burn for the flies.",
+    "return_coast": "Falling back to Kerbin. Small corrections aim the entry at 30 km; the crew are flies.",
+    "entry": "Re-entry. The flies still steer the capsule; chutes at 10 km and 5 km.",
+    "done": "Landed. Every attitude and every throttle passed through a connectome.",
+}
 
 
 def font(size):
@@ -163,6 +179,7 @@ def render_frame(row, cfg, t0, brain=None, i=None):
         fill=DIM,
         font=F,
     )
+    d.text((10, 56), CAPTIONS.get(row["phase"], ""), fill=INK, font=F)
     for seat, (role, who, _) in enumerate(SEATS):
         x0 = seat * COL
         if seat:
@@ -215,8 +232,18 @@ def rows_of(path):
 def replay(args):
     run = Path(args.run)
     cfg = load_config(run)
-    rows = list(enumerate(rows_of(run / "mission.jsonl")))[:: args.every]
+    rows = list(enumerate(rows_of(run / "mission.jsonl")))
     t0 = rows[0][1]["ut"]
+    wall0 = rows[0][1].get("wall")
+    if args.phases:
+        keep = set(args.phases.split(","))
+        rows = [(i, r) for i, r in rows if r["phase"] in keep]
+    if args.wall:
+        lo, hi = (float(x) for x in args.wall.split(":"))
+        rows = [(i, r) for i, r in rows if lo <= r["wall"] - wall0 <= hi]
+    rows = rows[:: args.every]
+    if not rows:
+        sys.exit("no rows selected")
     brain = load_brain(run)
     cmd = ["ffmpeg", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(args.fps), "-i", "-",
            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20", args.out]
@@ -288,7 +315,9 @@ def main():
     r.add_argument("run")
     r.add_argument("--out", default="cockpit.mp4")
     r.add_argument("--fps", type=float, default=5.0, help="rows are logged at about 5/s wall time")
-    r.add_argument("--every", type=int, default=1, help="use every Nth row")
+    r.add_argument("--every", type=int, default=1, help="use every Nth row (time-lapse)")
+    r.add_argument("--phases", default=None, help="only these phases, comma-separated (e.g. burn,entry)")
+    r.add_argument("--wall", default=None, help="only rows between these wall-clock seconds from the first row, START:END")
     r.set_defaults(fn=replay)
     l = sub.add_parser("live")
     l.add_argument("run")
