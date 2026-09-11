@@ -259,7 +259,7 @@ def replay(args):
 
 
 PAGE = b"""<html><body style="margin:0;background:#0c0c10;overflow:hidden">
-<img id=f src=/frame.png style="width:100vw;height:auto;display:block;image-rendering:auto">
+<img id=f src=/frame.png style="width:900px;height:640px;display:block">
 <script>
 // Load the next frame off-screen and swap only when it has arrived: no flash between frames.
 let busy=false;
