@@ -51,3 +51,32 @@ def test_extra_authority_is_confined_to_atmospheric_ascent(phase, altitude, expe
     m.c = replace(m.c, authority=.5)
     m.phase = phase
     assert m.attitude_authority(altitude) == expected
+
+
+def return_mission():
+    m = object.__new__(MunMission)
+    m.c = MunConfig()
+    return m
+
+
+def test_first_return_look_corrects_a_wide_miss_with_a_survival_budget():
+    look, off, max_dv = return_mission().return_look({}, 20_000, 55_117)
+    assert (look, off, max_dv) == ("corrected_back", True, 250.0)
+
+
+def test_trim_is_not_refused_on_cost_and_is_judged_on_the_executed_periapsis():
+    # Fly 9b: 46.3 km after the correction, 35 m/s trim refused at the old 30 m/s cap, skip.
+    look, off, max_dv = return_mission().return_look({"corrected_back": True}, 1_540, 46_342)
+    assert look == "trimmed_back" and off and max_dv >= 35.0
+
+
+def test_trim_looks_again_after_each_burn_up_to_three_times():
+    m = return_mission()
+    assert m.return_look({"corrected_back": True, "trimmed_back": False, "trims_back": 1}, 1_300, 43_500)[1] is True
+    assert m.return_look({"corrected_back": True, "trimmed_back": False, "trims_back": 3}, 1_300, 43_500) is None
+
+
+def test_no_return_look_inside_the_last_ten_minutes_or_when_on_target():
+    m = return_mission()
+    assert m.return_look({"corrected_back": True}, 500, 46_000) is None
+    assert m.return_look({"corrected_back": True}, 1_500, 41_000)[1] is False

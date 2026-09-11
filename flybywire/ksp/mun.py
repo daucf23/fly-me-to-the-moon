@@ -372,39 +372,58 @@ class MunMission:
         ut = self.sc.ut + 120.0
         node = self.v.control.add_node(ut, prograde=0.0, radial=0.0, normal=0.0)
         period = self.v.orbit.period
+        seen = {"first_pass": 0, "later_pass": 0, "no_encounter": 0, "nan_soi": 0}
 
         def score_of(node_or_orbit):
             mun, back = self.patches(node_or_orbit)
-            if first_pass and mun is not None:
-                o = getattr(node_or_orbit, "orbit", node_or_orbit)
-                t_soi = o.time_to_soi_change
-                if math.isnan(t_soi) or t_soi > period:
-                    mun, back = None, None
+            if first_pass:
+                if mun is None:
+                    seen["no_encounter"] += 1
+                else:
+                    o = getattr(node_or_orbit, "orbit", node_or_orbit)
+                    t_soi = o.time_to_soi_change
+                    if math.isnan(t_soi):
+                        seen["nan_soi"] += 1
+                        mun, back = None, None
+                    elif t_soi > period:
+                        seen["later_pass"] += 1
+                        mun, back = None, None
+                    else:
+                        seen["first_pass"] += 1
             return self.trajectory_score(mun, back, score_mun), mun, back
 
         before, mun, back = score_of(node)
         best = (before, [0.0, 0.0, 0.0], mun, back)
         # Coarse look first: the corridor may be several m/s away in either axis, and
-        # on the way home, after a wide flyby, a couple of hundred.
+        # on the way home, after a wide flyby, a couple of hundred. Looking for a first
+        # pass the filter makes the score a plateau with one basin in it, and the burn
+        # residual that lost the encounter is lateral (mission 8: 1 m/s along, 12 total),
+        # so the coarse look has to sample normal too or the pattern search has no slope.
         span, step_p, step_r = (span, span / 10, span / 5) if score_mun else (max_dv, max_dv / 15, max_dv / 8)
+        if first_pass:
+            step_p = span / 5  # 9 x 11 x 9 = 891 evaluations, about 90 s at 1x; the pattern search refines
+        normals = np.arange(-span, span + 0.1, span / 4) if first_pass else [0.0]
         for p in np.arange(-span, span + 0.1, step_p):
             for r in np.arange(-span, span + 0.1, step_r):
-                node.prograde, node.radial = float(p), float(r)
-                s, mun, back = score_of(node)
-                if s < best[0]:
-                    best = (s, [float(p), float(r), 0.0], mun, back)
+                for n in normals:
+                    node.prograde, node.radial, node.normal = float(p), float(r), float(n)
+                    s, mun, back = score_of(node)
+                    if s < best[0]:
+                        best = (s, [float(p), float(r), float(n)], mun, back)
+        node.normal = 0.0
         best, evals = self.pattern_search(node, ("prograde", "radial", "normal"), best, steps=(1.0, 1.0, 1.0), floor=0.005, score_mun=score_mun, score=score_of)
         s, (p, r, nrm), mun, back = best
         dv = math.sqrt(p * p + r * r + nrm * nrm)
         self.hands_on()
+        probe = {"period": round(period), "candidates": seen} if first_pass else {}
         if dv > max_dv or s >= before - 1e-6 or dv < 0.05:
             node.remove()
-            self.event("no_correction", reason="too expensive" if dv > max_dv else "no improvement", dv=round(dv, 2), score_before=round(before, 3), score_after=round(s, 3), first_pass=first_pass)
+            self.event("no_correction", reason="too expensive" if dv > max_dv else "no improvement", dv=round(dv, 2), score_before=round(before, 3), score_after=round(s, 3), first_pass=first_pass, **probe)
             return None
         self.event(
             "node", purpose="correction", prograde=round(p, 3), radial=round(r, 3), normal=round(nrm, 3), dv=round(dv, 3),
             mun_periapsis=None if mun is None else round(mun), return_periapsis=None if back is None else round(back),
-            score_before=round(before, 3), score_after=round(s, 3), evals=evals, first_pass=first_pass,
+            score_before=round(before, 3), score_after=round(s, 3), evals=evals, first_pass=first_pass, **probe,
         )
         return node
 
@@ -886,19 +905,20 @@ class MunMission:
             # Two looks at the entry corridor: one right after the flyby, one inside the
             # last hour when a small burn moves the periapsis by little and precisely.
             t_peri = o.time_to_periapsis
-            look = None
-            if not self.flags.get("corrected_back") and t_peri > 1_800:
-                look, tolerance = "corrected_back", c.correction_tolerance
-            elif not self.flags.get("trimmed_back") and 600 < t_peri < 3_000:
-                look, tolerance = "trimmed_back", 3_000.0
-            if look:
+            decision = self.return_look(self.flags, t_peri, o.periapsis_altitude)
+            if decision:
+                look, off, max_dv = decision
                 self.flags[look] = True
-                off = abs(o.periapsis_altitude - c.return_periapsis) > tolerance
-                self.event("return_check", look=look, periapsis=round(o.periapsis_altitude), correcting=off)
+                self.event("return_check", look=look, periapsis=round(o.periapsis_altitude), trims=self.flags.get("trims_back", 0), correcting=off)
                 if off:
                     # Survival burn: worth most of what is left in the tank.
-                    node = self.correction_node(score_mun=False, max_dv=250.0 if look == "corrected_back" else 30.0)
+                    node = self.correction_node(score_mun=False, max_dv=max_dv)
                     if node is not None:
+                        if look == "trimmed_back":
+                            # Look again once this burn is done: fly 9b's correction
+                            # left 46 km, the trim was refused, the capsule skipped.
+                            self.flags["trims_back"] = self.flags.get("trims_back", 0) + 1
+                            self.flags["trimmed_back"] = False
                         self.node, self.after_burn = node, "return_coast"
                         self.go("burn")
                         return
@@ -933,6 +953,15 @@ class MunMission:
             if v.situation in (self.sc.VesselSituation.landed, self.sc.VesselSituation.splashed):
                 self.event("landed", situation=str(v.situation).split(".")[-1], altitude=round(alt))
                 self.go("done")
+                return
+            if alt > 100_000 and v.flight(o.body.reference_frame).vertical_speed > 0 and self.flags.get("chutes_checked"):
+                # Skipped off the air. Nothing left to burn with; the chutes stay armed.
+                # Say so, and wait out the next pass at warp instead of at 1x on a battery.
+                if not self.flags.get("skipped"):
+                    self.flags["skipped"] = True
+                    self.event("skip", periapsis=round(o.periapsis_altitude), apoapsis=round(o.apoapsis_altitude), time_to_periapsis=round(o.time_to_periapsis))
+                if o.time_to_periapsis > 300 and alt > 150_000:
+                    self.warp_to(self.sc.ut + o.time_to_periapsis - 240)
             elif self.tick % 20 == 0 and (v.crew_count == 0 or not v.parts.all):
                 self.event("abort", reason="vessel lost", altitude=round(alt), parts=len(v.parts.all), crew=v.crew_count)
                 self.go("done")
@@ -1009,6 +1038,20 @@ class MunMission:
             self.go(nxt)
 
     # --- helpers -----------------------------------------------------------------------
+
+    def return_look(self, flags, t_peri, periapsis):
+        """Which look at the entry corridor is due, if any: (look, off_target, max_dv).
+        One correction right after the flyby, then trims inside the last 50 minutes,
+        each judged on the periapsis the previous burn actually left, up to three, and
+        none inside the last ten minutes (node lead, alignment, the burn itself). A trim
+        is a survival burn too: fly 9b came home at 46 km because 35 m/s was "too
+        expensive", bottomed out at 46.9 km and went back up to 800 km."""
+        c = self.c
+        if not flags.get("corrected_back") and t_peri > 1_800:
+            return "corrected_back", abs(periapsis - c.return_periapsis) > c.correction_tolerance, 250.0
+        if not flags.get("trimmed_back") and 600 < t_peri < 3_000 and flags.get("trims_back", 0) < 3:
+            return "trimmed_back", abs(periapsis - c.return_periapsis) > 3_000.0, 250.0
+        return None
 
     def attitude_authority(self, altitude):
         # The saved stack is rolled 90 degrees: Bill's yaw axis flies the gravity
