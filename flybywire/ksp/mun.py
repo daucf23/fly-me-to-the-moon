@@ -223,7 +223,7 @@ class MunMission:
         dv = math.sqrt(mu / r) - v_apo
         ut = self.sc.ut + o.time_to_apoapsis
         node = self.v.control.add_node(ut, prograde=dv)
-        self.event("node", purpose="circularize", dv=round(dv, 1), ut=round(ut, 1))
+        self.event("node", purpose="circularize", dv=round(dv, 1), node_ut=round(ut, 1))
         return node
 
     def patches(self, node_or_orbit):
@@ -329,13 +329,13 @@ class MunMission:
             node.remove()
             self.hands_on()
             raise RuntimeError("No Mun encounter found in one orbit of burn times")
-        self.event("tmi_coarse", ut=round(best[1][0]), dv=best[1][1], mun_periapsis=round(best[2]), return_periapsis=best[3], evals=evals)
+        self.event("tmi_coarse", node_ut=round(best[1][0]), dv=best[1][1], mun_periapsis=round(best[2]), return_periapsis=best[3], evals=evals)
         best = grid(best[1][0] + np.arange(-60, 61, 4.0), np.arange(848.0, 872.1, 1.0), best)
-        self.event("tmi_fine", ut=round(best[1][0]), dv=best[1][1], mun_periapsis=round(best[2]), return_periapsis=best[3], evals=evals)
+        self.event("tmi_fine", node_ut=round(best[1][0]), dv=best[1][1], mun_periapsis=round(best[2]), return_periapsis=best[3], evals=evals)
         best, n = self.pattern_search(node, ("ut", "prograde"), best, steps=(2.0, 0.5), floor=0.02)
         s, (ut, dv), mun, back = best
         self.event(
-            "node", purpose="tmi", dv=round(dv, 3), ut=round(ut, 2), mun_periapsis=round(mun),
+            "node", purpose="tmi", dv=round(dv, 3), node_ut=round(ut, 2), mun_periapsis=round(mun),
             return_periapsis=None if back is None else round(back), free_return=back is not None and back > 0,
             score=round(s, 3), evals=evals + n,
         )
