@@ -62,7 +62,7 @@ def main():
     mun.add_argument("--return-periapsis", type=float, default=40_000.0)
     mun.add_argument("--authority", type=float, default=None, help="Fraction of deflection the crew may command (flies 0.5, autopilot 0.7)")
     mun.add_argument("--damping", type=float, default=None, help="Rate gyro, stick per deg/s (flies 0.12, autopilot 0.03)")
-    mun.add_argument("--thrust-authority", type=float, default=1.0, help="Upper-stage gimbal authority relative to the wheels; augmentation is divided by 1 + this x throttle")
+    mun.add_argument("--thrust-authority", type=float, default=2.0, help="Upper-stage gimbal authority relative to the wheels; augmentation is divided by 1 + this x throttle")
     mun.add_argument("--save-milestones", action="store_true", help="Quicksave after circularization and TMI (flybywire-orbit, flybywire-tmi)")
     mun.add_argument("--turn-end", type=float, default=40_000.0)
     mun.add_argument("--turn-pitch", type=float, default=85.0)

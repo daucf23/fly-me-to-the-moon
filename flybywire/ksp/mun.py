@@ -61,12 +61,14 @@ class MunConfig:
     main_altitude: float = 3_000.0  # mains full deployment; armed once the drogue is out
     authority: float = 0.7  # fraction of deflection the crew may command per axis
     damping: float = 0.03  # rate gyro, stick per deg/s
-    # On the upper stage the Poodle's gimbal at full throttle doubles what the wheels do
-    # (62 vs 31 deg/s^2 per unit stick, fly mission 2), and a loop tuned for the wheels
-    # chatters against the stops the moment the engine lights. Authority and damping are
-    # both divided by (1 + thrust_authority * throttle) there. Not on the booster: the
-    # Mainsail's gimbal is the whole authority, and the loop was tuned with it lit.
-    thrust_authority: float = 1.0
+    # On the upper stage the Poodle's gimbal at full throttle more than doubles what the
+    # wheels do (62-77 vs 31 deg/s^2 per unit stick, fly missions 2-3, rising as the
+    # tanks empty), and a loop tuned for the wheels chatters against the stops the
+    # moment the engine lights. Authority and damping are both divided by
+    # (1 + thrust_authority * throttle) there; 2.0 keeps the loop where the coast has it
+    # up to ~95 deg/s^2. Not on the booster: the Mainsail's gimbal is the whole
+    # authority, and the loop was tuned with it lit.
+    thrust_authority: float = 2.0
     roll_damping: float = 0.1  # computer holds roll rate: stick per deg/s
     error_scale_deg: float = 5.0
     dv_scale: float = 40.0
