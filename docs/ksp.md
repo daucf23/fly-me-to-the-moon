@@ -295,3 +295,12 @@ took 437–524 m/s of the Poodle after the booster, TMI 848–867 m/s, correctio
     ascent reached apoapsis on the booster and needed 1180.7 m/s to circularize; it
     retained about 1483 m/s upper-stage vacuum delta-v (about 630 after typical TMI).
     This validates ascent and orbit, not another complete Mun mission.
+16. **Entry is the survival number, and 40 km was not it.** Four missions captured at
+    40 km with 4.4–4.9 G; 46 km (fly 9b) and 51 km (fly 10b) skipped back out to 800 and
+    2,400 km apoapses. The trim that would have saved 9b was refused as "too expensive"
+    at 35 m/s. Now: the entry target is 30 km (the crew are flies; only the skip matters),
+    return trims have a 250 m/s budget, each is re-checked on the periapsis the burn
+    actually left (up to three), a return planned through a second Mun encounter before
+    periapsis is scored as no return (fly 10a planned 52 km that way and executed −504 km),
+    and a capsule that climbs back above 100 km logs `skip` and warps to the next pass.
+    Fly 10c: 55 km exit, 178 m/s trim to an executed 28.7 km, 4.5 G, landed.
