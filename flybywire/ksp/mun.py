@@ -333,7 +333,7 @@ class MunMission:
         self.hands_on()
         return node
 
-    def correction_node(self, score_mun=True, max_dv=60.0):
+    def correction_node(self, score_mun=True, max_dv=60.0, span=20.0):
         """Mid-course correction: a small burn 120 s from now in the prograde/radial
         plane that moves the predicted trajectory back onto the targets, found by the
         same pattern search. Outbound it targets both periapses; homebound only the
@@ -346,7 +346,7 @@ class MunMission:
         best = (before, [0.0, 0.0], mun, back)
         # Coarse look first: the corridor may be several m/s away in either axis, and
         # on the way home, after a wide flyby, a couple of hundred.
-        span, step_p, step_r = (20.0, 2.0, 4.0) if score_mun else (max_dv, max_dv / 15, max_dv / 8)
+        span, step_p, step_r = (span, span / 10, span / 5) if score_mun else (max_dv, max_dv / 15, max_dv / 8)
         for p in np.arange(-span, span + 0.1, step_p):
             for r in np.arange(-span, span + 0.1, step_r):
                 node.prograde, node.radial = float(p), float(r)
@@ -431,20 +431,23 @@ class MunMission:
                 pass
 
     def resume_in_space(self):
-        """Pick the mission up from a save made in flight: in Kerbin orbit with no Mun
-        encounter that is plan_tmi; on a Mun-bound patch it is coast_to_mun; inside the
-        Mun's sphere the flyby; homebound the return coast. The ascent-only jobs
-        (tower, panels) are marked done; the action groups are harmless if repeated."""
+        """Pick the mission up from a save made in flight: in a low Kerbin orbit that is
+        plan_tmi; flung out toward the Mun's distance, with or without an encounter, it
+        is coast_to_mun (which corrects a lost encounter); inside the Mun's sphere the
+        flyby; homebound, periapsis already in the air, the return coast. The
+        ascent-only jobs (tower, panels) are marked done; the action groups are harmless
+        if repeated."""
         o = self.v.orbit
         self.flags["les"] = self.flags["panels"] = True
         for n in self.v.control.nodes:
             n.remove()
+        high = o.apoapsis_altitude > 3e6 or o.apoapsis_altitude < 0  # out to the Mun's distance, or escaping
         if o.body.name == "Mun":
             phase = "mun_flyby"
-        elif self.flags.get("flyby_done") or (o.next_orbit is None and o.periapsis_altitude < 70_000 and o.apoapsis_altitude > 1e6):
+        elif high and o.periapsis_altitude < 70_000:
             self.flags["flyby_done"] = True
             phase = "return_coast"
-        elif o.next_orbit is not None and o.next_orbit.body.name == "Mun":
+        elif high or (o.next_orbit is not None and o.next_orbit.body.name == "Mun"):
             phase = "coast_to_mun"
         else:
             phase = "plan_tmi"
@@ -721,30 +724,50 @@ class MunMission:
                 self.event("soi", body="Mun", periapsis=round(o.periapsis_altitude))
                 self.go("mun_flyby")
                 return
-            if not self.flags.get("corrected_out"):
-                # One look, a third of the way out: is the return still on target?
-                t_soi = o.time_to_soi_change
-                if t_soi > 0 and t_soi < 0.66 * self.flags.get("t_soi0", t_soi):
-                    self.flags["corrected_out"] = True
-                    mun, back = self.patches(o)
-                    off_target = (
-                        back is None or mun is None
-                        or abs(back - c.return_periapsis) > c.correction_tolerance
-                        or abs(mun - c.mun_periapsis) > 3 * c.correction_tolerance
-                    )
-                    self.event("midcourse_check", mun_periapsis=mun, return_periapsis=back, correcting=off_target)
-                    if off_target:
-                        node = self.correction_node(score_mun=True)
-                        if node is not None:
-                            self.node, self.after_burn = node, "coast_to_mun"
-                            self.go("burn")
-                            return
-                self.flags.setdefault("t_soi0", t_soi)
             t_soi = o.time_to_soi_change
-            if t_soi > c.warp_lead + 30:
+            encounter = not math.isnan(t_soi) and t_soi > 0 and o.next_orbit is not None and o.next_orbit.body.name == "Mun"
+            corrections = self.flags.get("corrections_out", 0)
+            # Two kinds of look. The free-return corridor is 2 m/s wide and a crew's
+            # burn is good to ten (fly mission 3 left no encounter at all: apoapsis
+            # 13,400 km against the Mun's 12,000), so a lost encounter is corrected at
+            # once, while it is cheap, up to twice. With an encounter, one look a third
+            # of the way out: is the return still on target?
+            look = None
+            if not encounter:
+                if corrections >= 2:
+                    self.event("abort", reason="no Mun encounter after corrections", apoapsis=round(min(o.apoapsis_altitude, ESCAPE_APOAPSIS)))
+                    self.go("done")
+                    return
+                look = "lost_encounter"
+            elif not self.flags.get("midcourse_looked"):
+                if t_soi < 0.66 * self.flags.setdefault("t_soi0", t_soi):
+                    look = "midcourse"
+            if look:
+                if look == "midcourse":
+                    self.flags["midcourse_looked"] = True
+                mun, back = self.patches(o)
+                off_target = (
+                    back is None or mun is None
+                    or abs(back - c.return_periapsis) > c.correction_tolerance
+                    or abs(mun - c.mun_periapsis) > 3 * c.correction_tolerance
+                )
+                self.event("midcourse_check", look=look, mun_periapsis=mun, return_periapsis=back, correcting=off_target)
+                if off_target:
+                    node = self.correction_node(score_mun=True, max_dv=60.0 if encounter else 150.0, span=20.0 if encounter else 40.0)
+                    if node is not None:
+                        self.flags["corrections_out"] = corrections + 1
+                        self.flags.pop("t_soi0", None)  # the encounter moves; measure the leg afresh
+                        self.node, self.after_burn = node, "coast_to_mun"
+                        self.go("burn")
+                        return
+                    if not encounter:
+                        self.event("abort", reason="no correction restores the Mun encounter")
+                        self.go("done")
+                        return
+            if encounter and t_soi > c.warp_lead + 30:
                 aligned = abs(truth["pitch_error_deg"]) < 10 and abs(truth["yaw_error_deg"]) < 10
                 if aligned:
-                    target_ut = self.sc.ut + (t_soi * 0.34 if not self.flags.get("corrected_out") else t_soi) - c.warp_lead
+                    target_ut = self.sc.ut + (t_soi * 0.34 if not self.flags.get("midcourse_looked") else t_soi) - c.warp_lead
                     self.warp_to(max(target_ut, self.sc.ut + 60))
             return
 

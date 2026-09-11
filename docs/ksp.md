@@ -201,3 +201,32 @@ backstops override them and say so in the event log (`"by": "Bob"` versus
 Budget: Mainsail stage 64 t of propellant (≈3.0 km/s vacuum), Poodle 2.48 km/s. Orbit
 took 437–524 m/s of the Poodle after the booster, TMI 848–867 m/s, corrections 26 +
 228 + 21 m/s on mission 8.
+
+**What the fly crew taught** (`--crew flies`):
+
+10. A fly is a proportional controller with a lag. Fly mission 1 oscillated ±8° on both
+    attitude seats from the pad to the (attempted) circularization; the interlock kept
+    Bob dark, 30 of 404 m/s were burned, and the ship fell back. Fitting the telemetry:
+    the stick is 0.13 per degree of needle with a 0.32 s lag, saturating near 5°; the
+    Poodle stage's wheels give 21–31 deg/s² per unit stick. At `--authority 0.7
+    --damping 0.03` that loop has a damping ratio of 0.2 and 25° of phase loss, and a
+    simulation of it reproduces the ±7.6° limit cycle. The flies now fly at `0.5 /
+    0.12` (the autopilot crew, which damps itself, keeps `0.7 / 0.03`); the same
+    simulation settles a 20° error in ~6 s from the booster to the bare upper stage.
+    Fly mission 2 held pitch to 0.5° mean through the ascent.
+11. The gimbal is a second actuator. With the Poodle lit the same stick gives 62 deg/s²
+    (one-tick-delayed regression, r = 0.95) against 31 with it off, and a rate loop
+    tuned for the wheels chattered between the stops at 1 Hz, ±3°, the moment the
+    engine came up, in the ascent and in the burn alike. On the upper stage the
+    augmentation is divided by `1 + thrust_authority × throttle` (default 1.0); the
+    booster is exempt, its gimbal *is* the authority and the loop was tuned lit. Fly
+    mission 3: circularization 216 m/s with 0.45° mean pitch error under thrust and no
+    interlock events; TMI 855 m/s with 1.0° mean, a few 5–7° excursions in the last
+    third as the stage lightened.
+12. Judge overshoot on velocity-to-be-gained. The remaining-Δv magnitude grows with
+    every degree the nose wanders while burning; that is lateral error for the
+    corrections to fix, and it ended fly mission 1's burn at 374 m/s.
+13. `--save-milestones` quicksaves `flybywire-orbit` after circularization and
+    `flybywire-tmi` after TMI; `--quicksave flybywire-orbit` resumes from there (the
+    mission recognises an orbiting vessel and picks the phase from the patched conics),
+    so a burn or the entry can be worked on without the seven-minute ascent.
