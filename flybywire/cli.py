@@ -44,6 +44,28 @@ def main():
     ksp.add_argument("--yaw-damping", type=float, default=0.03, help="Rate-gyro damping, stick per deg/s (0 to disable)")
     ksp.add_argument("--timeout", type=float, default=600.0)
     ksp.add_argument("--check", action="store_true", help="Connect, report the vessel, do not fly")
+
+    mun = sub.add_parser("mun", help="Fly me to the Mun: free-return flyby with a crew of three flies")
+    mun.add_argument("--crew", choices=["flies", "autopilot"], default="flies")
+    mun.add_argument("--run-dir", type=Path, default=None)
+    mun.add_argument("--address", default="127.0.0.1")
+    mun.add_argument("--rpc-port", type=int, default=50000)
+    mun.add_argument("--stream-port", type=int, default=50001)
+    mun.add_argument("--quicksave", default=None, help="Load this save first (crewed vessel on the pad)")
+    mun.add_argument("--neural-ms", type=float, default=50.0)
+    mun.add_argument("--error-scale-deg", type=float, default=5.0)
+    mun.add_argument("--dv-scale", type=float, default=40.0, help="Remaining delta-v that draws Bob a full bar")
+    mun.add_argument("--steer-gain-hz", type=float, default=70.0)
+    mun.add_argument("--steer-tau-ms", type=float, default=100.0)
+    mun.add_argument("--parking-altitude", type=float, default=100_000.0)
+    mun.add_argument("--mun-periapsis", type=float, default=60_000.0)
+    mun.add_argument("--return-periapsis", type=float, default=32_000.0)
+    mun.add_argument("--authority", type=float, default=0.7)
+    mun.add_argument("--damping", type=float, default=0.03)
+    mun.add_argument("--turn-end", type=float, default=40_000.0)
+    mun.add_argument("--turn-pitch", type=float, default=85.0)
+    mun.add_argument("--rcs", choices=["off", "turns", "always"], default="off", help="Thrusters spend monopropellant; wheels and gimbal are enough for this stack")
+    mun.add_argument("--stop-after", default=None, help="Stop when this phase begins (e.g. plan_tmi) for shakedowns")
     a = p.parse_args()
 
     if a.command == "prepare":
@@ -64,6 +86,50 @@ def main():
         run_launch(a)
     elif a.command == "ksp":
         run_ksp(a)
+    elif a.command == "mun":
+        run_mun(a)
+
+
+def run_mun(a):
+    from .ksp.crew import make_crew
+    from .ksp.mun import MunConfig, MunMission
+
+    config = MunConfig(
+        address=a.address,
+        rpc_port=a.rpc_port,
+        stream_port=a.stream_port,
+        quicksave=a.quicksave,
+        dt=a.neural_ms / 1000,
+        parking_altitude=a.parking_altitude,
+        turn_end=a.turn_end,
+        turn_pitch=a.turn_pitch,
+        mun_periapsis=a.mun_periapsis,
+        return_periapsis=a.return_periapsis,
+        authority=a.authority,
+        damping=a.damping,
+        error_scale_deg=a.error_scale_deg,
+        dv_scale=a.dv_scale,
+        rcs=a.rcs,
+        stop_after=a.stop_after,
+    )
+    run_dir = a.run_dir or Path("runs") / f"mun-{a.crew}"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    crew = make_crew(
+        a.crew,
+        **({"neural_ms": a.neural_ms, "decoder_kwargs": {"gain_hz": a.steer_gain_hz, "tau_ms": a.steer_tau_ms}} if a.crew == "flies" else {}),
+    )
+    (run_dir / "provenance.json").write_text(
+        json.dumps({"config": config.__dict__, "crew": crew.name, "seats": crew.provenance(), "args": vars(a)}, indent=2, default=str)
+    )
+    mission = MunMission(config, crew, run_dir)
+    try:
+        summary = mission.fly()
+        (run_dir / "summary.json").write_text(json.dumps(summary, indent=2))
+        print(json.dumps(summary), flush=True)
+    except KeyboardInterrupt:
+        print("Abort. Throttle closed, SAS on.", flush=True)
+    finally:
+        crew.close()
 
 
 def add_flight_arguments(p):

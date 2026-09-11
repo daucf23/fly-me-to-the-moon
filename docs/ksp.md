@@ -96,3 +96,81 @@ stuttering game.
 
 Per-tick logs land in `runs/ksp-*/episode-*.jsonl`; episode summaries in
 `runs/ksp-*/episodes.jsonl`; `scripts/summarize.py runs/ksp-*` tabulates them.
+
+## Fly me to the Mun
+
+```
+uv run flybywire mun --crew autopilot --quicksave "quicksave #1"   # the ceiling, flown first
+uv run flybywire mun --crew flies     --quicksave "quicksave #1"   # three seats, three brains
+```
+
+A free-return flyby of the Mun and a splashdown, with every attitude and every throttle
+in the mission passing through a connectome. The 2D simulator is untouched; all of this
+lives in `flybywire/ksp/crew.py` and `flybywire/ksp/mun.py`.
+
+**The crew.** Three seats in the Mk1-3, three separate copies of the connectome, each
+with its own panel and decoder, sharing nothing but the ship. Jeb holds the pitch
+needle, Bill the yaw needle: the same edge-anchored bars as the 2D sim, computed in the
+ship's own frame so roll cannot swap them. Bob works the throttle: his panel shows the
+burn's remaining delta-v as a bar on the right; his steering cells fire while it is
+there and fall quiet as it shrinks, and the decoder's deadband is the engine cutoff. The
+three kernels run in parallel threads (the C kernel releases the GIL), so a tick costs
+about what one brain costs.
+
+**The flight computer** (Apollo's split): it knows orbital mechanics and nothing about
+flying. It plans burns as maneuver nodes with KSP's own patched conics, decides when to
+burn, stages, works the action groups and warps the coasts. Phases: ascent (gravity
+turn, booster to depletion or early separation, escape tower off on action group 1
+above 55 km), coast, circularize, deploy the solar panels (Lights), solve and burn the
+trans-Munar injection, mid-course correction a third of the way out, flyby, return
+correction, Abort at 90 km (capsule off the Poodle, chutes armed), retrograde hold to
+splashdown. It never reverts and never recovers; `--quicksave` is the reset.
+
+**Three authorities on one ship.** The computer is the only writer to the controls. The
+flies produce advisory sticks; a rate gyro damps them (`--damping`); the computer's
+backstops override them and say so in the event log (`"by": "Bob"` versus
+`"by": "computer backstop: cutoff"`). Specifically:
+
+- SAS and RCS are off. SAS on the same axis as a fly is two hands on one stick; RCS
+  answers every twitch of a noisy readout with monopropellant (`--rcs turns` arms it for
+  large reorientations only, `--rcs always` for comparison; the summary reports what
+  was spent).
+- Engine inhibit: during orbital burns Bob's panel goes dark while the nose is more than
+  5° off the burn vector and lights again under 2°, so Bob cannot burn in the wrong
+  direction while Jeb and Bill are still turning. The first stage is exempt: a Mainsail
+  cut at 10 km is the worse failure.
+- Fixed burn attitude: the needles point at the node's full burn vector, held
+  inertially, not at the remaining vector, which swings wildly in the last metres per
+  second and would have the attitude seats chasing it while Bob is still burning.
+- Behind the nose, `atan2` errors sit at ±180° on both axes and flip sign with the
+  slightest noise. There the needles are driven by the lateral components instead:
+  which way to turn is decided once and stays decided.
+- Roll is nobody's seat. The computer holds roll rate at zero, checking the sign of
+  KSP's roll input against kRPC's angular-velocity convention in flight.
+- Watchdog: a brain that does not answer within two seconds has its stick neutralised
+  for that tick; forty consecutive timeouts and the computer flies that axis and logs
+  `seat_lost`. Nothing is ever stepped from two threads.
+- Sticks and throttle are zeroed before every warp; warps only happen in vacuum
+  (physics warp in air lets the aerodynamics fly the ship, shakedown 4).
+
+**What the shakedowns taught** (autopilot crew, `--stop-after plan_tmi`):
+
+1. Never shut the booster down and coast on it: no gimbal, and the pod's wheels cannot
+   turn 100 t. The nose went 22° off, the interlock correctly refused to light, and the
+   ship fell back.
+2. Never separate the booster under thrust: it rams the upper stage (apoapsis jumped
+   15 km in four seconds with the engine off; 52° tumble). MECO, settle 1.5 s,
+   decouple, then bring the Poodle on line.
+3. A heavy pod on top is aerodynamically unstable. The pitch program is capped to 3° of
+   angle of attack below 25 km and 10° to 45 km; that is what a gravity turn is. Max-Q
+   upset went from 40° to 6.6°, and circularization from 1.5 km/s to 524 m/s.
+4. The free-return corridor is about 8 s by 2 m/s wide at TMI. Solving it takes ~1200
+   patched-conic evaluations through a node (~1 min): coarse grid over one orbit, fine
+   grid in the encounter band, pattern search on a bounded score that weighs the return
+   periapsis ten to one over the flyby altitude. On the solution, +0.3 m/s of burn puts
+   the return periapsis at −31 km and +1 s at −5 km. No crew executes to that; the
+   mid-course correction (two-axis, prograde/radial, same search) is the plan.
+
+Budget: Mainsail stage 64 t of propellant (≈3.0 km/s vacuum), Poodle 2.48 km/s. Orbit
+took 524 m/s of the Poodle after the booster, TMI 867 m/s, leaving ~1 km/s for
+corrections.

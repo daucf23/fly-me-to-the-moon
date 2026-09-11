@@ -25,8 +25,13 @@ to follow, **it reaches an 89 × 964 km orbit on every seed**. Frozen weights fl
 identically; blind, it tumbles ([docs/results.md](docs/results.md)). The memory circuit
 is two synapses from the stick but cannot be woken without blinding the readout; that is
 measured, not assumed ([docs/calibration.md](docs/calibration.md)).
-- **Kerbal Space Program**: bridge and test vehicle built, awaiting a running kRPC server
-for the first flight ([docs/ksp.md](docs/ksp.md)).
+- **Kerbal Space Program**: the fly has flown a 100 t crewed stack off the pad in real
+time, staging and all, to 435 km against the autopilot's 443
+([docs/ksp.md](docs/ksp.md)).
+- **Fly me to the Mun**: in progress. Three seats, three brains: Jeb on pitch, Bill on
+yaw, Bob on the throttle, and a flight computer that plans the burns and works the
+action groups. Free-return flyby and splashdown; the autopilot crew flies each phase
+first ([docs/ksp.md](docs/ksp.md#fly-me-to-the-mun)).
 
 ## Flight plan
 
@@ -83,6 +88,8 @@ uv run flybywire launch --pilot autopilot     # ...and the baselines: none, rand
 uv run python scripts/sweep.py --tau 50 300   # decoder settings, six flights in parallel
 uv run python scripts/probe_regimes.py        # why the memory circuit stays asleep
 uv run flybywire ksp --check                  # talk to a running KSP with kRPC
+uv run flybywire ksp --quicksave "quicksave #1" --gravity-turn   # one fly, one axis, KSP
+uv run flybywire mun --crew flies --quicksave "quicksave #1"     # three flies, to the Mun and back
 ```
 
 Datasets, the compiled kernel, brain checkpoints, and run telemetry stay in `data/` and
