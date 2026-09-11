@@ -59,7 +59,7 @@ def main():
     mun.add_argument("--steer-tau-ms", type=float, default=100.0)
     mun.add_argument("--parking-altitude", type=float, default=100_000.0)
     mun.add_argument("--mun-periapsis", type=float, default=60_000.0)
-    mun.add_argument("--return-periapsis", type=float, default=35_000.0)
+    mun.add_argument("--return-periapsis", type=float, default=30_000.0)
     mun.add_argument("--authority", type=float, default=None, help="Fraction of deflection the crew may command (flies 0.5, autopilot 0.7)")
     mun.add_argument("--ascent-authority", type=float, default=None, help="Attitude authority below 45 km during ascent (default 0.7, or explicit --authority)")
     mun.add_argument("--damping", type=float, default=None, help="Rate gyro, stick per deg/s (flies 0.12, autopilot 0.03)")
