@@ -393,12 +393,17 @@ class MunMission:
             if not self.c.quicksave:
                 raise RuntimeError("No controllable vessel on the pad and no --quicksave given")
             self.event("load", quicksave=self.c.quicksave)
+            ut_before = sc.ut
+            t_load = time.monotonic()
             sc.load(self.c.quicksave)
-            deadline = time.monotonic() + 120
             good = 0
-            while time.monotonic() < deadline and good < 4:
+            while time.monotonic() - t_load < 120 and good < 4:
                 time.sleep(0.5)
-                good = good + 1 if ready() else 0
+                # The vessel we are leaving behind may itself look ready (in orbit,
+                # say) for the moment before KSP starts loading; a loaded save has a
+                # clock that real time since the load cannot explain.
+                loaded = abs(sc.ut - ut_before) > 5 * (time.monotonic() - t_load) + 1
+                good = good + 1 if ready() and loaded else 0
             if good < 4:
                 raise RuntimeError("Quicksave did not produce a controllable vessel on the pad")
         return sc.active_vessel
