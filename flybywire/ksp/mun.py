@@ -766,6 +766,10 @@ class MunMission:
             encounter = not math.isnan(t_soi) and t_soi > 0 and o.next_orbit is not None and o.next_orbit.body.name == "Mun"
             first_pass = encounter and t_soi < o.period
             corrections = self.flags.get("corrections_out", 0)
+            if encounter:
+                # The live conics drop an encounter now and then (ksp.md 11b); remember
+                # when it was due so the coast can carry on blind toward it.
+                self.flags["soi_expected"] = self.sc.ut + t_soi
             # Two kinds of look. The free-return corridor is 2 m/s wide and a crew's
             # burn leaves ~10 m/s of lateral residual (fly missions 3 and 4), which
             # loses the first-pass encounter and, this close to a 2:1 resonance with
@@ -820,6 +824,18 @@ class MunMission:
                 if aligned:
                     target_ut = self.sc.ut + (t_soi * 0.34 if not self.flags.get("midcourse_looked") else t_soi) - c.warp_lead
                     self.warp_to(max(target_ut, self.sc.ut + 60))
+            elif not encounter and self.flags.get("later_pass_accepted") and self.flags.get("soi_expected"):
+                # Encounter accepted, then lost by the conics. Carry on toward where it was
+                # due, half the distance at a time, and look again; the fly-9 test sat at
+                # 1x for a quarter hour here. Past due with nothing in sight is an abort.
+                remaining = self.flags["soi_expected"] - self.sc.ut
+                if remaining < -600:
+                    self.event("abort", reason="accepted encounter never reappeared", overdue=round(-remaining))
+                    self.go("done")
+                    return
+                if remaining > 2 * (c.warp_lead + 30) and abs(truth["pitch_error_deg"]) < 10 and abs(truth["yaw_error_deg"]) < 10:
+                    self.event("blind_warp", remaining=round(remaining))
+                    self.warp_to(self.sc.ut + remaining / 2)
             return
 
         if ph == "mun_flyby":
