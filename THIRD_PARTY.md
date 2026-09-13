@@ -34,5 +34,6 @@ sample cutting by Elan Hickler / Soundemote. The recordings are released under
 `440300901dfe9275fd84e0b7763af1f8443ae62e`.
 Exact sample URLs and SHA-256 hashes are in
 [scripts/media/v6-samples.json](scripts/media/v6-samples.json).
-Samples and KSP footage are not committed. See [the edit notes](docs/video-edit-plan.md)
-for the media workflow.
+Samples and KSP footage are not committed. `scripts/fetch_score_samples.py` downloads
+and verifies the samples; `scripts/score_mission_v6.py` renders the score and
+`scripts/edit_twitter_video_v6.py` the published clip.

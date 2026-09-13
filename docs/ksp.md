@@ -265,8 +265,10 @@ took 437–524 m/s of the Poodle after the booster, TMI 848–867 m/s, correctio
     aboard, no seat timeouts. Corrections total 163 m/s against the autopilot's 275.
     The second-pass habit is the open problem: a TMI residual that would be noise on a
     first-pass encounter is a lost one here. `coast_to_mun` now prefers a first-pass
-    encounter (correction searched in three axes right after TMI, `first_pass=True`);
-    see [handoff-2026-09-11.md](handoff-2026-09-11.md) for its status.
+    encounter (correction searched in three axes right after TMI, `first_pass=True`).
+    Status: in four flights the search found no first-pass candidate within ±40 m/s on
+    any axis, and the later-pass route with a blind coast to the expected SOI time flew
+    every time (runs 9b through 12); it is the validated path.
 12. Judge overshoot on velocity-to-be-gained. The remaining-Δv magnitude grows with
     every degree the nose wanders while burning; that is lateral error for the
     corrections to fix, and it ended fly mission 1's burn at 374 m/s.
