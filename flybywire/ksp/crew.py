@@ -10,7 +10,8 @@ becomes the engine cutoff. Nothing about orbital mechanics reaches any of them.
 Three brains on one ship is three authorities on one ship, so the arbitration is
 explicit: the flight computer is the only thing that writes to the controls. The flies
 produce advisory sticks; a rate gyro damps them; the computer's backstops (engine
-inhibit while the nose is off the burn vector, cutoff, MECO) override them; SAS is off.
+inhibit while the nose is off the burn vector, cutoff, MECO) override them. SAS is off
+during active fly control and holds attitude during solver pauses and time warp.
 A brain that stops answering has its stick neutralised by a watchdog rather than left
 frozen.
 

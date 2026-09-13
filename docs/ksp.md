@@ -104,9 +104,22 @@ uv run flybywire mun --crew autopilot --quicksave "quicksave #1"   # the ceiling
 uv run flybywire mun --crew flies     --quicksave "quicksave #1"   # three seats, three brains
 ```
 
-A free-return flyby of the Mun and a splashdown, with every attitude and every throttle
-in the mission passing through a connectome. The 2D simulator is untouched; all of this
-lives in `flybywire/ksp/crew.py` and `flybywire/ksp/mun.py`.
+A Mun flyby and return with decoded connectome outputs supplying pitch, yaw and
+throttle inputs. The flight computer supplies guidance, gyro damping, roll control,
+staging and safety overrides. Completed runs include splashdowns and landings on land.
+The 2D simulator is untouched; the mission implementation lives in
+`flybywire/ksp/crew.py` and `flybywire/ksp/mun.py`.
+
+**The recorded mission.** `runs/mun-flies-12-video`, clean capture-time revision
+`b96bd97` (see the [revision map](revision-map.json)), completed
+in 2,032 seconds (about 34 minutes): 232,506 m Mun periapsis, 4.5 G peak, landing on
+Kerbin with all three Kerbals home and no human piloting. Its summary records no seat
+timeouts, so the timeout-triggered computer takeover was not used. All three seats
+have `learning: false` in their provenance. This demonstrates fixed-weight neural
+control within the engineered flight system. It is not evidence of learning orbital
+mechanics. The video shows a 75-second edit of this continuous mission; its selected
+active-control intervals have SAS off. Late parachute descent stood attitude commands
+down to conserve battery, and final cleanup re-enabled SAS after landing.
 
 **The crew.** Three seats in the Mk1-3, three separate copies of the connectome, each
 with its own panel and decoder, sharing nothing but the ship. Jeb holds the pitch
@@ -117,30 +130,35 @@ there and fall quiet as it shrinks, and the decoder's deadband is the engine cut
 three kernels run in parallel threads (the C kernel releases the GIL), so a tick costs
 about what one brain costs.
 
-**The flight computer** (Apollo's split): it knows orbital mechanics and nothing about
-flying. It plans burns as maneuver nodes with KSP's own patched conics, decides when to
-burn, stages, works the action groups and warps the coasts. Phases: ascent (gravity
-turn, booster to depletion or early separation, escape tower off on action group 1
+**The flight computer** (Apollo's split): it handles orbital guidance and control
+augmentation. It searches maneuver-node parameters using KSP's patched-conic
+predictions, decides when to burn, stages, works the action groups and warps the coasts.
+Phases: ascent (gravity turn, booster to depletion or early separation, escape tower off on action group 1
 above 55 km), coast, circularize, deploy the solar panels (Lights), solve and burn the
 trans-Munar injection, mid-course correction a third of the way out, flyby, return
-correction to a 40 km periapsis and a trim, Abort at 90 km (capsule off the Poodle),
+correction toward the configured entry periapsis (currently 30 km) and a trim,
+Abort at 90 km (capsule off the Poodle),
 retrograde hold, drogue released below 10 km and mains below 5 km once each chute
-reports itself safe, splashdown. It never reverts and never recovers; `--quicksave` is
-the reset.
+reports itself safe, landing or splashdown. It never reverts and never recovers;
+`--quicksave` is the reset.
 
 **Three authorities on one ship.** The computer is the only writer to the controls. The
 flies produce advisory sticks; a rate gyro damps them (`--damping`); the computer's
 backstops override them and say so in the event log (`"by": "Bob"` versus
 `"by": "computer backstop: cutoff"`). Specifically:
 
-- SAS and RCS are off. SAS on the same axis as a fly is two hands on one stick; RCS
-  answers every twitch of a noisy readout with monopropellant (`--rcs turns` arms it for
+- SAS is off during active fly control. Solver searches and time warp zero the fly
+  controls and enable SAS attitude hold; control resumes with SAS off. Final cleanup
+  also enables SAS. RCS is off by default because it answers every twitch of a noisy
+  readout with monopropellant (`--rcs turns` arms it for
   large reorientations only, `--rcs always` for comparison; the summary reports what
   was spent).
 - Engine inhibit: during orbital burns Bob's panel goes dark while the nose is more than
   5° off the burn vector and lights again under 2°, so Bob cannot burn in the wrong
   direction while Jeb and Bill are still turning. The first stage is exempt: a Mainsail
   cut at 10 km is the worse failure.
+- Ignition and cutoff: the computer commands full throttle while lighting the booster
+  on the pad, and can zero throttle for staging, burn completion or safety backstops.
 - Fixed burn attitude: the needles point at the node's full burn vector, held
   inertially, not at the remaining vector, which swings wildly in the last metres per
   second and would have the attitude seats chasing it while Bob is still burning.

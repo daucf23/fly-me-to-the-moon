@@ -1,5 +1,16 @@
 # Roadmap to a public release
 
+**Current status — 2026-09-12:** the final recorded flight is complete:
+`mun-flies-12-video`, 232.5 km flyby, 4.5 G, all three Kerbals landed. The v6
+75-second edit and spaced post copy are ready. The repository now includes an MIT
+license, third-party media notices, and [public-release evidence](evidence/README.md).
+The offline suite passes 37 tests. The plan below preserves the earlier sequencing;
+its initial uncommitted-ascent status has been superseded by the final flight.
+Remaining reproduction work: package the actual Mun vessel/setup and validate it
+from a fresh checkout. A raised-floor emergency correction was demonstrated;
+an actual sub-30 km emergency recovery remains unproven and is not claimed.
+Publishing the repository and posting the video are separate final release steps.
+
 Updated 2026-09-11. This is the plan for finishing the current project, not a new
 research programme. Implementation detail and flight history live in
 [the handoff](handoff-2026-09-11.md); controller behaviour is in [ksp.md](ksp.md).

@@ -4,8 +4,10 @@ Division of labour, Apollo style. The flight computer (this file) knows orbital
 mechanics: it plans burns as maneuver nodes with KSP's own patched conics, decides when
 to burn, stages, works the action groups, and time-warps the coasts. The crew flies the
 needles: Jeb holds the pitch needle, Bill the yaw needle, Bob the remaining-delta-v bar
-that is the throttle. Every attitude and every throttle in the mission passes through
-a connectome; no timing or geometry does.
+that supplies a throttle input. Decoded neural outputs feed pitch, yaw and throttle;
+the computer adds rate damping, controls roll, and can override throttle for ignition,
+cutoff and safety. SAS holds attitude during solver pauses and time warp. Timing and
+orbital geometry belong to the computer; the fly models read synthetic instruments.
 
 Phases: prelaunch -> ascent -> coast_to_apoapsis -> circularize (burn) -> plan_tmi ->
 tmi (burn) -> coast_to_mun [-> correction (burn)] -> mun_flyby -> return_coast

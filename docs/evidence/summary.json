@@ -1,0 +1,31 @@
+{
+  "crew": "flies",
+  "ticks": 10489,
+  "wall_seconds": 2032,
+  "phases": [
+    "ascent",
+    "coast_to_apoapsis",
+    "burn",
+    "plan_tmi",
+    "burn",
+    "coast_to_mun",
+    "burn",
+    "coast_to_mun",
+    "mun_flyby",
+    "return_coast",
+    "burn",
+    "return_coast",
+    "entry",
+    "done"
+  ],
+  "reached_mun": true,
+  "free_return": true,
+  "mun_periapsis": 232506,
+  "landed": true,
+  "max_g": 4.5,
+  "final_body": "Kerbin",
+  "final_periapsis": -598433,
+  "monopropellant": 30.0,
+  "seat_timeouts": {},
+  "events": 530
+}

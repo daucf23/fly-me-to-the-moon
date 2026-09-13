@@ -1,0 +1,247 @@
+{
+  "repo": "https://github.com/sgossner/VSCO-2-CE",
+  "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e",
+  "license": "CC0-1.0",
+  "samples": [
+    {
+      "source_path": "Percussion/BDrumNewhit_v4_rr1_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/BDrumNewhit_v4_rr1_Sum.wav",
+      "file": "00.wav",
+      "sha256": "7d8603e6802b51bc5acd3f73275f8e6408c7f2ccdd36d1a55b27e74034101589"
+    },
+    {
+      "source_path": "Percussion/BDrumNewhit_v4_rr2_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/BDrumNewhit_v4_rr2_Sum.wav",
+      "file": "01.wav",
+      "sha256": "ddc1495aed34b595ad91e30f7bda2e81a4e4e1e5aa69b5296a2f2587dc9e96e9"
+    },
+    {
+      "source_path": "Percussion/BDrumNewhit_v6_rr1_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/BDrumNewhit_v6_rr1_Sum.wav",
+      "file": "02.wav",
+      "sha256": "bb8966b0478cf77e3ed7e484fcfb212c1b9df356cc9a56017e1d3b4c5f6341bc"
+    },
+    {
+      "source_path": "Percussion/BDrumNewhit_v6_rr2_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/BDrumNewhit_v6_rr2_Sum.wav",
+      "file": "03.wav",
+      "sha256": "7d82f466e07e586da3f13c569abb6c4074afd3d1bafb786fe31fc566f0026207"
+    },
+    {
+      "source_path": "Percussion/Snare2-HitSN_v3_rr1_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/Snare2-HitSN_v3_rr1_Sum.wav",
+      "file": "04.wav",
+      "sha256": "3df96009d655dd4fe43c635bd3c20314a1e0cbdf9f571ee8a66207f9ef917d08"
+    },
+    {
+      "source_path": "Percussion/Snare2-HitSN_v3_rr2_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/Snare2-HitSN_v3_rr2_Sum.wav",
+      "file": "05.wav",
+      "sha256": "3ed6158d6873089e0f4967f303c3fab514ddde3991117a45d259d419f6bc62b8"
+    },
+    {
+      "source_path": "Percussion/Snare2-HitSN_v5_rr1_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/Snare2-HitSN_v5_rr1_Sum.wav",
+      "file": "06.wav",
+      "sha256": "8deb654b739f6dfb01f192b7043a9aad92b7973995246252571240fe712d0876"
+    },
+    {
+      "source_path": "Percussion/Snare2-HitSN_v5_rr2_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/Snare2-HitSN_v5_rr2_Sum.wav",
+      "file": "07.wav",
+      "sha256": "1f7ca9367273f7958cfccd5e454c0f30bb471301bc9ee05ef753c6f0423a3798"
+    },
+    {
+      "source_path": "Percussion/Timpani/Timpani1_Hit_v3_rr1_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/Timpani/Timpani1_Hit_v3_rr1_Sum.wav",
+      "file": "08.wav",
+      "sha256": "8b39a785901d08dee14dd89914bdf2201e16ee418965e4d903fdb8e280a14d24"
+    },
+    {
+      "source_path": "Percussion/Timpani/Timpani1_Hit_v3_rr2_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/Timpani/Timpani1_Hit_v3_rr2_Sum.wav",
+      "file": "09.wav",
+      "sha256": "ac6ae66048e162024d188f1ea01f6b8b6bd9184d35e164258bab6a383eb7ff93"
+    },
+    {
+      "source_path": "Percussion/Timpani/Timpani3_Hit_v3_rr1_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/Timpani/Timpani3_Hit_v3_rr1_Sum.wav",
+      "file": "10.wav",
+      "sha256": "46cd2ba3798f9e3a6be515b13dbc37d2ef65c82afb0d0e9e34121e4524bfcd3a"
+    },
+    {
+      "source_path": "Percussion/Timpani/Timpani3_Hit_v3_rr2_Sum.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Percussion/Timpani/Timpani3_Hit_v3_rr2_Sum.wav",
+      "file": "11.wav",
+      "sha256": "8eb961265ed1e07249dd2fc164f20b82f3e544c3e19ab3c9efef43a51e1c9575"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_E1_v2_RR1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_E1_v2_RR1.wav",
+      "file": "12.wav",
+      "sha256": "c7fec3551d21e326c2478ce9073cf8239485de835042c01e34c85fd692bf1ff4"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_E1_v2_RR2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_E1_v2_RR2.wav",
+      "file": "13.wav",
+      "sha256": "3ef89c9e64a719046cc77dd06af6cda941d0dace8556e24d6bf3ae12fc00a735"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_B1_v2_RR1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_B1_v2_RR1.wav",
+      "file": "14.wav",
+      "sha256": "3883a65c6d301bf6f61b21d5ec6e27f9740ba219b5b022a9e5f3a67c62aeaa2a"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_B1_v2_RR2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_B1_v2_RR2.wav",
+      "file": "15.wav",
+      "sha256": "d59af5e67b221405d69294434f72b2e3523cbf88f378bc888136839a5f4eff7a"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_D2_v2_RR1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_D2_v2_RR1.wav",
+      "file": "16.wav",
+      "sha256": "c647723304b5f4b2d3af02739017e38bc4e85244c15355ebd6f8443c1445b5ab"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_D2_v2_RR2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_D2_v2_RR2.wav",
+      "file": "17.wav",
+      "sha256": "798af63a9273d686805c94427fe977c13362ba3263357ba5f1ec7db38efc628e"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_A2_v2_RR1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_A2_v2_RR1.wav",
+      "file": "18.wav",
+      "sha256": "a0f0d6a225e5a31debd902b518b96987b322e064bd38c29f891196c06ed4b7be"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_A2_v2_RR2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_A2_v2_RR2.wav",
+      "file": "19.wav",
+      "sha256": "ddec2ced000c1e948a32c9d4d1dc8625ff52c60fd37df89948aace604c736df2"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_C3_v2_RR1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_C3_v2_RR1.wav",
+      "file": "20.wav",
+      "sha256": "278a14177cd3ffffc5418e403d9583af22778a8ce8fc548f88ea707e044a62d4"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_C3_v2_RR2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_C3_v2_RR2.wav",
+      "file": "21.wav",
+      "sha256": "8ac75e28eaeaf48e92c536bf16b01eaa6b21172a0072cf96650a0e80cb443438"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_E3_v2_RR1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_E3_v2_RR1.wav",
+      "file": "22.wav",
+      "sha256": "1daf39c60a6c83dfa941418a2ab51328f79ae738fe7c3e302e8395774eac8681"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_E3_v2_RR2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_E3_v2_RR2.wav",
+      "file": "23.wav",
+      "sha256": "38ba726d9c4d30870b84e06caad28fc39f84458dee439ccb016df4bbdc743809"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_G3_v2_RR1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_G3_v2_RR1.wav",
+      "file": "24.wav",
+      "sha256": "adedb635e08e72f6e06e31dc1355edca528de2753f06eea271ec004e6a3b44f5"
+    },
+    {
+      "source_path": "Strings/Cello Section/spic/spic_G3_v2_RR2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/spic/spic_G3_v2_RR2.wav",
+      "file": "25.wav",
+      "sha256": "56f59a67ac8ec56ce37b0de04ecb8bc1b86570660e55553a6e70a79cc81dee9e"
+    },
+    {
+      "source_path": "Strings/Violin Section/Spic/VlnEns_Spic_B2_v2_rr1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Violin%20Section/Spic/VlnEns_Spic_B2_v2_rr1.wav",
+      "file": "26.wav",
+      "sha256": "ee4aa779919171e33053b71c02691f026fd0b13c299da86f84c066e52ce3a4ec"
+    },
+    {
+      "source_path": "Strings/Violin Section/Spic/VlnEns_Spic_B2_v2_rr2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Violin%20Section/Spic/VlnEns_Spic_B2_v2_rr2.wav",
+      "file": "27.wav",
+      "sha256": "a67bd97acd98c3e22c70b1ec2ff9090ab4355ddc76bae87dcdf1a4adf1c2208f"
+    },
+    {
+      "source_path": "Strings/Violin Section/Spic/VlnEns_Spic_E4_v2_rr1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Violin%20Section/Spic/VlnEns_Spic_E4_v2_rr1.wav",
+      "file": "28.wav",
+      "sha256": "db063e7e21abb2d3271d0e96068601fbb48a91f2f0bfde8dea773ce1a6bacfb0"
+    },
+    {
+      "source_path": "Strings/Violin Section/Spic/VlnEns_Spic_E4_v2_rr2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Violin%20Section/Spic/VlnEns_Spic_E4_v2_rr2.wav",
+      "file": "29.wav",
+      "sha256": "4acf30d89e77aedaa2c69d0ae8a475abe98539134c8b72985f860658daa8630d"
+    },
+    {
+      "source_path": "Strings/Violin Section/Spic/VlnEns_Spic_G4_v2_rr1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Violin%20Section/Spic/VlnEns_Spic_G4_v2_rr1.wav",
+      "file": "30.wav",
+      "sha256": "3345451be62b9bdfbbf6bb03f22f410484abb75585992336d530215fc4df7141"
+    },
+    {
+      "source_path": "Strings/Violin Section/Spic/VlnEns_Spic_G4_v2_rr2.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Violin%20Section/Spic/VlnEns_Spic_G4_v2_rr2.wav",
+      "file": "31.wav",
+      "sha256": "f41d60066c6d0fa7d21308e97f237a34d6ac2765e477cc330ffb7e8821e4cc3c"
+    },
+    {
+      "source_path": "Strings/Cello Section/susvib/susvib_G1_v1_1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/susvib/susvib_G1_v1_1.wav",
+      "file": "32.wav",
+      "sha256": "9e5d24e8e28d6c7f650f9bb2b33d43c13e341a8bd33124c64e23881378b181ba"
+    },
+    {
+      "source_path": "Strings/Cello Section/susvib/susvib_D2_v1_1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/susvib/susvib_D2_v1_1.wav",
+      "file": "33.wav",
+      "sha256": "e8640dec9febc6e39fcf06b19d2c95a85d5ff8c38f13c9879e69f551eaf38ab8"
+    },
+    {
+      "source_path": "Strings/Cello Section/susvib/susvib_A2_v1_1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/susvib/susvib_A2_v1_1.wav",
+      "file": "34.wav",
+      "sha256": "c97a003184fdcb153d6b6c0bae8d82a90592a1b04b06bd7caaeda8b9776d5284"
+    },
+    {
+      "source_path": "Strings/Cello Section/susvib/susvib_C3_v1_1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/susvib/susvib_C3_v1_1.wav",
+      "file": "35.wav",
+      "sha256": "a614ee7ca821b44660236e47b89620cf914ec6ad27a99bc0d9764f47dbe512e1"
+    },
+    {
+      "source_path": "Strings/Cello Section/susvib/susvib_E3_v1_1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Cello%20Section/susvib/susvib_E3_v1_1.wav",
+      "file": "36.wav",
+      "sha256": "d2f961e30bf64021cf4acbd88e0e7a1fd1840943ae78c62a711bcce3d109216e"
+    },
+    {
+      "source_path": "VSCO 1 Percussion/varMetal/Cymbals/susp/susp_hit_softmall_roll2_cresc.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/VSCO%201%20Percussion/varMetal/Cymbals/susp/susp_hit_softmall_roll2_cresc.wav",
+      "file": "37.wav",
+      "sha256": "2cf99abadc7afc632a035d5c8f61b2d4ba85a94d0d2905c5a68d99ba44e4c983"
+    },
+    {
+      "source_path": "VSCO 1 Percussion/varMetal/Cymbals/susp/susp_hit_softmall_p.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/VSCO%201%20Percussion/varMetal/Cymbals/susp/susp_hit_softmall_p.wav",
+      "file": "38.wav",
+      "sha256": "52c773fb5fcff708f2bafddd9c3ca578a3fc78c0d5db6687d6bfdc585a483e66"
+    },
+    {
+      "source_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/440300901dfe9275fd84e0b7763af1f8443ae62e/LICENSE",
+      "file": "LICENSE.txt",
+      "sha256": "36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673"
+    }
+  ]
+}

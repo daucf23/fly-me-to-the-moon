@@ -3,11 +3,11 @@
 **Literally Fly by Wire.** A fruit-fly connectome at the stick of a rocket.
 
 The full retained **MaleCNS v1.0** wiring diagram (166,700 neurons, 25.6 million
-connections) runs as a spiking network. It looks at a cockpit instrument panel through
-its own photoreceptors, and a handful of its descending neurons are wired to the
-rocket's controls. Reaching for altitude stimulates dopamine reward cells; falling,
-tumbling, or crashing stimulates aversive ones. An experimental plasticity rule can
-change the connections in between.
+connections) runs as a spiking network. It looks at a synthetic cockpit instrument
+panel through modeled photoreceptors. A fixed decoder maps selected descending-neuron
+activity to control inputs; the flight computer adds stabilization and safety limits.
+The 2D experiments also test engineered reward/aversive stimulation and an experimental
+plasticity rule. The recorded Mun mission runs with learning disabled.
 
 Then we ask the only question that matters: **does the fly get to space?**
 
@@ -28,20 +28,34 @@ measured, not assumed ([docs/calibration.md](docs/calibration.md)).
 - **Kerbal Space Program**: the fly has flown a 100 t crewed stack off the pad in real
 time, staging and all, to 435 km against the autopilot's 443
 ([docs/ksp.md](docs/ksp.md)).
-- **Fly me to the Mun**: **done, by flies.** Three seats, three brains: Jeb on pitch,
-Bill on yaw, Bob on the throttle, and a flight computer that plans the burns and works
-the action groups. Every attitude and every throttle of a free-return flyby of the Mun
-and a splashdown under chutes, all three Kerbals aboard, passed through a connectome:
-pad to landing in one 35-minute run with no operator input, flyby at 82 km, entry at
-27 km and 4.8 G (`runs/mun-flies-11-rc`; earlier `mun-flies-8` at 194 km / 4.4 G and
-`mun-flies-4` at 25 km), after mission 6 taught the planner that hitting the Mun
-is worse than missing the way home. The autopilot crew flew it first
-(300 km flyby). What it took: a rate gyro tuned to the fly's lag, less stick once the
-gimbal joins the wheels, and a score that puts impact below every other failure
+- **Fly me to the Mun**: **done, with the fly models in the control loop.** Three
+separate copies of the connectome: Jeb on pitch, Bill on yaw, Bob on throttle. Their
+decoded neural outputs supply control inputs. The flight computer plans burns using
+KSP's orbital predictions, adds gyro damping, controls roll, stages, manages warp,
+and applies engine/safety overrides. SAS holds attitude during solver pauses and warp;
+it is off during active fly control.
+The recorded flight (`runs/mun-flies-12-video`, revision `b96bd97`) went from pad to
+landing on land in one approximately 34-minute mission with no human piloting:
+232.5 km Mun flyby, 4.5 G peak, all three Kerbals home, and no seat timeouts. Learning
+was disabled in all three models. Earlier `mun-flies-11-rc` splashed down after
+35 minutes, with an 82 km flyby, 27 km entry and 4.8 G; `mun-flies-8` flew by at
+194 km / 4.4 G, and `mun-flies-4` at 25 km. After mission 6 hit the Mun, we changed
+the planner's scoring to treat impact as fatal. The autopilot crew proved the route
+first (300 km flyby). What it took: a rate gyro tuned to the fly's lag, less stick once
+the gimbal joins the wheels, and an explicit impact penalty
 ([docs/ksp.md](docs/ksp.md#fly-me-to-the-mun)). To watch the flies fly:
 `scripts/cockpit.py` replays or shows live, per seat, the panel the fly saw, a raster of
 1,000 measured neurons from eye to descending cells, the two cells the stick reads, the
 fly's stick and what the ship received (`--record-brain` on the flight).
+
+Recorded run logs retain their capture-time commit IDs. The
+[revision map](docs/revision-map.json) resolves those IDs after metadata-only history
+maintenance; each mapped code snapshot is identical.
+
+**Inspect the recorded flight:** [results, provenance and a 2.8 MB evidence archive](docs/evidence/README.md).
+The archive includes telemetry and sampled neural activity for cockpit replay.
+The flown Mun vessel still needs to be packaged and validated for fresh-checkout
+reproduction; the checked-in craft is the earlier single-seat experiment.
 
 ## Flight plan
 
@@ -53,8 +67,9 @@ fly's stick and what the ship received (`--record-brain` on the flight).
    (live plasticity, frozen weights, black input) and compare apoapsis distributions.
 3. **Kerbal Space Program.** Same brain, same decoder, same instrument panel, fed from
   KSP 1.12 telemetry via [kRPC](https://github.com/krpc/krpc) and writing to the
-   vessel's pitch/yaw/roll/throttle. Episodes end in orbit, in the ground, or on a timer,
-   then revert to launch.
+   vessel's controls through the flight computer. Neural seats supply pitch/yaw/throttle
+   inputs; the computer supplies roll damping and control augmentation. Episodes end
+   in orbit, in the ground, or on a timer, then revert to launch.
 4. **Mission control.** A browser view of what the fly sees, what it fires, and how high
   it got. Only after steps 2–3 produce something worth watching.
 
@@ -102,8 +117,14 @@ uv run flybywire ksp --quicksave "quicksave #1" --gravity-turn   # one fly, one 
 uv run flybywire mun --crew flies --quicksave "quicksave #1"     # three flies, to the Mun and back
 ```
 
-Datasets, the compiled kernel, brain checkpoints, and run telemetry stay in `data/` and
-`runs/` and are never committed.
+Datasets, the compiled kernel, brain checkpoints, and working run telemetry stay in
+ignored `data/` and `runs/`. The selected recorded-mission evidence is archived in
+`docs/evidence/`.
+
+## License
+
+Original project code: [MIT](LICENSE). The neural backend, wiring dataset and
+soundtrack samples retain their notices in [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Credits
 

@@ -1,6 +1,9 @@
 # Datasets, compiled kernel, brain checkpoints, run telemetry: local only.
 data/
+video/
 runs/
+# Local promotional draft.
+/docs/twitter-post.txt
 *.partial
 
 # Python
